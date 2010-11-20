@@ -10,8 +10,10 @@
   <div id="spinner" class="spinner" style="display:none;">
     <img src="${resource(dir:'images',file:'spinner.gif')}" alt="${message(code:'spinner.alt',default:'Loading...')}" />
   </div>
-  <div style="float:right"><sec:ifLoggedIn>
-      <sec:username/>|<g:link controller='logout'>Logout</g:link>
+  <div style="float:right">
+    <sec:ifLoggedIn>
+      <g:set var="num"><sec:loggedInUserInfo field="id"/></g:set>
+      <g:link controller="user" action="show" id='${num}'><sec:username/></g:link>|<g:link controller='logout'>Logout</g:link>
     </sec:ifLoggedIn>
     <sec:ifNotLoggedIn>
       <g:link controller='login' action='auth'>Login</g:link>
