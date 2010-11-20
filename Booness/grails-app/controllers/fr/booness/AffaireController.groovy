@@ -1,0 +1,65 @@
+package fr.booness
+
+import grails.plugins.springsecurity.Secured
+
+
+class AffaireController {
+
+    def scaffold=true
+    def springSecurityService
+    
+    @Secured(['ROLE_USER'])
+    def save={
+        //System.out.println params
+        def affaire = new Affaire(params)
+        User principal = User.get(springSecurityService.principal.id)
+        principal.addToAffaires(affaire)
+        if (affaire.save(flush: true)) {
+            flash.message = "new affaire ${affaire.name} created"
+            redirect(action: "show", id: affaire.id)
+        }
+        else {
+            render(view: "create", model: [affaire: affaire])
+        }
+    }
+
+    @Secured(['ROLE_USER'])
+    def create={
+        redirect(action:'wizard')
+    }
+
+    @Secured(['ROLE_USER'])
+    def wizardFlow={
+        chooseCompte {
+            on("next"){
+                flow.compte=Compte.findByName(params.compte)
+            }.to("createAffaire")
+            on("new").to("createCompte")
+        }
+
+        createAffaire {
+            on("finish"){
+                System.out.println params
+                def affaire=new Affaire(params)
+                System.out.println affaire
+                User principal = User.get(springSecurityService.principal.id)
+                flow.compte.addToAffaires(affaire)
+                principal.addToAffaires(affaire)
+                //affaire.save(flush:true)
+            }.to("finish")
+            on("previous").to("chooseCompte")
+        }
+
+        createCompte {
+            on("save"){
+                flow.compte=new Compte(params)
+                flow.compte.save(flush:true)
+            }.to("createAffaire")
+            on("previous").to("chooseCompte")
+        }
+
+        finish {
+            redirect(controller:"affaire", action: "index")
+        }
+    }
+}
