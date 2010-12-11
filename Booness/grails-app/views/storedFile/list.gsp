@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'file.label', default: 'File')}" />
+        <g:set var="entityName" value="${message(code: 'storedFile.label', default: 'StoredFile')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -22,23 +22,23 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'file.id.label', default: 'Id')}" />
+                            <g:sortableColumn property="id" title="${message(code: 'storedFile.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="name" title="${message(code: 'file.name.label', default: 'Name')}" />
+                            <g:sortableColumn property="name" title="${message(code: 'storedFile.name.label', default: 'Name')}" />
                         
-                            <g:sortableColumn property="path" title="${message(code: 'file.path.label', default: 'Path')}" />
+                            <g:sortableColumn property="path" title="${message(code: 'storedFile.path.label', default: 'Path')}" />
                         
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${fileInstanceList}" status="i" var="fileInstance">
+                    <g:each in="${storedFileInstanceList}" status="i" var="storedFileInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${fileInstance.id}">${fieldValue(bean: fileInstance, field: "id")}</g:link></td>
+                            <td><g:link action="show" id="${storedFileInstance.id}">${fieldValue(bean: storedFileInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: fileInstance, field: "name")}</td>
+                            <td>${fieldValue(bean: storedFileInstance, field: "name")}</td>
                         
-                            <td>${fieldValue(bean: fileInstance, field: "path")}</td>
+                            <td>${fieldValue(bean: storedFileInstance, field: "path")}</td>
                         
                         </tr>
                     </g:each>
@@ -46,7 +46,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${fileInstanceTotal}" />
+                <g:paginate total="${storedFileInstanceTotal}" />
             </div>
         </div>
     </body>

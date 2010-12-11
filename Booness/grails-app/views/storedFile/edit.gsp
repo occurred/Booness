@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'file.label', default: 'File')}" />
+        <g:set var="entityName" value="${message(code: 'storedFile.label', default: 'StoredFile')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -19,33 +19,33 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${fileInstance}">
+            <g:hasErrors bean="${storedFileInstance}">
             <div class="errors">
-                <g:renderErrors bean="${fileInstance}" as="list" />
+                <g:renderErrors bean="${storedFileInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form method="post" >
-                <g:hiddenField name="id" value="${fileInstance?.id}" />
-                <g:hiddenField name="version" value="${fileInstance?.version}" />
+                <g:hiddenField name="id" value="${storedFileInstance?.id}" />
+                <g:hiddenField name="version" value="${storedFileInstance?.version}" />
                 <div class="dialog">
                     <table>
                         <tbody>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="name"><g:message code="file.name.label" default="Name" /></label>
+                                  <label for="name"><g:message code="storedFile.name.label" default="Name" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: fileInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${fileInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: storedFileInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${storedFileInstance?.name}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="path"><g:message code="file.path.label" default="Path" /></label>
+                                  <label for="path"><g:message code="storedFile.path.label" default="Path" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: fileInstance, field: 'path', 'errors')}">
-                                    <g:textField name="path" value="${fileInstance?.path}" />
+                                <td valign="top" class="value ${hasErrors(bean: storedFileInstance, field: 'path', 'errors')}">
+                                    <g:textField name="path" value="${storedFileInstance?.path}" />
                                 </td>
                             </tr>
                         

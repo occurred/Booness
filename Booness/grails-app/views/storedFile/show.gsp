@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'file.label', default: 'File')}" />
+        <g:set var="entityName" value="${message(code: 'storedFile.label', default: 'StoredFile')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -23,23 +23,23 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="file.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="storedFile.id.label" default="Id" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: fileInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="file.name.label" default="Name" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: fileInstance, field: "name")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: storedFileInstance, field: "id")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="file.path.label" default="Path" /></td>
+                            <td valign="top" class="name"><g:message code="storedFile.name.label" default="Name" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: fileInstance, field: "path")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: storedFileInstance, field: "name")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="storedFile.path.label" default="Path" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: storedFileInstance, field: "path")}</td>
                             
                         </tr>
                     
@@ -48,7 +48,7 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${fileInstance?.id}" />
+                    <g:hiddenField name="id" value="${storedFileInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
