@@ -15,10 +15,9 @@ body {
     background: #fff;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
-    font-size: 20px;
 }
 #grailsLogo {
-    padding:20px;
+	padding:20px;
 }
 
 a:link, a:visited, a:hover {
@@ -30,7 +29,7 @@ a:link, a:visited, a:hover {
 h1 {
     color: #48802c;
     font-weight: normal;
-    font-size: 26px;
+    font-size: 16px;
     margin: .8em 0 .3em 0;
 }
 
@@ -39,18 +38,19 @@ ul {
 }
 
 input, select, textarea {
-    font: 21px verdana, arial, helvetica, sans-serif;
+    background-color: #fcfcfc;
+    border: 1px solid #ccc;
+    font: 11px verdana, arial, helvetica, sans-serif;
     margin: 2px 0;
     padding: 2px 4px;
-    width: 100%;
 }
 select {
-    padding: 2px 2px 2px 0;
+   padding: 2px 2px 2px 0;
 }
 textarea {
-    width: 100%;
-    height: 150px;
-    vertical-align: top;
+	width: 250px;
+	height: 150px;
+	vertical-align: top;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -73,7 +73,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .menuButton {
-    font-size: 20px;
+    font-size: 10px;
     padding: 0 5px;
 }
 .menuButton a {
@@ -118,7 +118,8 @@ div.errors ul {
     padding: 0;
 }
 div.errors li {
-    background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
+	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
+    line-height: 16px;
     padding-left: 30px;
 }
 
@@ -142,21 +143,24 @@ tr {
     border: 0;
 }
 td, th {
-    line-height: 22px;
+    font: 11px verdana, arial, helvetica, sans-serif;
+    line-height: 12px;
     padding: 5px 6px;
     text-align: left;
     vertical-align: top;
 }
 th {
+    background: #fff url(../images/skin/shadow.jpg);
     color: #666;
-    font-size: 21px;
+    font-size: 11px;
     font-weight: bold;
+    line-height: 17px;
     padding: 2px 6px;
 }
 th a:link, th a:visited, th a:hover {
     color: #333;
     display: block;
-    font-size: 20px;
+    font-size: 10px;
     text-decoration: none;
     width: 100%;
 }
@@ -197,7 +201,7 @@ th.desc a {
     border: 1px solid #ccc;
     border-top: 0;
     color: #666;
-    font-size: 20px;
+    font-size: 10px;
     overflow: hidden;
     padding: 10px 3px;
 }
@@ -238,7 +242,7 @@ th.desc a {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
     color: #666;
-    font-size: 20px;
+    font-size: 10px;
     margin-top: 5px;
     overflow: hidden;
     padding: 0;
@@ -249,7 +253,7 @@ th.desc a {
     border: 0;
     color: #333;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 10px;
     font-weight: bold;
     margin-left: 3px;
     overflow: visible;
@@ -266,119 +270,4 @@ th.desc a {
 .buttons input.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
-}
-
-
-#nav {
-    margin-top:20px;
-    margin-left:30px;
-    width:200px;
-    float:left;
-    position:relative;
-}
-
-.homePagePanel * {
-    margin:0px;
-    float:left;
-    width:200px;
-}
-.homePagePanel .panelBody ul {
-    list-style-type:none;
-    margin-bottom:10px;
-    width:100%;
-}
-.homePagePanel .panelBody h1 {
-    text-transform:uppercase;
-    margin-bottom:10px;
-}
-.homePagePanel .panelBody {
-    background: url(../images/leftnav_midstretch.png) repeat-y top;
-    margin:0px;
-    padding:11px;
-}
-.homePagePanel .panelBtm {
-    background: url(../images/leftnav_btm.png) no-repeat top;
-    height:20px;
-    margin:0px;
-    padding:11px;
-}
-
-.homePagePanel .panelTop {
-    background: url(../images/leftnav_top.png) no-repeat top;
-    height:11px;
-    margin:0px;
-    padding-right:11px;
-    padding-left:11px;
-    padding-bottom:0px;
-}
-
-h2 {
-    margin-top:15px;
-    margin-bottom:15px;
-}
-
-#pageBody {
-    margin-left:280px;
-    margin-right:20px;
-}
-
-
-/*
-
-COLORING
-
-For ease of colortheming, the color selectors are grouped together with descriptive comments.
-Just change the color-values to apply your own color-scheme.
-
-*/
-
-/* Main navigation */
-.navigation li a { /*background-color: #aaa*/ }                         /* Background-color */
-.navigation li.navigation_active a { background-color: #55b; }      /* Background-color of active item */
-.navigation li.navigation_active a:hover { background-color: #55b;} /* Background-color of hovered active item */
-.navigation li a:hover { background-color: #999; }                  /* Background-color of hovered item */
-.navigation li a { color: #000; }                                   /* Text color */
-.navigation li a:hover { color: #fff; }                             /* Text color on hovering */
-.navigation li { /*border: 1px solid #888;*/ }                          /* Border color */
-.navigation li.navigation_first { border-left-color: #888; }        /* Border color. Typically same as above */
-.navigation li { border-left-color: #bbb; }                         /* Highlight border-color */
-.navigation li.navigation_active { border-left-color: #555; }       /* Highlight border-color of active item */
-
-/* Sub navigation */
-.subnavigation li { background-color: #555; }                       /* Background-color */
-.subnavigation li a { border-color: #555; }                         /* Should be set to the same as the above */
-.subnavigation li a { color: #fff; }                                /* Text color */
-.subnavigation li a:hover { border-color: #fff; }                   /* Markings color of hovered item */
-.subnavigation li a:hover { color: #e0e0e0; }                       /* Text color of hovered item */
-.subnavigation li.subnavigation_active a { color: #e0e0e0; }        /* Text color of active item */
-.subnavigation li.subnavigation_active a { border-color: #e0e0e0; } /* Markings color of active item */
-
-.navigation {
-    list-style-type: none;
-    clear: both;
-    margin: 1em 0;
-    font-size: 22px;
-    overflow: hidden; /* Clearing floats */
-}
-
-.navigation li {
-    float: left;
-    /* border: 1px solid #888; */
-    /* border-left-color: #bbb; */
-}
-.navigation li.navigation_first {
-    /* border-left-color: #888; */
-}
-.navigation li.navigation_active {
-    /* border-left-color: #555; */
-}
-.navigation li a {
-    padding: 0.5em 1em;
-    display: block;
-    text-decoration: none;
-    /* background-color: #aaa; */
-    /* color: #fff; */
-}
-.navigation li a:hover {
-    /* background-color: #999; */
 }
