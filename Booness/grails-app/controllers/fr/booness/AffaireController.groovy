@@ -7,6 +7,12 @@ class AffaireController {
 
     def scaffold=true
     def springSecurityService
+
+    static navigation = [
+        tilte: 'Affaire',
+        group: 'user',
+        order: 20
+    ]
     
     @Secured(['ROLE_USER'])
     def save={
