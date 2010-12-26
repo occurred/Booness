@@ -24,4 +24,8 @@ class User implements Serializable {
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
+
+        String toString(){
+            return username
+        }
 }

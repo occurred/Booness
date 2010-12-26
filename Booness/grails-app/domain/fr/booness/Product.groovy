@@ -12,4 +12,8 @@ class Product {
         photo()
         price(min:0)
     }
+
+    String toString(){
+        return name
+    }
 }

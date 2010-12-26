@@ -5,7 +5,7 @@ class Compte implements Serializable {
     String name
     String description
 
-    static hasMany = [affaires:Affaire, contacts:Contact]
+    static hasMany = [affaires:Affaire, contacts:Contact, logs:Log]
 
     static constraints = {
         name(nullable:false, blank:false, unique:true)
@@ -13,6 +13,6 @@ class Compte implements Serializable {
     }
 
     String toString(){
-        return name;
+        return name
     }
 }
