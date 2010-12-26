@@ -46,7 +46,8 @@ class BootStrap {
         idoine.addToContacts(new Contact(name:'Gregoire Cario',email:'gregoire@idoine-informatique.ch',telephone:'+449837234',address:'en suisse', description: 'He is a great guy'))
         def affaire = new Affaire(name:'super affaire', description:'ventes de pleins de tuyaux')
 
-        
+        idoine.addToLogs(new Log(title:'premiere visite', content:'''ca s'est bien passe''', dateCreated:new Date()).save())
+        idoine.addToLogs(new Log(title:'seconde visite', content:'''ca s'est pas trop bien passe''', dateCreated:new Date()).save())
 
         def p1=new Product(name:'evier 1', description:'bel evier en inox', price:500, photo:new byte[0])
         def p2=new Product(name:'evier 2', description:'bel evier en couleur', price:600, photo:new byte[0])
