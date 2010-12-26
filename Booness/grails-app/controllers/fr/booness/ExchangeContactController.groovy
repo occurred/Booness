@@ -17,6 +17,7 @@ class ExchangeContactController {
 			
 			ws=new WSClient("file:/home/ubuntu/NetBeansProjects/Booness/Services.wsdl", this.class.classLoader)
 			ws.setSSLProperties(mapClient)
+			ws.setBasicAuthentication("fx.thoorens","fx@thoo123")
 			
 			ws.initialize()
 		}

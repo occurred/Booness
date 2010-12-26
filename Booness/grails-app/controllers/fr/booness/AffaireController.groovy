@@ -30,6 +30,19 @@ class AffaireController {
     }
 
     @Secured(['ROLE_USER'])
+    def delete={
+        def affaire=Affaire.get(params.id)
+        System.out.println affaire.compte
+        if (affaire.delete(flush: true)) {
+            flash.message = "affaire ${affaire.name} deleted"
+        }
+        else {
+            flash.error = "Could not delete affaire ${affaire.name}"
+        }
+        redirect(action: "list")
+    }
+
+    @Secured(['ROLE_USER'])
     def create={
         redirect(action:'wizard')
     }

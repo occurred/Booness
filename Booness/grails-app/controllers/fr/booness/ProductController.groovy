@@ -7,7 +7,7 @@ class ProductController {
     static navigation = [
         tilte: 'Product',
         group: 'user',
-        order: 30
+        order: 100
     ]
 
     def index={
