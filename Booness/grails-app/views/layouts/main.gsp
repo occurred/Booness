@@ -14,11 +14,12 @@
   </div>
   <table>
     <tr><td></td><td><h1 id="pageBody">BOONESS</h1></td></tr>
+    <tr>
       <td width="200px;">
         <div class="homePagePanel">
           <div class="panelTop"></div>
           <div class="panelBody">
-            <ul class="navigation" id="navigation_all"><li class="navigation_first"><a href="${createLink(uri: '/')}">Home</a></li></ul>
+            <ul class="navigation" id="navigation_all"><li class="navigation_first"><sec:ifLoggedIn><a href="${createLink(uri: '/dashboard')}">Dashboard</a></sec:ifLoggedIn><sec:ifNotLoggedIn><a href="${createLink(uri: '/')}">Home</a></sec:ifNotLoggedIn></li></ul>
             <nav:render group="public"/>
             <sec:ifAllGranted roles="ROLE_USER"><nav:render group="user"/></sec:ifAllGranted>
             <sec:ifAllGranted roles="ROLE_ADMIN"><nav:render group="admin"/></sec:ifAllGranted>

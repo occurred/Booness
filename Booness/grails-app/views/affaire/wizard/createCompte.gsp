@@ -36,6 +36,45 @@
           </td>
         </tr>
 
+        <tr class="prop">
+          <td valign="top" class="street">
+            <label for="name">Street</label>
+          </td>
+          <td valign="top" class="value ">
+
+            <input type="text" name="street" value="" id="street" />
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="zip">
+            <label for="name">ZIP</label>
+          </td>
+          <td valign="top" class="value ">
+
+            <input type="text" name="zip" value="" id="zip" />
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="city">
+            <label for="name">City</label>
+          </td>
+          <td valign="top" class="value ">
+
+            <input type="text" name="city" value="" id="city" />
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="country">
+            <label for="name">Country</label>
+          </td>
+          <td valign="top" class="value ">
+
+            <input type="text" name="country" value="" id="country" />
+          </td>
+        </tr>
       </tbody>
     </table>
     <g:submitButton name="previous" value="Previous"/>

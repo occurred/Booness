@@ -8,7 +8,7 @@ class ProfileController {
     def springSecurityService
 
     static navigation = [
-        tilte: 'Profile',
+        title: 'Profile',
         group: 'user',
         order: 1000
     ]
@@ -17,26 +17,29 @@ class ProfileController {
         redirect(action:show)
     }
 
+    @Secured(['ROLE_ADMIN'])
+    def list
+
     def show={
         User principal = User.get(springSecurityService.principal.id)
-        [profileInstance:principal.profile]
+        [profileInstance:principal]
     }
 
     def edit={
         User principal = User.get(springSecurityService.principal.id)
-        [profileInstance:principal.profile]
+        [profileInstance:principal]
     }
 
     def update={
         User principal = User.get(springSecurityService.principal.id)
-        principal.profile.properties = params
-        if(principal.profile.validate()){
+        principal.properties = params
+        if(principal.validate()){
             flash.message = "Update Successful"
             redirect(action:show)
         }
         else{
             principal.profile.save(flush:true)
-            redirect(action: "edit", model: [profileInstance: principal.profile])
+            redirect(action: "edit", model: [profileInstance: principal])
         }
         
     }

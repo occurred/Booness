@@ -1,12 +1,13 @@
 package fr.booness
 
 import grails.converters.deep.JSON
+import grails.plugins.springsecurity.Secured
 
-class CompteController {
+@Secured(['ROLE_USER'])class CompteController {
     def scaffold=true
 
      static navigation = [
-        tilte: 'Compte',
+        title: 'Comptes',
         group: 'user',
         order: 10
     ]

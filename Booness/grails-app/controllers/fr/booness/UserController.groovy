@@ -4,8 +4,9 @@ package fr.booness
 class UserController {
 
     def scaffold = true
+
     static navigation = [
-        tilte: 'Affaire',
+        title: 'Affaires',
         group: 'admin'
     ]
 

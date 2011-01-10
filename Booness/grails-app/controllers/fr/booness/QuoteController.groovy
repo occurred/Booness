@@ -7,7 +7,7 @@ class QuoteController {
     def scaffold = true
 
     static navigation = [
-        tilte: 'Quote',
+        title: 'Quotes',
         group: 'user',
         order: 40
     ]

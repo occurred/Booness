@@ -4,9 +4,12 @@ class Log implements Serializable, Comparable{
 
     String title
     String content
-    Date dateCreated=new Date()
+    Compte compte
+    User user
+    Date dateCreated
+    Date lastUpdated
 
-    static belongsTo = Compte
+    static belongsTo = [compte:Compte, user:User]
 
     static constraints = {
         title()
@@ -18,6 +21,6 @@ class Log implements Serializable, Comparable{
     }
 
     int compareTo(Object other){
-        return dateCreated.compareTo(other.dateCreated)
+        return lastUpdated ? lastUpdated.compareTo(other.lastUpdated):-1
     }
 }

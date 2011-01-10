@@ -44,7 +44,7 @@
                         
                             <td>${fieldValue(bean: productInstance, field: "description")}</td>
                         
-                            <td><img src="<g:createLink controller='product' action='renderImage' id='${productInstance.id}'/>"/></td>
+                            <td><img alt="${fieldValue(bean: productInstance, field: "name")}" width="200px" src="<g:createLink controller='product' action='renderImage' id='${productInstance.id}'/>"/></td>
                         
                             <td>${fieldValue(bean: productInstance, field: "price")}</td>
                         

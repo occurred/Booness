@@ -12,7 +12,8 @@
     <meta content="main" name="layout"/>
   </head>
   <body>
-    choose a Compte here!
+    <br/>
+    <h2>Choose (or create) a Compte here!</h2>
   <g:form action="wizard">
     <g:select name="compte" id="compte" from="${fr.booness.Compte.list()}"></g:select>
     <g:submitButton name="new" value="Create a New Compte"/>

@@ -2,14 +2,14 @@ package fr.booness
 
 import grails.plugins.springsecurity.Secured
 
-
+@Secured(['ROLE_USER'])
 class AffaireController {
 
     def scaffold=true
     def springSecurityService
 
     static navigation = [
-        tilte: 'Affaire',
+        title: 'Affaires',
         group: 'user',
         order: 20
     ]
@@ -62,8 +62,9 @@ class AffaireController {
                 def affaire=new Affaire(params)
                 System.out.println affaire
                 User principal = User.get(springSecurityService.principal.id)
-                flow.compte.addToAffaires(affaire)
                 principal.addToAffaires(affaire)
+                System.out.println flow.compte
+                flow.compte.addToAffaires(affaire)
                 //affaire.save(flush:true)
             }.to("finish")
             on("previous").to("chooseCompte")
@@ -73,6 +74,7 @@ class AffaireController {
             on("save"){
                 flow.compte=new Compte(params)
                 flow.compte.save(flush:true)
+                System.out.println flow.compte
             }.to("createAffaire")
             on("previous").to("chooseCompte")
         }

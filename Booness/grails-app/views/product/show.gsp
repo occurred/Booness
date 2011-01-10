@@ -46,7 +46,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="product.photo.label" default="Photo" /></td>
 
-                            <td valign="top" class="value"><img src="<g:createLink controller='product' action='renderImage' id='${productInstance.id}'/>"/></td>
+                            <td valign="top" class="value"><img width="500px" alt="${fieldValue(bean: productInstance, field: "name")}"  src="<g:createLink controller='product' action='renderImage' id='${productInstance.id}'/>"/></td>
                         </tr>
                     
                         <tr class="prop">

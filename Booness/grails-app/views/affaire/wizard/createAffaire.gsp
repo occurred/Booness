@@ -12,8 +12,9 @@
     <meta content="main" name="layout"/>
   </head>
   <body>
-    Using Compte: ${compte.name}
     <br/>
+    <h2>Using Compte: ${compte.name}</h2>
+    <h2>Please create a new Affaire now:</h2>
   <g:form action="wizard">
     <table>
       <tbody>
