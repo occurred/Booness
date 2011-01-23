@@ -19,7 +19,7 @@
         <div class="homePagePanel">
           <div class="panelTop"></div>
           <div class="panelBody">
-            <ul class="navigation" id="navigation_all"><li class="navigation_first"><sec:ifLoggedIn><a href="${createLink(uri: '/dashboard')}">Dashboard</a></sec:ifLoggedIn><sec:ifNotLoggedIn><a href="${createLink(uri: '/')}">Home</a></sec:ifNotLoggedIn></li></ul>
+            <ul class="navigation" id="navigation_all"><li class="navigation_first"><sec:ifLoggedIn><a href="${createLink(uri: '/dashboard')}"><g:message code="navigation.user.dashboard"/></a></sec:ifLoggedIn><sec:ifNotLoggedIn><a href="${createLink(uri: '/')}">Home</a></sec:ifNotLoggedIn></li></ul>
             <nav:render group="public"/>
             <sec:ifAllGranted roles="ROLE_USER"><nav:render group="user"/></sec:ifAllGranted>
             <sec:ifAllGranted roles="ROLE_ADMIN"><nav:render group="admin"/></sec:ifAllGranted>

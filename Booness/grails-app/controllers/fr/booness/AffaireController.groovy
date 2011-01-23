@@ -9,7 +9,7 @@ class AffaireController {
     def springSecurityService
 
     static navigation = [
-        title: 'Affaires',
+        title: 'business',
         group: 'user',
         order: 20
     ]

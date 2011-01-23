@@ -7,8 +7,10 @@ class ProfileController {
 
     def springSecurityService
 
+    def scaffold=User
+
     static navigation = [
-        title: 'Profile',
+        title: 'profile',
         group: 'user',
         order: 1000
     ]
@@ -22,12 +24,13 @@ class ProfileController {
 
     def show={
         User principal = User.get(springSecurityService.principal.id)
-        [profileInstance:principal]
+        println principal
+        [userInstance:principal]
     }
 
     def edit={
         User principal = User.get(springSecurityService.principal.id)
-        [profileInstance:principal]
+        [userInstance:principal]
     }
 
     def update={
@@ -38,7 +41,7 @@ class ProfileController {
             redirect(action:show)
         }
         else{
-            principal.profile.save(flush:true)
+            principal.save(flush:true)
             redirect(action: "edit", model: [profileInstance: principal])
         }
         

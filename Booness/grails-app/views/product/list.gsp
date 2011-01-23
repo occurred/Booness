@@ -4,33 +4,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <title><g:message code="product.list" default="Product List" /></title>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="product.new" default="New Product" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <h1><g:message code="product.list" default="Product List" /></h1>
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>
             <div class="list">
                 <table>
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'product.id.label', default: 'Id')}" />
+                   	    <g:sortableColumn property="id" title="Id" titleKey="product.id" />
                         
-                            <g:sortableColumn property="name" title="${message(code: 'product.name.label', default: 'Name')}" />
+                   	    <g:sortableColumn property="name" title="Name" titleKey="product.name" />
                         
-                            <g:sortableColumn property="description" title="${message(code: 'product.description.label', default: 'Description')}" />
+                   	    <g:sortableColumn property="description" title="Description" titleKey="product.description" />
                         
-                            <g:sortableColumn property="photo" title="${message(code: 'product.photo.label', default: 'Photo')}" />
+                   	    <g:sortableColumn property="photo" title="Photo" titleKey="product.photo" />
                         
-                            <g:sortableColumn property="price" title="${message(code: 'product.price.label', default: 'Price')}" />
+                   	    <g:sortableColumn property="price" title="Price" titleKey="product.price" />
                         
                         </tr>
                     </thead>

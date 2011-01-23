@@ -7,7 +7,7 @@ import grails.plugins.springsecurity.Secured
     def scaffold=true
 
      static navigation = [
-        title: 'Comptes',
+        title: 'Accounts',
         group: 'user',
         order: 10
     ]

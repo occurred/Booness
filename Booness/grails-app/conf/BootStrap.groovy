@@ -1,4 +1,6 @@
 import fr.booness.*
+import java.text.SimpleDateFormat
+
 class BootStrap {
     def springSecurityService
 
@@ -56,13 +58,21 @@ class BootStrap {
         taffaire=new Affaire(name:'Archived affaire 3', description:'ventes de pleins de tuyaux', archived:true)
         idoine.addToAffaires(taffaire)
         user.addToAffaires(taffaire)
+        Random r=new Random();
 
 
-        idoine.addToLogs(new Log(user: commercial, compte:idoine, title:'premiere visite', content:'''ca s'est bien passe''', dateCreated:new Date()))
-        for(int i=2;i<1000;i++){
-            idoine.addToLogs(new Log(user: User.findByUsername('user'+(i%10)), compte:idoine, title:i+'eme visite', content:'''ca s'est pas trop bien passe''', dateCreated:new Date()))
+        idoine.addToLogs(new Log(user: commercial, compte:idoine, title:'premiere visite', description:'''ca s'est bien passe''', startDate:new Date(), endDate:new Date(3600000+System.currentTimeMillis()), allday:false))
+        def df=new SimpleDateFormat("yyyy-MM-dd")
+        new Event(title:'Reunion consultants debut d\'annee', description:'reunion de trois jours pour le bilan de l\'annee dernier et fixer les objectifs de cette annee', startDate:df.parse("2011-01-04"), endDate:df.parse("2011-01-06"), allday:true).save()
+        new Event(title:'Reunion demonstration prototype', description:'Nouveau prototype pour gerer les clients de Calefi.fr', startDate:df.parse("2011-02-01"), endDate:df.parse("2011-02-01"), allday:true).save()
+        println "ok"
+        /*
+        for(int i=2;i<3;i++){
+            long randomTS=(long)(r.nextDouble()*100000000)+System.currentTimeMillis();
+            println randomTS
+            idoine.addToLogs(new Log(user: User.findByUsername('user'+(i%10)), compte:idoine, title:i+'eme visite', description:'''ca s'est pas trop bien passe''', startDate:new Date(), endDate:new Date(System.currentTimeMillis()+3600000l), allday:false))
         }
-
+*/
         def p1=new Product(name:'evier 1', description:'bel evier en inox', price:500, photo:new byte[0])
         def p2=new Product(name:'evier 2', description:'bel evier en couleur', price:600, photo:new byte[0])
         def p3=new Product(name:'tuyau 1', description:'tuyau court en inox', price:50, photo:new byte[0])

@@ -6,7 +6,7 @@ class UserController {
     def scaffold = true
 
     static navigation = [
-        title: 'Affaires',
+        title: 'Users',
         group: 'admin'
     ]
 
