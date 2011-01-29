@@ -13,13 +13,14 @@ class Contact {
 
     static constraints = {
         name()
+        description(maxSize: 1024)
         email(email:true)
         telephone()
         street()
         zip(min:0)
+        country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])
         city()
-        country()
-        description(maxSize: 1024)
+        
     }
 
     String toString(){

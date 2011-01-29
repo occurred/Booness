@@ -1,6 +1,10 @@
 package fr.booness
 
+import grails.converters.*
+
 class ContactController {
+
+    def GeocoderService
 
     static navigation = [
         title: 'Contacts',
@@ -12,5 +16,11 @@ class ContactController {
 
     def index={
         redirect(action:list)
+        
+    }
+
+    def getCities={
+        def cit= geocoderService.getCities(params.zip,params.country)
+        render cit as JSON
     }
 }

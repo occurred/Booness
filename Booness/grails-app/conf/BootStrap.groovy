@@ -44,8 +44,8 @@ class BootStrap {
             }
         }
         
-        Compte idoine=new Compte(name:'Idoine Informatique', description:'Super client', street:'20 chemin des pales', zip:12390, city:'cortaillod', country:'Suisse')
-        idoine.addToContacts(new Contact(name:'Gregoire Cario',email:'gregoire@idoine-informatique.ch',telephone:'+449837234',street:'20 chemin des pales', zip:12390, city:'cortaillod', country:'Suisse', description: 'He is a great guy'))
+        Compte idoine=new Compte(name:'Idoine Informatique', description:'Super client', street:'7 chemin des pales', zip:2016, city:'Cortaillod', country:'CH')
+        idoine.addToContacts(new Contact(name:'Gregoire Cario',email:'gregoire@idoine-informatique.ch',telephone:'+449837234',street:'7 chemin des pales', zip:2106, city:'Cortaillod', country:'CH', description: 'Services Informatiques de Qualite'))
         def affaire = new Affaire(name:'super affaire', description:'ventes de pleins de tuyaux')
         def taffaire=new Affaire(name:'affaire 1', description:'ventes de pleins de tuyaux')
         idoine.addToAffaires(taffaire)

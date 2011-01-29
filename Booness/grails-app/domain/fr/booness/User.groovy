@@ -34,6 +34,6 @@ class User implements Serializable {
     }
 
     String toString(){
-        return username
+        return name
     }
 }

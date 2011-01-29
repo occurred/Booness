@@ -5,7 +5,7 @@
 </head>
 <body>
   <div>
-    <h1>Welcome to BOONESS Customer Management</h1>
+    <h1><g:message code="welcome"/></h1>
     <p></p>
   </div>
 </body>

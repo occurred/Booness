@@ -11,12 +11,13 @@ class EventController {
     }
 
     private String createJSON(){
-        String json="["
+        def json="["
         Event.list().each{
             json+="{"
             json+="title:\""+it.title+"\","
             json+="start:'"+it.startDate+"',"
             json+="end:'"+it.endDate+"',"
+            json+="allDay:"+it.allday+","
             if(it instanceof Log){
                 json+="url:\"b/../log/show/"+it.id+"\","
                 json+="className: 'event-log'"

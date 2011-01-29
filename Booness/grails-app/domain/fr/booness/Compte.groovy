@@ -16,9 +16,9 @@ class Compte implements Serializable {
         name(nullable:false, blank:false, unique:true)
         description(size:0..1024)
         street()
-        zip(range:1000..100000)
+        zip(min:0)
+        country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])
         city()
-        country(inList:["France", "Italie", "Allemagne","Espagne", "Belgique","Luxembourg","Suisse", "Royaume-Uni"])
     }
 
     String toString(){
