@@ -82,6 +82,16 @@
 
           <tr class="prop">
             <td valign="top" class="name">
+              <label for="post"><g:message code="contact.post" default="post" />:</label>
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'post', 'errors')}">
+          <g:select name="post" from="${contactInstance.constraints.post.inList}" value="${contactInstance.post}" valueMessagePrefix="contact.post"  />
+
+          </td>
+          </tr>
+
+          <tr class="prop">
+            <td valign="top" class="name">
               <label for="email"><g:message code="contact.email" default="Email" />:</label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'email', 'errors')}">

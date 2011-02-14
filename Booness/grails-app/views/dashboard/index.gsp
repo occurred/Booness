@@ -25,7 +25,8 @@
   <div id="tabs" style="width:800px;height:800px">
     <ul>
       <li><a href="#tabs-1">Calendrier</a></li>
-      <li><a href="#tabs-2">Activites</a></li>
+      <li><a href="#tabs-2">En cours</a></li>
+      <li><a href="#tabs-3">Recherche</a></li>
     </ul>
     <div id="tabs-1">
       <fullcal:calendar id="cal">
@@ -42,7 +43,7 @@
       </fullcal:calendar>
     </div>
     <div id="tabs-2">
-      <h1>${user.name}</h1>
+      <h1>Bonjour ${user.name}, J'espere que vous allez bien. Avez-vous fait tous vos rapports aujourd'hui</h1>
       <h2><g:message code="compte.affaires"/></h2>
       
 <%for(def affaire:user.affaires){
@@ -55,6 +56,15 @@
               <blockquote>${log.description}</blockquote>
 <%}%>
             
+    </div>
+
+    <div id="tabs-3">
+
+    <g:formRemote url="[action:'search']" method="get" id="searchableForm" name="searchableForm" update="results">
+        mots-clefs : <input type="text" name="q" value="" size="50" id="q" />
+    </g:formRemote>
+      <div id="results">
+      </div>
     </div>
 
   </div>

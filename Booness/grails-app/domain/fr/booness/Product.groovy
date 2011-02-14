@@ -13,6 +13,8 @@ class Product {
         price(min:0)
     }
 
+    static searchable=[only: ['name', 'description']]
+
     String toString(){
         return name
     }

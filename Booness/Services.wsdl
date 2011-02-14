@@ -1015,7 +1015,7 @@
   <wsdl:service name="ExchangeWebService">
     <wsdl:port name="ExchangeWebPort" binding="tns:ExchangeServiceBinding">
       <soap:address
-      location="https://zeus.idoine-intranet.ch:443/ews/exchange.asmx" />
+      location="https://owa.caleffi.it:443/ews/exchange.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

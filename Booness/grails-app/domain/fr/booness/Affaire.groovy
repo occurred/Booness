@@ -17,6 +17,9 @@ class Affaire implements Serializable {
         archived()
     }
 
+    static searchable=[only: ['name', 'description']]
+
+
     String toString(){
         return name;
     }

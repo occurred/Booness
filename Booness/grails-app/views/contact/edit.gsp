@@ -81,6 +81,17 @@
 
           <tr class="prop">
             <td valign="top" class="name">
+              <label for="post"><g:message code="contact.post" default="post" />:</label>
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'post', 'errors')}">
+          <g:select name="post" from="${contactInstance.constraints.post.inList}" value="${contactInstance.post}" valueMessagePrefix="contact.post"  />
+
+          </td>
+          </tr>
+
+
+          <tr class="prop">
+            <td valign="top" class="name">
               <label for="description"><g:message code="contact.description" default="Description" />:</label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'description', 'errors')}">
@@ -146,14 +157,12 @@
             <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'city', 'errors')}">
           <g:select id="city"
                     name="city"
-                    onfocus="
-${remoteFunction(
+                    onfocus="${remoteFunction(
   controller:'contact',
   action:'getCities',
   params:'getParams()',
-  onComplete:'updateCities(e)')}
-                    "
-                    value="${fieldValue(bean: contactInstance, field: 'city')}" />
+  onComplete:'updateCities(e)')}" value="${fieldValue(bean: contactInstance, field: 'city')}"
+  />
 
           </td>
           </tr>

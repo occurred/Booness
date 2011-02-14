@@ -42,10 +42,7 @@ class AffaireController {
         redirect(action: "list")
     }
 
-    @Secured(['ROLE_USER'])
-    def create={
-        redirect(action:'wizard')
-    }
+    
 
     @Secured(['ROLE_USER'])
     def wizardFlow={

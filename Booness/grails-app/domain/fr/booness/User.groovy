@@ -5,6 +5,7 @@ class User implements Serializable {
     String username
     String password
     String name
+    String initiales
     String email
     String telephone
     String bio
@@ -20,10 +21,13 @@ class User implements Serializable {
         username(blank: false, unique: true)
         password(blank: false, password:true)
         name(nullable:true)
+        initiales(maxSize:2, unique:true)
         email(email: true)
         telephone()
         bio(maxSize:1024)
     }
+
+    static searchable=[only: ['name', 'bio']]
 
     static mapping = {
         password column: '`password`'

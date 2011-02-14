@@ -15,6 +15,8 @@ class Event {
         description(size:0..1024)
     }
 
+    static searchable=[only: ['title', 'description']]
+
     public String toString(){
          title
     }
