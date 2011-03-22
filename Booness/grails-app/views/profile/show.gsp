@@ -18,6 +18,7 @@
     <h2><g:message code="user.email"/> : ${userInstance.email}</h2>
     <h2><g:message code="user.bio"/></h2>
     <h3>${userInstance.bio}</h3>
+    <h2>[<a href="${createLink(controller:'user',action:'changePassword')}"/>Changer de mot de passe</a>]</h2>
 
   </body>
 </html>

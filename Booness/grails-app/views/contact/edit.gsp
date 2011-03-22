@@ -44,9 +44,15 @@
   }
 }
 
+        
+
   </script>
 </head>
-<body>
+<body onload="var zselect = document.getElementById('city');
+        var zopt = zselect.options[zselect.selectedIndex];
+${remoteFunction(controller:"contact", action:"getCities", params:'getParams()', onComplete:"updateCity(e)")};
+
+">
   <div class="nav">
     <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="contact.list" default="Contact List" /></g:link></span>
@@ -125,7 +131,17 @@
               <label for="street"><g:message code="contact.street" default="Street" />:</label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'street', 'errors')}">
-          <g:textField name="street" value="${fieldValue(bean: contactInstance, field: 'street')}" />
+          <g:textField name="street" value="${contactInstance.street}" />
+
+          </td>
+          </tr>
+
+          <tr class="prop">
+            <td valign="top" class="name">
+              <label for="extra"><g:message code="contact.extra" default="Extra" />:</label>
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'extra', 'errors')}">
+          <g:textField name="extra" value="${contactInstance.extra}" />
 
           </td>
           </tr>
@@ -135,7 +151,7 @@
               <label for="zip"><g:message code="contact.zip" default="Zip" />:</label>
             </td>
             <td valign="top" class="value ${hasErrors(bean: contactInstance, field: 'zip', 'errors')}">
-          <g:textField name="zip" value="${fieldValue(bean: contactInstance, field: 'zip')}" />
+          <g:textField name="zip" value="${contactInstance.zip}" />
 
           </td>
           </tr>
@@ -158,11 +174,11 @@
           <g:select id="city"
                     name="city"
                     onfocus="${remoteFunction(
-  controller:'contact',
-  action:'getCities',
-  params:'getParams()',
-  onComplete:'updateCities(e)')}" value="${fieldValue(bean: contactInstance, field: 'city')}"
-  />
+controller:'contact',
+action:'getCities',
+params:'getParams()',
+onComplete:'updateCities(e)')}" value="${contactInstance.city}"
+                    />
 
           </td>
           </tr>

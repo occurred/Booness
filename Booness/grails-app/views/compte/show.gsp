@@ -8,6 +8,7 @@
 <html>
   <head>
     <title>${compteInstance.name}</title>
+    <script type="text/javascript" src="http://www.websnapr.com/js/websnapr.js"></script>
     <meta content="main" name="layout"/>
   <fullcal:resources theme="smoothness"/>
   <jqui:resources/>
@@ -38,7 +39,7 @@
       <g:message code="compte.type"/> : ${compteInstance.type}<br/>
 <%if(compteInstance.phone){%><g:message code="compte.phone"/> : <a href="skype:${compteInstance.phone}?call">${compteInstance.phone}</a><br/><%}%>
       <%if(compteInstance.email){%><g:message code="compte.email"/> : <a href="mailto:${compteInstance.email}">${compteInstance.email}</a><br/><%}%>
-      <%if(compteInstance.website){%><g:message code="compte.website"/> : <a href="${compteInstance.website}" target="_blank"><img style="border:2px solid #bbbbbb" src="http://images.websnapr.com/?key=C2T4XSE7A1b0&url=${compteInstance.website}&size=s"/></a><%}%>
+      <%if(compteInstance.website){%><g:message code="compte.website"/> : <script type="text/javascript">wsr_snapshot('${compteInstance.website}', 'C2T4XSE7A1b0', 's');</script><%}%>
     </div>
 
     <div id="tabs-2">
@@ -47,7 +48,7 @@
 <%for(def affaire in compteInstance.affaires){%>
         <li><h2><a href="${createLink(controller:"affaire",action:"show",id:affaire.id)}"/>${affaire.name}</a></h2> <p>${affaire.description}</h2></li>
 <%}%>
-        <li><h2>[<a href="${createLink(controller:"affaire", action:"create")}"/><g:message code="message.new"/></a>]</h2></li>
+        <li><h2>[<a href="${createLink(controller:"affaire", action:"create", params:["compte.id":compteInstance.id, "owner.id":sec.loggedInUserInfo(field:"id")])}"/><g:message code="message.new"/></a>]</h2></li>
 
         <ul/>
     </div>
@@ -57,7 +58,8 @@
 <%for(def log in compteInstance.logs){%>
         <li><h2><a href="${createLink(controller:"log",action:"show",id:log.id)}"/>${log.title}</a></h2> <p>${log.description}</h2></li>
 <%}%>
-        <li><h2>[<a href="${createLink(controller:"log", action:"create")}"/><g:message code="message.new"/></a>]</h2></li>
+        <li><h2>[<a href="${createLink(controller:"log", action:"create")}"/><g:message code="message.new"/></a>]
+      [<a href="mailto:yetanotherman@gmail.com?subject=&body=@description@%0A%0A%0A@description@%0A@compte@${compteInstance.id}@compte@" >mail</a>]</h2></li>
 
         <ul/>
     </div>
