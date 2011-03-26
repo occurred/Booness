@@ -10,7 +10,7 @@
     <title>Dashboard</title>
     <meta content="main" name="layout"/>
   <fullcal:resources theme="smoothness"/>
-  <jqui:resources/>
+  <jqui:resources theme="smoothness"/>
 
 </head>
 <body>
@@ -22,7 +22,7 @@
                 });
         });
   </script>
-  <div id="tabs" style="width:800px;height:800px">
+  <div id="tabs" style="width:100%;height:1000px">
     <ul>
       <li><a href="#tabs-1">Calendrier</a></li>
       <li><a href="#tabs-2">En cours</a></li>
@@ -51,9 +51,9 @@
               <h3>${affaire.name} [<g:link controller="affaire" action="show" id="${affaire.id}"><g:message code="show"/></g:link>]</h3>
   <%}}%>
            <h2><g:message code="compte.logs"/></h2>
-<%for(def log:fr.booness.Log.findAllByUser(user,[max:10, order:'desc'])){%>
+<%for(def log:fr.booness.Log.findAllByUser(user,[max:10, order:'desc', sort:'startDate'])){%>
               <h3>${log.title} [<g:link controller="log" action="show" id="${log.id}"><g:message code="show"/></g:link>]</h3>
-              <blockquote>${log.description}</blockquote>
+              <blockquote>${log.description.length()<128?log.description.replaceAll("<br/>"," "):log.description.substring(0,128).replaceAll("<br/>"," ").replaceAll("<"," ").replaceAll("\\>"," ")}...</blockquote>
 <%}%>
             
     </div>

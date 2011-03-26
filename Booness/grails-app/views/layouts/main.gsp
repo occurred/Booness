@@ -41,8 +41,6 @@
         </div>
       </td>
       <td>
-        <div id="nav">
-        </div>
     <g:layoutBody />
   </td>
 </tr>
