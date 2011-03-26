@@ -1,6 +1,6 @@
 package fr.booness
 
-class Log extends Event implements Serializable{
+class Log extends Event{
 
     Compte compte
     User user
@@ -9,5 +9,6 @@ class Log extends Event implements Serializable{
 
     static constraints = {
     }
+    
 
 }

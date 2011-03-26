@@ -12,7 +12,7 @@ class Event {
         allday()
         startDate()
         endDate()
-        description(size:0..1024)
+        description(size:0..4096)
     }
 
     static searchable=[only: ['title', 'description']]

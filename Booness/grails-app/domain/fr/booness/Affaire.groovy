@@ -8,7 +8,7 @@ class Affaire implements Serializable {
     Compte compte
     User owner
 
-    static hasMany = [quotes:Quote, files:StoredFile]
+    static hasMany = [quotes:Quote]
     static belongsTo = [owner:User, compte:Compte]
     
     static constraints = {

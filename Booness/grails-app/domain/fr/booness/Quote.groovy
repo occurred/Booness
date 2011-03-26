@@ -4,9 +4,10 @@ class Quote implements Serializable{
     String title
     Date dateCreated
     Boolean isPaid=false
+    Affaire affaire
 
     static hasMany=[products:Product]
-    static belongsTo=Affaire
+    static belongsTo=[affaire:Affaire]
     
     static constraints = {
         title()

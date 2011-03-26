@@ -9,7 +9,7 @@ class User implements Serializable {
     String email
     String telephone
     String bio
-    SortedSet logs
+    Set logs
     boolean enabled
     boolean accountExpired
     boolean accountLocked

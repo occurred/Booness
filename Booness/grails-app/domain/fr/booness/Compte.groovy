@@ -13,7 +13,7 @@ class Compte implements Serializable {
     String website
     String phone
     String email
-    SortedSet logs
+    Set logs
 
     static hasMany = [affaires:Affaire, contacts:Contact, logs:Log]
 
