@@ -3,30 +3,57 @@ package fr.booness
 
 class EventController {
 
-
+    def springSecurityService
+    
     def scaffold=true
+
+    static navigation = [
+        title: 'Calendrier',
+        group: 'admin'
+    ]
     
     def json={
-        render createJSON()
+        User principal = User.get(springSecurityService.principal.id)
+        render createJSON(principal)
     }
 
-    private String createJSON(){
+    private String createJSON(User user){
         def json="["
-        Event.list().each{
-            json+="{"
+        boolean first=true
+        Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
+            if(first){
+                first=false
+                json+="{"
+            }
+            else {
+                json+=",{"
+            }
+
             json+="title:\""+it.title+"\","
             json+="start:'"+it.startDate+"',"
             json+="end:'"+it.endDate+"',"
             json+="allDay:"+it.allday+","
-            if(it instanceof Log){
-                json+="url:\"b/../log/show/"+it.id+"\","
-                json+="className: 'event-log'"
-            }
-            else
-                json+="url:\"b/..${controllerUri}/show/"+it.id+"\""
-            json+="},"
+            json+="url:\"log/show/"+it.id+"\","
+            json+="className: 'event-log'"
+            json+="}"
         }
-        json+="{}]"
+        Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
+            if(first){
+                first=false
+                json+="{"
+            }
+            else {
+                json+=",{"
+            }
+
+            json+="title:\""+it.title+"\","
+            json+="start:'"+it.startDate+"',"
+            json+="end:'"+it.endDate+"',"
+            json+="allDay:"+it.allday+","
+            json+="url:\"${controllerName}/show/"+it.id+"\""
+            json+="}"
+        }
+        json+="]"
         return json
     }
 }

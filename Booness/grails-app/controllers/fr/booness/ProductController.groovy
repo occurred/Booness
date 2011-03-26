@@ -8,7 +8,7 @@ import grails.plugins.springsecurity.Secured
 
     static navigation = [
         title: 'Products',
-        group: 'user',
+        group: 'nuser',
         order: 100
     ]
 

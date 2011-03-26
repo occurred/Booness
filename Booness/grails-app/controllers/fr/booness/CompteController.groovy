@@ -3,7 +3,8 @@ package fr.booness
 import grails.converters.deep.JSON
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_USER'])class CompteController {
+@Secured(['ROLE_USER'])
+class CompteController {
     def scaffold=true
 
      static navigation = [
@@ -14,5 +15,9 @@ import grails.plugins.springsecurity.Secured
 
     def ajaxGetComptes ={
         render Compte.list() as JSON
+    }
+
+    def print={
+        [compteInstance:Compte.get(params.id)]
     }
 }

@@ -7,7 +7,6 @@ class ProfileController {
 
     def springSecurityService
 
-    def scaffold=User
 
     static navigation = [
         title: 'profile',
@@ -28,24 +27,6 @@ class ProfileController {
         [userInstance:principal]
     }
 
-    def edit={
-        User principal = User.get(springSecurityService.principal.id)
-        [userInstance:principal]
-    }
-
-    def update={
-        User principal = User.get(springSecurityService.principal.id)
-        principal.properties = params
-        if(principal.validate()){
-            flash.message = "Update Successful"
-            redirect(action:show)
-        }
-        else{
-            principal.save(flush:true)
-            redirect(action: "edit", model: [profileInstance: principal])
-        }
-        
-    }
 
 
 }

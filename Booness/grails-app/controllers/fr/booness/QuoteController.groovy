@@ -2,13 +2,14 @@ package fr.booness
 
 import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_USER'])
 class QuoteController {
 
     def scaffold = true
 
     static navigation = [
         title: 'Quotes',
-        group: 'user',
+        group: 'nuser',
         order: 90
     ]
 
@@ -16,10 +17,6 @@ class QuoteController {
         redirect(action:list)
     }
 
-    @Secured(['ROLE_USER'])
-    def create={
-        redirect(action:'wizard')
-    }
 
     @Secured(['ROLE_USER'])
     def wizardFlow={
