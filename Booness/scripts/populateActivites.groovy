@@ -16,7 +16,7 @@ activites.splitEachLine('<;>') {fields ->
     def timeStop=fields[10].split(" ")[1]
     def allday=timeStart.startsWith("00:00")
 
-    println userId
+    //println userId
     def compte=Compte.get(Long.parseLong(compteId))
     def user=User.get(Long.parseLong(userId))
     println compte
