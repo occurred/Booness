@@ -32,7 +32,7 @@
       });
   </script>
   <h1>${compteInstance.name}</h1>
-  <p>[<a href="${createLink(controller:"compte", action:"edit", id:compteInstance.id)}"/><g:message code="edit"/></a>][<a href="${createLink(controller:"compte", action:"print", id:compteInstance.id)}"/><g:message code="print"/></a>]</p>
+  <p>[<a href="${createLink(controller:"compte", action:"edit", id:compteInstance.id)}"><g:message code="edit"/></a>][<a href="${createLink(controller:"compte", action:"print", id:compteInstance.id)}" target="_blank"><g:message code="print"/></a>]</p>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">General</a></li>
