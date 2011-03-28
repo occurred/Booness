@@ -36,9 +36,9 @@
     <g:each in="${compteInstance.contacts}">
       <h3>${it.name}</h3>
       <blockquote style="border-style: solid;border-width: 1px;padding: 1em 1em">
-${it.email?"email : "+it.email+"<br/>":""}
-${it.telephone?"tel : "+it.telephone+"<br/>":""}
-${it.city?"adresse :<br/>"+(it.street?it.street+"<br/>":"")+(it.extra?it.extra+"<br/>":"")+it.zip+" "+it.city+"<br/>":""}
+${it.email?"<b>Email</b> : "+it.email+"<br/>":""}
+${it.telephone?"<b>Tel</b> : "+it.telephone+"<br/>":""}
+${it.city?"<b>Adresse</b> :<br/><blockquote>"+(it.street?it.street+"<br/>":"")+(it.extra?it.extra+"<br/>":"")+it.zip+" "+it.city+"<br/></blockquote>":""}
       </blockquote>
     </g:each>
 
