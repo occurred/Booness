@@ -41,6 +41,5 @@ ${it.telephone?"<b>Tel</b> : "+it.telephone+"<br/>":""}
 ${it.city?"<b>Adresse</b> :<br/><blockquote>"+(it.street?it.street+"<br/>":"")+(it.extra?it.extra+"<br/>":"")+it.zip+" "+it.city+"<br/></blockquote>":""}
       </blockquote>
     </g:each>
-
   </body>
 </html>

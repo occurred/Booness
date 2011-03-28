@@ -4,14 +4,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
+        <resource:richTextEditor type="full"/>
         <title><g:message code="user.edit" default="Edit User" /></title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="user.list" default="User List" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="user.new" default="New User" /></g:link></span>
-        </div>
         <div class="body">
             <h1><g:message code="user.edit" default="Edit User" /></h1>
             <g:if test="${flash.message}">
@@ -29,7 +25,26 @@
                     <table>
                         <tbody>
                         
-                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="username"><g:message code="user.username" default="Username" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'username', 'errors')}">
+                                    <g:textField name="username" value="${fieldValue(bean: userInstance, field: 'username')}" />
+
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="password"><g:message code="user.password" default="Password" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
+                                    <g:passwordField name="password" value="${fieldValue(bean: userInstance, field: 'password')}" />
+
+                                </td>
+                            </tr>
+                        
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="name"><g:message code="user.name" default="Name" />:</label>
@@ -75,13 +90,11 @@
                                     <label for="bio"><g:message code="user.bio" default="Bio" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'bio', 'errors')}">
-                                    <g:textArea name="bio" rows="5" cols="40" value="${fieldValue(bean: userInstance, field: 'bio')}" />
+                                    <richui:richTextEditor name="bio" width="600" height="300" value="${userInstance.bio}" />
 
                                 </td>
                             </tr>
-
-                            <sec:ifAllGranted roles="ROLE_ADMIN">
-
+                        
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="accountExpired"><g:message code="user.accountExpired" default="Account Expired" />:</label>
@@ -101,8 +114,6 @@
 
                                 </td>
                             </tr>
-
-                            </sec:ifAllGranted>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
@@ -120,8 +131,7 @@
 
                                 </td>
                             </tr>
-
-                            <sec:ifAllGranted roles="ROLE_ADMIN">
+                        
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="enabled"><g:message code="user.enabled" default="Enabled" />:</label>
@@ -131,7 +141,6 @@
 
                                 </td>
                             </tr>
-                            </sec:ifAllGranted>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">

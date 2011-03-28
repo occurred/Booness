@@ -4,13 +4,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
+        <resource:richTextEditor  type="full"/>
         <title><g:message code="user.create" default="Create User" /></title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="user.list" default="User List" /></g:link></span>
-        </div>
         <div class="body">
             <h1><g:message code="user.create" default="Create User" /></h1>
             <g:if test="${flash.message}">
@@ -91,7 +88,7 @@
                                     <label for="bio"><g:message code="user.bio" default="Bio" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'bio', 'errors')}">
-                                    <g:textArea name="bio" rows="5" cols="40" value="${fieldValue(bean: userInstance, field: 'bio')}" />
+                                    <richui:richTextEditor name="bio" width="600" height="300" value="${userInstance.bio}" />
 
                                 </td>
                             </tr>

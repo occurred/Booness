@@ -12,13 +12,20 @@
     <title>${userInstance.name}</title>
   </head>
   <body>
-    <br/>
-    <h2><g:message code="user.username"/> : <sec:loggedInUserInfo field="username"/></h2>
-    <h2><g:message code="user.name"/> : ${userInstance.name}</h2>
-    <h2><g:message code="user.email"/> : ${userInstance.email}</h2>
-    <h2><g:message code="user.bio"/></h2>
-    <h3>${userInstance.bio}</h3>
-    <h2>[<a href="${createLink(controller:'user',action:'changePassword')}"/>Changer de mot de passe</a>]</h2>
+  <g:if test="${flash.message}">
+    <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
+  </g:if>
 
-  </body>
+  <g:if test="${flash.error}"><div class="errors">
+      <g:message code="${flash.error}" args="${flash.args}" default="${flash.defaultMessage}" />
+    </div>
+  </g:if>
+  <h2><g:message code="user.username"/> : <sec:loggedInUserInfo field="username"/></h2>
+  <h2><g:message code="user.name"/> : ${userInstance.name}</h2>
+  <h2><g:message code="user.email"/> : ${userInstance.email}</h2>
+  <h2><g:message code="user.bio"/></h2>
+  <h3>${userInstance.bio}</h3>
+  <h2>[<a href="${createLink(controller:'user',action:'changePassword')}"/>Changer de mot de passe</a>]</h2>
+
+</body>
 </html>
