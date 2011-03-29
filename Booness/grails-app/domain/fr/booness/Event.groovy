@@ -1,6 +1,6 @@
 package fr.booness
 
-class Event {
+class Event implements Comparable {
     String title
     String description
     Date startDate
@@ -19,5 +19,9 @@ class Event {
 
     public String toString(){
          title
+    }
+
+    public int compareTo(Object that){
+        return -startDate.compareTo(that.startDate)
     }
 }

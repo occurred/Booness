@@ -13,9 +13,13 @@ class Compte implements Serializable {
     String website
     String phone
     String email
-    Set logs
+    SortedSet logs
 
     static hasMany = [affaires:Affaire, contacts:Contact, logs:Log]
+
+    static mapping ={
+        logs sort:'startDate'
+    }
 
     static constraints = {
         name(nullable:false, blank:false)
