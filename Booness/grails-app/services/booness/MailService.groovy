@@ -10,11 +10,12 @@ class MailService {
     String descriptionSeparator = "@description@"
     String compteSeparator = "@compte@"
     String logSeparator = "@log@"
+    SimpleDateFormat dfz = new SimpleDateFormat("yyyyMMdd'T'hhmmss'Z'")
+    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd'T'hhmmss")
 
     def parseCompte(mail) {
-        println mail
+        //println mail
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd'T'hhmmss'Z'")
         println mail.count
         def parent = mail.parent
         def from=parent.from[0].address
@@ -66,15 +67,26 @@ class MailService {
             else if(content.getContentType().startsWith("TEXT/CALENDAR")){
                 def cal=readString(content.content)
                 //if(true) cal=cal.decodeBase64()
-                println cal
+                //println cal
+                boolean parse=false;
                 cal.split("\n").each{line->
-                    def val=line.split(":")
-                    if(val.length==2){
-                        if(val[0].startsWith("DTSTART")){
-                            log.startDate=df.parse(val[1])
-                        }
-                        else if(val[0].startsWith("DTEND")){
-                            log.endDate=df.parse(val[1])
+                    println line
+                    if(line.startsWith("BEGIN:VEVENT")){
+                        parse=true
+                    }
+                    else if(line.startsWith("END:VEVENT")){
+                        parse=false
+                    }
+                    if(parse){
+                        def val=line.split(":")
+                        if(val.length==2){
+                        
+                            if(val[0].startsWith("DTSTART")){
+                                log.startDate=val[1].endsWith("Z")?dfz.parse(val[1]):df.parse(val[1])
+                            }
+                            else if(val[0].startsWith("DTEND")){
+                                log.endDate=val[1].endsWith("Z")?dfz.parse(val[1]):df.parse(val[1])
+                            }
                         }
                     }
                     log.allday=false
@@ -96,7 +108,7 @@ class MailService {
 
     private Compte extractCompteFromBody(String body){
         String[] temp=body.split(compteSeparator);
-        if(temp.length!=3) return null
+        if(temp.length<2) return null
         else return Compte.get(Long.parseLong(temp[1]))
     }
 
