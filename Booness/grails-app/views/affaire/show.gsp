@@ -22,7 +22,7 @@
               });
       });
   </script>
-  <h1>${affaireInstance.name}</h1>
+  <h1>${affaireInstance.name} / <a href="${createLink(controller:'compte', action:'show', id:affaireInstance.compte.id)}">${affaireInstance.compte}</a> par ${affaireInstance.owner}</h1>
   <p>[<a href="${createLink(controller:"affaire", action:"edit", id:affaireInstance.id)}"/><g:message code="edit"/></a>]</p>
 <div id="tabs">
   <ul>

@@ -13,15 +13,36 @@
     <img src="${resource(dir:'images',file:'spinner.gif')}" alt="${message(code:'spinner.alt',default:'Loading...')}" />
   </div>
   <table>
-    <tr><td></td><td><h1 id="pageBody">BOONESS</h1></td></tr>
+    <tr>
+      <td></td>
+      <td>
+        <div style="text-align: right">
+          <g:form url="[controller:'dashboard',action:'search']" method="get" id="searchableForm" name="searchableForm" update="">
+            <input style="width:200px;bottom: 0" type="text" name="q" value="" size="50" id="q"/>
+          </g:form>
+        </div>
+      </td>
+    </tr>
+
     <tr>
       <td width="200px;">
         <div class="homePagePanel">
           <div class="panelTop"></div>
           <div class="panelBody">
-            <ul class="navigation" id="navigation_all"><li class="navigation_first"><sec:ifLoggedIn><a href="${createLink(uri: '/dashboard?lang=fr')}"><g:message code="navigation.user.dashboard"/></a></sec:ifLoggedIn><sec:ifNotLoggedIn><a href="${createLink(uri: '/')}">Home</a></sec:ifNotLoggedIn></li></ul>
+            <ul class="navigation" id="navigation_all">
+              <li class="navigation_first">
+              <sec:ifLoggedIn>
+                <a href="${createLink(uri: '/dashboard?lang=fr')}"><g:message code="navigation.user.dashboard"/></a>
+              </sec:ifLoggedIn>
+              <sec:ifNotLoggedIn>
+                <a href="${createLink(uri: '/')}">Home</a>
+              </sec:ifNotLoggedIn>
+              </li>
+            </ul>
             <nav:render group="public"/>
-            <sec:ifAllGranted roles="ROLE_USER"><nav:render group="user"/></sec:ifAllGranted>
+            <sec:ifAllGranted roles="ROLE_USER">
+              <nav:render group="user"/>
+            </sec:ifAllGranted>
             <sec:ifAllGranted roles="ROLE_ADMIN"><nav:render group="admin"/></sec:ifAllGranted>
             <ul class="navigation" id="navigation_all">
               <sec:ifNotLoggedIn>

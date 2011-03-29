@@ -11,7 +11,19 @@
     <title>${contactInstance.name}</title>
   </head>
   <body>
-    <h1>${contactInstance.name} [<a href="${createLink(controller:"contact", action:"edit", id:contactInstance.id)}"><g:message code="edit"/></a>]</h1>
+<%
+def compte=null
+def c = fr.booness.Compte.createCriteria()
+def results = c.list {
+  contacts {
+    eq('id',contactInstance.id)
+  }
+}
+if(results.size()>0){
+  compte=results[0]
+}
+%>
+    <h1>${contactInstance.name} [<a href="${createLink(controller:"contact", action:"edit", id:contactInstance.id)}"><g:message code="edit"/></a><g:if test="${compte!=null}">] / (<a href="${createLink(controller:'compte', action:'show', id:compte.id)}">${compte.name}</a>)</g:if></h1>
     <p><b><g:message code="contact.post"/></b> : ${contactInstance.post}</p>
     <p><b><g:message code="contact.email"/></b> : ${contactInstance.email}</p>
     <p><b><g:message code="contact.telephone"/></b> : ${contactInstance.telephone}</p>

@@ -26,7 +26,6 @@
     <ul>
       <li><a href="#tabs-1">Calendrier</a></li>
       <li><a href="#tabs-2">En cours</a></li>
-      <li><a href="#tabs-3">Recherche</a></li>
     </ul>
     <div id="tabs-1">
       <fullcal:calendar id="cal">
@@ -58,14 +57,7 @@
             
     </div>
 
-    <div id="tabs-3">
-
-    <g:formRemote url="[action:'search']" method="get" id="searchableForm" name="searchableForm" update="results">
-        mots-clefs : <input type="text" name="q" value="" size="50" id="q" />
-    </g:formRemote>
-      <div id="results">
-      </div>
-    </div>
+   
 
   </div>
 </body>
