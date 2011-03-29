@@ -23,4 +23,14 @@ class ContactController {
         def cit= geocoderService.getCities(params.zip,params.country)
         render cit as JSON
     }
+
+    def getCompteId={
+        def c = Compte.createCriteria()
+        def results = c.list {
+            contacts {
+                eq('id',Long.parseLong(params.id))
+            }
+        }
+        render results[0].id
+    }
 }

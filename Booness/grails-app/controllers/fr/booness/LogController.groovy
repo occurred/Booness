@@ -3,7 +3,7 @@ package fr.booness
 import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_USER'])
-class LogController {
+class LogController{
 
     def scaffold=true
 
