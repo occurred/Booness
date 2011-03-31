@@ -2,14 +2,15 @@ package fr.booness
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_USER'])class ProductController {
+@Secured(['ROLE_USER'])
+class ProductController {
 
     def scaffold=true
 
     static navigation = [
         title: 'Products',
-        group: 'nuser',
-        order: 100
+        group: 'user',
+        order: 60
     ]
 
     def index={

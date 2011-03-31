@@ -16,11 +16,13 @@
     <tr>
       <td></td>
       <td>
+        <sec:ifLoggedIn>
         <div style="text-align: right">
           <g:form url="[controller:'dashboard',action:'search']" method="get" id="searchableForm" name="searchableForm" update="">
             <input style="width:200px;bottom: 0" type="text" name="q" value="" size="50" id="q"/>
           </g:form>
         </div>
+        </sec:ifLoggedIn>
       </td>
     </tr>
 

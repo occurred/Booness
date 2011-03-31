@@ -28,8 +28,8 @@ class Contact {
         street(nullable:true)
         extra(nullable:true)
         zip(nullable:true)
-        country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])
         city(nullable:true)
+        country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])
     }
 
     static searchable=[only: ['name', 'description']]

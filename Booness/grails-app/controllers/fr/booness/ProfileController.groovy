@@ -11,7 +11,7 @@ class ProfileController {
     static navigation = [
         title: 'profile',
         group: 'user',
-        order: 1000
+        order: 70
     ]
 
     def index={

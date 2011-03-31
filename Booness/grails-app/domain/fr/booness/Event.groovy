@@ -1,7 +1,10 @@
 package fr.booness
 
+import fr.booness.param.LogType
+
 class Event implements Comparable {
     String title
+    LogType type
     String description
     Date startDate
     Date endDate
@@ -9,6 +12,7 @@ class Event implements Comparable {
 
     static constraints = {
         title()
+        type()
         allday()
         startDate()
         endDate()

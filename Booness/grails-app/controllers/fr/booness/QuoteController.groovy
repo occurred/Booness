@@ -9,8 +9,8 @@ class QuoteController {
 
     static navigation = [
         title: 'Quotes',
-        group: 'nuser',
-        order: 90
+        group: 'user',
+        order: 50
     ]
 
     def index={

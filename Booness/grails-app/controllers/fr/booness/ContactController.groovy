@@ -9,7 +9,7 @@ class ContactController {
     static navigation = [
         title: 'Contacts',
         group: 'user',
-        order: 50
+        order: 20
     ]
 
     def scaffold=true

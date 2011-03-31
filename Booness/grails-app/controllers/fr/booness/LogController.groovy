@@ -11,8 +11,8 @@ class LogController{
 
     static navigation = [
         title: 'Logs',
-        group: 'admin',
-        order: 25
+        group: 'user',
+        order: 30
     ]
 
     def index={

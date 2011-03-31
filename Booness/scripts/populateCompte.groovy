@@ -3,11 +3,11 @@ import fr.booness.*
 import java.text.SimpleDateFormat
 
 String getType(String typeid){
-    if(!typeid) return "Autre"
-    if(typeid.equals('0')) return "Bureau d'Etude"
-    if(typeid.equals('1')) return "Installateur"
-    if(typeid.equals('2')) return "Entreprise"
-    return "Autre"
+    if(!typeid) return fr.booness.param.CompteType.findByName("Autre")
+    if(typeid.equals('0')) return fr.booness.param.CompteType.findByName("Bureau d'Etude")
+    if(typeid.equals('1')) return fr.booness.param.CompteType.findByName("Installateur")
+    if(typeid.equals('2')) return fr.booness.param.CompteType.findByName("Entreprise")
+    return fr.booness.param.CompteType.findByName("Autre")
 }
 
 String reformatUrl(String url){
@@ -51,9 +51,15 @@ String reformatPhone(String phone){
 }
 
 
+def ctypes=["Bureau d'Etude","Installateur","Entreprise","Autre"]
+
+ctypes.each{
+    new fr.booness.param.CompteType(name:it).save()
+}
 
 def compte=new File('scripts/compte.txt')
 println compte.absolutePath
+
 int index=1
 compte.splitEachLine(';') {fields ->
     while(!(''+index).equals(fields[0])){

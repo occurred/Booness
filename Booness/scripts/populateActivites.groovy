@@ -4,6 +4,14 @@ import java.text.SimpleDateFormat
 import javax.swing.text.rtf.RTFEditorKit
 import javax.swing.text.*
 
+
+def ltypes=["Prise de Rendez-Vous","Visite","Suivi Dossier","Assistance Technique"]
+
+ltypes.each{
+    new fr.booness.param.LogType(name:it).save()
+}
+
+
 def df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.sss")
 def activites=new File('scripts/activites.txt')
 println activites.absolutePath

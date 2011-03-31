@@ -11,7 +11,7 @@ class AffaireController {
     static navigation = [
         title: 'business',
         group: 'user',
-        order: 20
+        order: 40
     ]
     
     @Secured(['ROLE_USER'])
