@@ -20,6 +20,13 @@
                     <thead>
                         <tr>
                         <%  excludedProps = ["version",
+                                             "id",
+                                             "description",
+                                             "email",
+                                             "phone2",
+                                             "website",
+                                             "street",
+                                             "extra",
                                              Events.ONLOAD_EVENT,
                                              Events.BEFORE_INSERT_EVENT,
                                              Events.BEFORE_UPDATE_EVENT,

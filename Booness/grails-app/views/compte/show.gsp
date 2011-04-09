@@ -39,15 +39,18 @@
     <li><a href="#tabs-2"><g:message code="compte.affaires"/></a></li>
     <li><a href="#tabs-3"><g:message code="compte.logs"/></a></li>
     <li><a href="#tabs-4"><g:message code="compte.contacts"/></a></li>
-    <li><a href="#tabs-5"><g:message code="compte.address"/></a></li>
+    <li><a href="#tabs-5"><g:message code="compte.carte" default="Carte"/></a></li>
   </ul>
 
   <div id="tabs-1">
-${compteInstance.description}<br/>
-    <g:message code="compte.type"/> : ${compteInstance.type}<br/>
-<%if(compteInstance.phone){%><g:message code="compte.phone"/> : <a href="skype:${compteInstance.phone}?call">${compteInstance.phone}</a><br/><%}%>
-  <%if(compteInstance.email){%><g:message code="compte.email"/> : <a href="mailto:${compteInstance.email}">${compteInstance.email}</a><br/><%}%>
-    <%if(compteInstance.website){%><g:message code="compte.website"/> : <script type="text/javascript">wsr_snapshot('${compteInstance.website}', 'C2T4XSE7A1b0', 's');</script><%}%>
+    <b><g:message code="compte.type"/></b> : ${compteInstance.type}<br/>
+    <b><g:message code="compte.address"/></b>
+    <blockquote>${compteInstance.street}<br/>${compteInstance.extra?compteInstance.extra+"<br/>":""}${compteInstance.zip} ${compteInstance.city}</blockquote>
+<%if(compteInstance.phone){%><b><g:message code="compte.phone"/></b> : <a href="skype:${compteInstance.phone}?call">${compteInstance.phone}</a><br/><%}%>
+  <%if(compteInstance.email){%><b><g:message code="compte.email"/></b> : <a href="mailto:${compteInstance.email}">${compteInstance.email}</a><br/><%}%>
+    <%if(compteInstance.website){%><b><g:message code="compte.website"/></b> : <script type="text/javascript">wsr_snapshot('${compteInstance.website}', 'C2T4XSE7A1b0', 's');</script><%}%>
+    <blockquote>
+${compteInstance.description}</blockquote>
   </div>
 
   <div id="tabs-2">
@@ -88,7 +91,7 @@ ${compteInstance.description}<br/>
 
   </div>
   <div id="tabs-5">
-    <div>${compteInstance.street}<br/>${compteInstance.extra}<br/>${compteInstance.zip} ${compteInstance.city}</div>
+    En fonction de la qualite de renseignement de l'adresse, la geolocalisation de la carte peut varier.
     <iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;mrt=loc&amp;hl=fr&amp;geocode=&amp;q=${compteInstance.street}+${compteInstance.extra}+${compteInstance.zip}+${compteInstance.city}+France&amp;ie=UTF8&amp;output=embed"></iframe>
 
   </div>

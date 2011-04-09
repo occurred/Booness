@@ -14,7 +14,8 @@
   </div>
   <table>
     <tr>
-      <td></td>
+      <td>
+      <sec:ifLoggedIn><a href="${createLink(controller:'profile',action:'index')}"><sec:loggedInUserInfo field="username"/></a> | <g:link controller='logout'>sortie</g:link></td></sec:ifLoggedIn>
       <td>
         <sec:ifLoggedIn>
         <div style="text-align: right">
@@ -27,9 +28,8 @@
     </tr>
 
     <tr>
-      <td width="200px;">
+      <td class="rounded-corners" width="150px;">
         <div class="homePagePanel">
-          <div class="panelTop"></div>
           <div class="panelBody">
             <ul class="navigation" id="navigation_all">
               <li class="navigation_first">
@@ -60,10 +60,9 @@
               </sec:ifLoggedIn>
             </ul>
           </div>
-          <div class="panelBtm"></div>
         </div>
       </td>
-      <td>
+      <td class="rounded-corners" >
     <g:layoutBody />
   </td>
 </tr>

@@ -23,15 +23,6 @@
     <%}%><br/>
     ${compteInstance.zip} ${compteInstance.city}
     </blockquote>
-    <h2>Affaires</h2>
-  <g:each in="${compteInstance.affaires}">
-    ${it.name}<br/>
-  </g:each>
-    <h2>Compte-Rendus</h2>
-    <g:each in="${compteInstance.logs}">
-      <h3>${it.title} par ${it.user.name} <small>(${it.startDate.toString().split(" ")[0]}<%if(!it.allday){%> de ${it.startDate.toString().split(" ")[1].substring(0,5)} a ${it.endDate.toString().split(" ")[1].substring(0,5)}<%}%>)</small></h3>
-      <blockquote style="text-align: justify;border-style: solid;border-width: 1px;padding: 1em 1em">${it.description}</blockquote>
-  </g:each>
     <h2>Contacts</h2>
     <g:each in="${compteInstance.contacts}">
       <h3>${it.name}</h3>
@@ -41,5 +32,15 @@ ${it.telephone?"<b>Tel</b> : "+it.telephone+"<br/>":""}
 ${it.city?"<b>Adresse</b> :<br/><blockquote>"+(it.street?it.street+"<br/>":"")+(it.extra?it.extra+"<br/>":"")+it.zip+" "+it.city+"<br/></blockquote>":""}
       </blockquote>
     </g:each>
+    <h2>Compte-Rendus</h2>
+    <g:each in="${compteInstance.logs}">
+      <h3>${it.title} par ${it.user.name} <small>(${it.startDate.toString().split(" ")[0]}<%if(!it.allday){%> de ${it.startDate.toString().split(" ")[1].substring(0,5)} a ${it.endDate.toString().split(" ")[1].substring(0,5)}<%}%>)</small></h3>
+      <blockquote style="text-align: justify;border-style: solid;border-width: 1px;padding: 1em 1em">${it.description}</blockquote>
+  </g:each>
+    <h2>Affaires</h2>
+  <g:each in="${compteInstance.affaires}">
+    ${it.name}<br/>
+  </g:each>
+    
   </body>
 </html>

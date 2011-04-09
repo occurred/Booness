@@ -10,7 +10,7 @@ class LogController{
     def springSecurityService
 
     static navigation = [
-        title: 'Logs',
+        title: 'Activités',
         group: 'user',
         order: 30
     ]
