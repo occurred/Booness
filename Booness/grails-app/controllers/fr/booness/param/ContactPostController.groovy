@@ -3,18 +3,18 @@ package fr.booness.param
 import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_ADMIN'])
-class LogTypeController {
+class ContactPostController {
+
 
     static navigation = [
-        title: 'Type d\'Activite',
+        title: 'Type de Fonction',
         group: 'admin',
         order: 1000
     ]
 
-    def scaffold = true
+    def scaffold=true
 
     def index={
         redirect(action:'list')
     }
-
 }
