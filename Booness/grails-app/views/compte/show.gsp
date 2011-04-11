@@ -10,8 +10,8 @@
     <title>${compteInstance.name}</title>
     <script type="text/javascript" src="http://www.websnapr.com/js/websnapr.js"></script>
     <meta content="main" name="layout"/>
-  <fullcal:resources theme="smoothness"/>
-  <jqui:resources theme="smoothness"/>
+  <jq:resources/>
+  <jqui:resources/>
 
 </head>
 <body>
@@ -74,7 +74,9 @@ ${compteInstance.description}</blockquote>
       </div>
       <%}%>
       </div>
-      <h2>[<a href="${createLink(controller:"log", action:"create")}"/><g:message code="message.new"/></a>]
+      <h2>[<a href="${createLink(controller:"log", action:"create", params:["compte.id":compteInstance.id,"user.id":id])}"/>
+      <g:message code="message.new"/>
+      </a>]
       [<a href="mailto:yetanotherman@gmail.com?subject=&body=@description@%0ABut de la visite%0A%0A%0AImpression du Commercial%0A%0A%0APoints Forts%0A%0A%0APoints Faibles%0A%0A%0A%0AReste à Faire / Actions à mener%0A%0A%0A%0AObservation du Directeur Commercial%0A%0A%0A%0A%0A@description@%0A@compte@${compteInstance.id}@compte@" >mail</a>]</h2></li>
 
           <ul/>

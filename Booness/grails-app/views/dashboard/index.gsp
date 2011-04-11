@@ -9,8 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Dashboard</title>
     <meta content="main" name="layout"/>
-  <fullcal:resources theme="smoothness"/>
-  <jqui:resources theme="smoothness"/>
+  <fullcal:resources/>
 
 </head>
 <body>
@@ -22,7 +21,7 @@
                 });
         });
   </script>
-  <div id="tabs" style="width:100%;height:1000px">
+  <div id="tabs" style="width:100%;">
     <ul>
       <li><a href="#tabs-1">Calendrier</a></li>
       <li><a href="#tabs-2">Derni&egrave;res Activit&eacute;s</a></li>
@@ -33,10 +32,17 @@
         header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month'
+        right: 'month,agendaWeek,agendaDay'
         },
         columnFormat: { week: 'ddd d/M' },
         timeFormat: 'HH:mm{ - HH:mm}',
+        <sec:ifAllGranted roles="ROLE_ADMIN">
+        selectable: true,
+  		selectHelper: true,
+  		select: function(start, end, allDay) {
+  		javascript:window.location="${createLink(controller:'event',action:'create', params:[title:'nouveau meeting'])}&allDay="+allDay+"&startDate_year="+start.getFullYear()+"&startDate_month="+(start.getMonth()+1)+"&startDate_day="+start.getDate()+"&startDate_hour="+start.getHours()+"&startDate_minute="+start.getMinutes()+"&endDate_year="+end.getFullYear()+"&endDate_month="+(end.getMonth()+1)+"&endDate_day="+end.getDate()+"&endDate_hour="+end.getHours()+"&endDate_minute="+end.getMinutes()
+  		},
+  		</sec:ifAllGranted>
         events:${include(controller:"event", action:"json")}
       </fullcal:calendar>
     </div>
@@ -45,7 +51,7 @@
       <blockquote style="border-style: solid;border-width: 1px;padding: 1em 1em">
 <%for(def affaire:user.affaires){
   if(!affaire.archived){%>
-      <h3>${affaire.name} [<g:link controller="affaire" action="show" id="${affaire.id}"><g:message code="show"/></g:link>] / </h3>
+      <h3>${affaire.name} [<g:link controller="affaire" action="show" id="${affaire.id}"><g:message code="show"/></g:link>] / ${affaire.compte.name}</h3>
   <%}
 }%>
       </blockquote>
