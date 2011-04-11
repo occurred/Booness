@@ -5,6 +5,7 @@ class LogType {
     String name
 
     static constraints = {
+        name(unique:true)
     }
 
     public String toString(){

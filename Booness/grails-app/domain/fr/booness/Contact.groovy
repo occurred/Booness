@@ -17,7 +17,7 @@ class Contact {
     String description
 
     static constraints = {
-        name()
+        name(nullable:false, blank:false)
         post(inList:["Directeur", "Installateur", "Autre"])
         description(maxSize: 1024)
         email(nullable:true,email:true)

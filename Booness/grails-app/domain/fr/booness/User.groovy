@@ -9,6 +9,7 @@ class User implements Serializable {
     String email
     String telephone
     String bio
+	String token
     Set logs
     boolean enabled
     boolean accountExpired
@@ -25,6 +26,7 @@ class User implements Serializable {
         email(email: true)
         telephone()
         bio(maxSize:1024)
+		token(unique:true)
     }
 
     static searchable=[only: ['name', 'bio']]

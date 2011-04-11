@@ -11,7 +11,7 @@ class Event implements Comparable {
     Boolean allday
 
     static constraints = {
-        title()
+        title(nullable:false, blank:false)
         type()
         allday()
         startDate()

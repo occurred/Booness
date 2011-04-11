@@ -7,7 +7,7 @@ class Product {
     Integer price
 
     static constraints = {
-        name(blank:false)
+        name(nullable:false, blank:false)
         description(maxSize:2048)
         photo(maxSize:1048567)
         price(min:0)
