@@ -71,6 +71,9 @@ class UserController {
     }
 
     def show = {
+		if(!("ROLE_ADMIN" in springSecurityService.currentUser.authorities.collect{ it.authority})){
+			redirect(controller:'profile', action:'show', id:params.id)
+		}
         def userInstance = User.get(params.id)
         if (!userInstance) {
             flash.message = "user.not.found"
