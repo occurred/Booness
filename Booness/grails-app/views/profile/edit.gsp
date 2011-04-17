@@ -83,7 +83,6 @@
                                     <richui:richTextEditor name="bio" width="600" height="300" value="${userInstance.bio}" />
                                 </td>
                             </tr>
-                            <sec:ifAllGranted roles="ROLE_ADMIN">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="token"><g:message code="user.token" default="Token" />:</label>
@@ -93,7 +92,6 @@
 
                                 </td>
                             </tr>
-                            </sec:ifAllGranted>
                   
                         </tbody>
                     </table>

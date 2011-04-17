@@ -20,11 +20,11 @@
       <g:message code="${flash.error}" args="${flash.args}" default="${flash.defaultMessage}" />
     </div>
   </g:if>
-  <g:message code="user.username"/> : <sec:loggedInUserInfo field="username"/><br/>
+  <g:message code="user.username"/> : ${userInstance.username}<br/>
   <g:message code="user.name"/> : ${userInstance.name}<br/>
   <g:message code="user.email"/> : ${userInstance.email}<br/>
   <g:message code="user.bio"/>
   <blockquote>${userInstance.bio}</blockquote>
-  <h2>[<a href="${createLink(controller:'profile',action:'edit')}"/><g:message code="edit"/></a>][<a href="${createLink(controller:'user',action:'changePassword')}"/>Changer de mot de passe</a>]</h2>
+  <h2>[<a href="${createLink(controller:'profile',action:'edit', id:params.id)}"/><g:message code="edit"/></a>]<g:if test="${sameUser}">[<a href="${createLink(controller:'user',action:'changePassword')}"/>Changer de mot de passe</a>]</g:if></h2>
 </body>
 </html>

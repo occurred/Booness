@@ -43,13 +43,16 @@
   </ul>
 
   <div id="tabs-1">
+  <blockquote style="border-style: solid;border-width: 1px;padding: 1em 1em">
     <b><g:message code="compte.type"/></b> : ${compteInstance.type}<br/>
     <b><g:message code="compte.address"/></b>
     <blockquote>${compteInstance.street}<br/>${compteInstance.extra?compteInstance.extra+"<br/>":""}${compteInstance.zip} ${compteInstance.city}</blockquote>
 <%if(compteInstance.phone){%><b><g:message code="compte.phone"/></b> : <a href="skype:${compteInstance.phone}?call">${compteInstance.phone}</a><br/><%}%>
   <%if(compteInstance.email){%><b><g:message code="compte.email"/></b> : <a href="mailto:${compteInstance.email}">${compteInstance.email}</a><br/><%}%>
     <%if(compteInstance.website){%><b><g:message code="compte.website"/></b> : <script type="text/javascript">wsr_snapshot('${compteInstance.website}', 'C2T4XSE7A1b0', 's');</script><%}%>
-    <blockquote>
+    </blockquote>
+    <br/>
+    <blockquote style="border-style: solid;border-width: 1px;padding: 1em 1em">
 ${compteInstance.description}</blockquote>
   </div>
 
@@ -85,9 +88,13 @@ ${compteInstance.description}</blockquote>
           <ul>
 
           <%for(def contact in compteInstance.contacts){%>
-            <li><h2><a href="${createLink(controller:"contact",action:"show",id:contact.id)}"/>${contact.name}</a></h2> <p>${contact.email}</h2></li>
+            <li><b><a href="${createLink(controller:"contact",action:"show",id:contact.id)}"/>${contact.name}</a> (${contact.post})</b><br/>
+			<g:if test="${contact.mobile}"><p>Mobile : <a href="tel:${contact.mobile}">${contact.mobile}</a></p></g:if>
+			<g:if test="${contact.telephone}"><p>Fixe : <a href="tel:${contact.telephone}">${contact.telephone}</a></g:if>
+			<g:if test="${contact.email}"><p><a href="mailto:${contact.email}">${contact.email}</a></p></g:if>
+			</li>
             <%}%>
-      <li><h2>[<a href="${createLink(controller:"contact", action:"create")}"/><g:message code="message.new"/></a>]</h2></li>
+      <li><h2>[<a href="${createLink(controller:"contact", action:"create", params:["compte.id":compteInstance.id])}"/><g:message code="message.new"/></a>]</h2></li>
 
       <ul/>
 

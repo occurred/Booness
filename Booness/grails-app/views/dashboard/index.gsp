@@ -47,6 +47,7 @@
       </fullcal:calendar>
     </div>
     <div id="tabs-2">
+      [<a href="${createLink(controller:'event', action:'ical', params:['token':user.token]).replaceAll("http","webcal")}">Integrer Le calendrier a Outlook</a>]
       <h2><g:message code="compte.affaires"/> non archiv&eacute;es</h2>
       <blockquote style="border-style: solid;border-width: 1px;padding: 1em 1em">
 <%for(def affaire:user.affaires){
