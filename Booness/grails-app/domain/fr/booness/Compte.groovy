@@ -21,7 +21,6 @@ class Compte implements Serializable {
 
     static hasMany = [affaires:Affaire, logs:Log, contacts:Contact]
 
-    static belongsTo = [owner:User]
 
     static mapping ={
         logs sort:'startDate'
@@ -43,7 +42,7 @@ class Compte implements Serializable {
         description(size:0..2048)
     }
 
-    static searchable=[only: ['name', 'description', 'city']]
+    static searchable=[only: ['name', 'description', 'city', 'phone', 'phone2', 'fax']]
 
     String toString(){
         return name

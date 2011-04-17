@@ -1,9 +1,11 @@
 package fr.booness
 
+import fr.booness.param.ContactPost;
+
 class Contact {
 
     String name
-    String post
+    ContactPost post
     String email
     String telephone
     String mobile
@@ -15,10 +17,13 @@ class Contact {
     String city
     String country
     String description
+	Compte compte
+	
+	static hasOne = [compte:Compte]
 
     static constraints = {
         name(nullable:false, blank:false)
-        post(inList:["Directeur", "Installateur", "Autre"])
+        post()
         description(maxSize: 1024)
         email(nullable:true,email:true)
         website(nullable:true,url:true)
@@ -30,10 +35,11 @@ class Contact {
         zip(nullable:true)
         city(nullable:true)
         country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])
+		compte(nullable:true)
     }
 
-    static searchable=[only: ['name', 'description']]
-
+    static searchable=[only: ['name', 'description', 'telephone', 'mobile', 'fax']]
+	
     String toString(){
         return name;
     }

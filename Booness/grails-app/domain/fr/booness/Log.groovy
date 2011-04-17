@@ -9,6 +9,5 @@ class Log extends Event{
 
     static constraints = {
     }
-    
 
 }
