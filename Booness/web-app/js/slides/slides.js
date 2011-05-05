@@ -373,11 +373,6 @@
           switch3D: function() {
             toggleClass(document.body, 'three-d');
           },
-          toggleHightlight: function() {
-            var link = query('#prettify-link');
-            link.disabled = !(link.disabled);
-            sessionStorage['highlightOn'] = !link.disabled;
-          },
           changeTheme: function() {
             var linkEls = queryAll('link.theme');
             var sheetIndex = 0;
@@ -406,8 +401,6 @@
                 this.showNotes(); break;
               case 51: // 3
                 this.switch3D(); break;
-              case 72: // H
-                this.toggleHightlight(); break;
               case 84: // T
                 this.changeTheme(); break;
             }
@@ -427,11 +420,6 @@
           },
         };
         
-        // load highlight setting from session storage, if available.
-        // session storage can only store strings so we have to assume type coercion
-        // for the boolean logic here
-        query('#prettify-link').disabled = !(sessionStorage['highlightOn'] == 'true');
- 
         // disable style theme stylesheets
         var linkEls = queryAll('link.theme');
         var stylesheetPath = sessionStorage['theme'] || 'css/default.css';
@@ -446,7 +434,5 @@
           query('.slides').style.display = 'block';
         }, false);
  
-        queryAll('pre').forEach(function(el) {
-          addClass(el, 'prettyprint');
-        });
+        
  
