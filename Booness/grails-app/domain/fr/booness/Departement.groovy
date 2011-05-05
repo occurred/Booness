@@ -1,5 +1,6 @@
 package fr.booness
 
+
 class Departement {
     String name
     String numero
@@ -8,7 +9,8 @@ class Departement {
     static belongsTo = User
 
     static constraints = {
-        name()
+        name(blank:false)
         numero()
     }
+
 }

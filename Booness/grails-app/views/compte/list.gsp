@@ -11,7 +11,8 @@
             <span class="menuButton"><g:link class="create" action="create"><g:message code="compte.new" default="New Compte" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="compte.list" default="Compte List" /></h1>
+            <g:if test="${!params.full}"><h1>Liste de mes comptes [<a href="${createLink(action:'list', params:[full:"1"])}">Voir tous les comptes</a>]</h1></g:if>
+            <g:else><h1>Liste de tous les comptes [<a href="${createLink(action:'list')}">Voir mes comptes</a>]</h1></g:else>
             <g:if test="${flash.message}">
             <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>
@@ -25,8 +26,6 @@
                    	    <g:sortableColumn property="type" title="Type" titleKey="compte.type" />
                         
                    	    <g:sortableColumn property="phone" title="Phone" titleKey="compte.phone" />
-                        
-                   	    <g:sortableColumn property="fax" title="Fax" titleKey="compte.fax" />
                         
                    	    <g:sortableColumn property="zip" title="Zip" titleKey="compte.zip" />
                         
@@ -46,13 +45,11 @@
                         
                             <td>${compteInstance.phone}</td>
                         
-                            <td>${compteInstance.fax}</td>
-                        
                             <td>${compteInstance.zip}</td>
                         
                             <td>${compteInstance.city}</td>
                         
-                            <td>${compteInstance.logs}</td>
+                            <td>${compteInstance.logs.size()}</td>
                         
                         </tr>
                     </g:each>
@@ -60,7 +57,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${compteInstanceTotal}" />
+                <g:paginate total="${compteInstanceTotal}" params="${params}" />
             </div>
         </div>
     </body>

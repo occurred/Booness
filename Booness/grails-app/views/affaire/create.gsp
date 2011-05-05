@@ -8,14 +8,13 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Create a new Affaire</title>
+    <title>Affaire</title>
     <meta content="main" name="layout"/>
   </head>
   <body>
     <br/>
-    <h2>Compte : ${fr.booness.Compte.get(params.compte.id)}</h2>
-    <h2><g:message code="affaire.owner"/> : ${fr.booness.User.get(params.owner.id)}</h2>
-    <h2>Please create a new Affaire now:</h2>
+    <h2>Compte : ${fr.booness.Compte.get(params.compte?.id)}</h2>
+    <h2>Creation d'une affaire :</h2>
   <g:form action="save" method="post">
     <table>
       <tbody>
@@ -42,8 +41,7 @@
 
       </tbody>
     </table>
-    <input type="hidden" name="compte.id" value="${params.compte.id}" id="compte.id" />
-    <input type="hidden" name="owner.id" value="${params.owner.id}" id="owner.id" />
+    <input type="hidden" name="compte.id" value="${params.compte?.id}" id="compte.id" />
     <g:submitButton class="save" name="save" action="save" value="${message(code: 'create', 'default': 'Create')}"/>
   </g:form>
 </body>

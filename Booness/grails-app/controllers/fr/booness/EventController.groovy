@@ -1,96 +1,91 @@
 package fr.booness
 
+import grails.plugins.springsecurity.Secured
+
 
 class EventController {
 
-	def springSecurityService
+    def springSecurityService
 
-	def scaffold=true
+    def scaffold=true
 
-	static navigation = [
-		title: 'Planning',
-		group: 'admin',
-		action: 'list'
-	]
+    static navigation = [
+        title: 'Planning',
+        group: 'admin',
+        action: 'list'
+    ]
 
+	@Secured(['ROLE_USER'])
 	def json={
-		User principal = User.get(springSecurityService.principal.id)
-		render createJSON(principal)
-	}
-	
-	def list={
-		params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
-		def c = Event.createCriteria()
-		def results = c.list (params) {
-			like("class", "%Event")
-			order("startDate", "desc")
-		}
-		[eventInstanceList:results, eventInstanceTotal: results.totalCount]
-	}
+        User principal = User.get(springSecurityService.principal.id)
+        render createJSON(principal)
+    }
 
+
+    @Secured(['ROLE_USER'])
 	private String createJSON(User user){
-		def json="["
-		boolean first=true
-		Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
-			if(first){
-				first=false
-				json+="{"
-			}
-			else {
-				json+=",{"
-			}
+        def json="["
+        boolean first=true
+        Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
+            if(first){
+                first=false
+                json+="{"
+            }
+            else {
+                json+=",{"
+            }
 
-			json+="title:\""+it.title+"\","
-			json+="start:'"+it.startDate+"',"
-			json+="end:'"+it.endDate+"',"
-			json+="allDay:"+it.allday+","
-			json+="url:\"log/show/"+it.id+"\","
-			json+="backgroundColor: 'green'"
-			json+="}"
-		}
-		Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
-			if(first){
-				first=false
-				json+="{"
-			}
-			else {
-				json+=",{"
-			}
+            json+="title:\""+it.title+"\","
+            json+="start:'"+it.startDate+"',"
+            json+="end:'"+it.endDate+"',"
+            json+="allDay:"+it.allday+","
+            json+="url:\"log/show/"+it.id+"\","
+            json+="backgroundColor: 'green'"
+            json+="}"
+        }
+        Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
+            if(first){
+                first=false
+                json+="{"
+            }
+            else {
+                json+=",{"
+            }
 
-			json+="title:\""+it.title+"\","
-			json+="start:'"+it.startDate+"',"
-			json+="end:'"+it.endDate+"',"
-			json+="allDay:"+it.allday+","
-			json+="url:\"${controllerName}/show/"+it.id+"\","
-			json+="backgroundColor: 'blue'"
-			json+="}"
-		}
-		json+="]"
-		return json
-	}
+            json+="title:\""+it.title+"\","
+            json+="start:'"+it.startDate+"',"
+            json+="end:'"+it.endDate+"',"
+            json+="allDay:"+it.allday+","
+            json+="url:\"${controllerName}/show/"+it.id+"\","
+            json+="backgroundColor: 'blue'"
+            json+="}"
+        }
+        json+="]"
+        return json
+    }
 
-	private String convertHtmlToText( String html ) {
-		String convertedString = html;
-		convertedString = convertedString.replaceAll("<.*?>", "");  // strip all HTML tags
-		convertedString = convertedString.replaceAll("&nbsp;", " ");  // convert &nbsp;
-		convertedString = convertedString.replaceAll("&amp;", "&");  // convert &amp;
-		convertedString = convertedString.trim(); // strip leading and trailing whitespace
-		convertedString = convertedString.replaceAll("\n{2,}", "\n"); // collapse multipe empty lines
-		return convertedString;
-	}
+    private String convertHtmlToText( String html ) {
+        String convertedString = html;
+        convertedString = convertedString.replaceAll("<.*?>", "");  // strip all HTML tags
+        convertedString = convertedString.replaceAll("&nbsp;", " ");  // convert &nbsp;
+        convertedString = convertedString.replaceAll("&amp;", "&");  // convert &amp;
+        convertedString = convertedString.trim(); // strip leading and trailing whitespace
+        convertedString = convertedString.replaceAll("\n{2,}", "\n"); // collapse multipe empty lines
+        return convertedString;
+    }
 
 
-	def ical={
-		User principal = User.findByToken(params.token)
-		render createIcal(principal)
-	}
+    def ical={
+        User principal = User.findByToken(params.token)
+        render createIcal(principal)
+    }
 
     private String createIcal(User user){
         def df=new java.text.SimpleDateFormat("yyyyMMdd'T'HHmmss")
         def ical='''BEGIN:VCALENDAR
-X-WR-CALNAME:Booness
+X-WR-CALNAME:Caleffi
 X-WR-CALDESC:GRAILS Plugin Calendar
-PRODID:-//Francois-Xavier Thoorens/NONSGML Bennu 0.1//EN
+PRODID:-//SIGMEUS/NONSGML Bennu 0.1//EN
 VERSION:2.0
 '''
         Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
@@ -117,5 +112,128 @@ VERSION:2.0
         ical+="END:VCALENDAR\n"
         return ical
     }
-}
 
+	@Secured(['ROLE_USER'])
+	def index = { redirect(action: "list", params: params) }
+
+    // the delete, save and update actions only accept POST requests
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	@Secured(['ROLE_USER'])
+    def list = {
+        params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
+        def c = Event.createCriteria()
+        def results = c.list (params) {
+            like("class", "%Event")
+            order("startDate", "desc")
+        }
+        [eventInstanceList:results, eventInstanceTotal: results.totalCount]
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def create = {
+        def eventInstance = new Event()
+        eventInstance.properties = params
+        return [eventInstance: eventInstance]
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def save = {
+        def eventInstance = new Event(params)
+        if (!eventInstance.hasErrors() && eventInstance.save()) {
+            flash.message = "event.created"
+            flash.args = [eventInstance.id]
+            flash.defaultMessage = "Event ${eventInstance.id} created"
+            redirect(action: "show", id: eventInstance.id)
+        }
+        else {
+            render(view: "create", model: [eventInstance: eventInstance])
+        }
+    }
+
+    @Secured(['ROLE_USER'])
+	def show = {
+        def eventInstance = Event.get(params.id)
+        if (!eventInstance) {
+            flash.message = "event.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "Event not found with id ${params.id}"
+            redirect(action: "list")
+        }
+        else {
+            return [eventInstance: eventInstance]
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def edit = {
+        def eventInstance = Event.get(params.id)
+        if (!eventInstance) {
+            flash.message = "event.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "Event not found with id ${params.id}"
+            redirect(action: "list")
+        }
+        else {
+            return [eventInstance: eventInstance]
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def update = {
+        def eventInstance = Event.get(params.id)
+        if (eventInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+                if (eventInstance.version > version) {
+                    
+                    eventInstance.errors.rejectValue("version", "event.optimistic.locking.failure", "Another user has updated this Event while you were editing")
+                    render(view: "edit", model: [eventInstance: eventInstance])
+                    return
+                }
+            }
+            eventInstance.properties = params
+            if (!eventInstance.hasErrors() && eventInstance.save()) {
+                flash.message = "event.updated"
+                flash.args = [params.id]
+                flash.defaultMessage = "Event ${params.id} updated"
+                redirect(action: "show", id: eventInstance.id)
+            }
+            else {
+                render(view: "edit", model: [eventInstance: eventInstance])
+            }
+        }
+        else {
+            flash.message = "event.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "Event not found with id ${params.id}"
+            redirect(action: "edit", id: params.id)
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def delete = {
+        def eventInstance = Event.get(params.id)
+        if (eventInstance) {
+            try {
+                eventInstance.delete()
+                flash.message = "event.deleted"
+                flash.args = [params.id]
+                flash.defaultMessage = "Event ${params.id} deleted"
+                redirect(action: "list")
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "event.not.deleted"
+                flash.args = [params.id]
+                flash.defaultMessage = "Event ${params.id} could not be deleted"
+                redirect(action: "show", id: params.id)
+            }
+        }
+        else {
+            flash.message = "event.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "Event not found with id ${params.id}"
+            redirect(action: "list")
+        }
+    }
+}

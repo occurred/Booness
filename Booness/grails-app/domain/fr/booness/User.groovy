@@ -8,6 +8,7 @@ class User implements Serializable {
     String initiales
     String email
     String telephone
+	String fax="+33475841561"
     String bio
 	String token
     Set logs
@@ -24,8 +25,9 @@ class User implements Serializable {
         name(nullable:true)
         initiales(maxSize:2, unique:true)
         email(email: true)
-        telephone()
-        bio(maxSize:1024)
+        telephone(nullable:true)
+		fax(nullable:true)
+        bio(nullable:true,maxSize:1024)
 		token(unique:true)
     }
 

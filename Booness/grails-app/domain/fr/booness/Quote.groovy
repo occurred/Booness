@@ -10,7 +10,7 @@ class Quote implements Serializable{
     static belongsTo=[affaire:Affaire]
     
     static constraints = {
-        title()
+        title(blank:false)
         isPaid()
         dateCreated()
         

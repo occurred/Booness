@@ -19,4 +19,20 @@ class LogController{
         redirect(action:list)
     }
 
+     @Secured(['ROLE_USER'])
+    def save={
+        //System.out.println params
+        def log = new Log(params)
+        User principal = User.get(springSecurityService.principal.id)
+        principal.addToLogs(log)
+        if (log.save(flush: true)) {
+            flash.message = "Nouvelle Activite ${log.title} creee"
+            redirect(action: "show", id: log.id)
+        }
+        else {
+            render(view: "create", model: [logInstance: Log])
+        }
+    }
+
+
 }

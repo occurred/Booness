@@ -27,11 +27,16 @@ class ContactController {
 		if(params.compteid){
 			Contact contact=Contact.get(params.id)
 			Compte compte=Compte.get(Long.parseLong(params.compteid))
-			
-			println compte
-			println contact
+			if(!compte.type){
+			compte.type=fr.booness.param.CompteType.get(1)
+				}
+			if(!contact.post){
+				contact.post=fr.booness.param.ContactPost.get(1)
+			}
+			println compte.type
+			println contact.post
 			contact.compte=compte
-			contact.save(flush:true)
+			compte.save(flush:true, failOnError:true)
 			redirect(action:'show', id:params.id)
 		}
 		else{
