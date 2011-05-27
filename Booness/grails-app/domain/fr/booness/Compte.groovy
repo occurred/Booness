@@ -2,7 +2,7 @@ package fr.booness
 
 import fr.booness.param.CompteType
 
-class Compte implements Serializable {
+class Compte {
 
     String name
     CompteType type
@@ -35,7 +35,7 @@ class Compte implements Serializable {
         phone2(nullable:true)
         fax(nullable:true)
         street()
-        extra(nillable:true)
+        extra(nullable:true)
         zip()
         city()
         country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])

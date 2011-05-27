@@ -16,7 +16,7 @@ class Event implements Comparable {
         allday()
         startDate()
         endDate()
-        description(size:0..4096)
+        description(size:0..9192)
     }
 
     static searchable=[only: ['title', 'description']]
@@ -29,3 +29,4 @@ class Event implements Comparable {
         return -startDate.compareTo(that.startDate)
     }
 }
+

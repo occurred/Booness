@@ -9,6 +9,7 @@ class Log extends Event{
     static belongsTo = [compte:Compte, user:User]
 
     static constraints = {
+		objectif(size:0..4096)
     }
 
 }

@@ -11,6 +11,7 @@ class Departement {
     static constraints = {
         name(blank:false)
         numero()
+		user(nullable:true)
     }
 
 }

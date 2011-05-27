@@ -1,6 +1,6 @@
 package fr.booness
 
-class Affaire implements Serializable {
+class Affaire {
     String name
     String description
     Boolean archived=false

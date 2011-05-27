@@ -21,6 +21,6 @@ class Product {
     static searchable=[only: ['code', 'description']]
 
     String toString(){
-        return name
+        return code
     }
 }
