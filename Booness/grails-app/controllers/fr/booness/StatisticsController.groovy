@@ -2,11 +2,13 @@ package fr.booness
 
 import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class StatisticsController {
 
+	
+	
     def index = { }
 	
-	@Secured(['ROLE_USER'])
 	private String createJSON(User user){
 		def json="["
 		boolean first=true

@@ -35,7 +35,7 @@ class EventController {
                 json+=",{"
             }
 
-            json+="title:\""+it.title+"\","
+            json+="title:\""+it.title.replaceAll("\"","'")+"\","
             json+="start:'"+it.startDate+"',"
             json+="end:'"+it.endDate+"',"
             json+="allDay:"+it.allday+","
@@ -52,7 +52,7 @@ class EventController {
                 json+=",{"
             }
 
-            json+="title:\""+it.title+"\","
+            json+="title:\""+it.title.replaceAll("\"","'")+"\","
             json+="start:'"+it.startDate+"',"
             json+="end:'"+it.endDate+"',"
             json+="allDay:"+it.allday+","
@@ -70,7 +70,7 @@ class EventController {
         convertedString = convertedString.replaceAll("&nbsp;", " ");  // convert &nbsp;
         convertedString = convertedString.replaceAll("&amp;", "&");  // convert &amp;
         convertedString = convertedString.trim(); // strip leading and trailing whitespace
-        convertedString = convertedString.replaceAll("\n{2,}", "\n"); // collapse multipe empty lines
+        convertedString = convertedString.replaceAll("\n{2,}", "\n"); // collapse multiple empty lines
         return convertedString;
     }
 
@@ -84,18 +84,21 @@ class EventController {
         def df=new java.text.SimpleDateFormat("yyyyMMdd'T'HHmmss")
         def ical='''BEGIN:VCALENDAR
 X-WR-CALNAME:Caleffi
+METHOD:PUBLISH
 X-WR-CALDESC:GRAILS Plugin Calendar
 PRODID:-//SIGMEUS/NONSGML Bennu 0.1//EN
 VERSION:2.0
 '''
-        Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
+        Log.findAllByUser(user,[max:1000, order:'desc', sort:'startDate']).each{
             ical+="BEGIN:VEVENT\n"
             ical+="UID:"+user.name+it.id+"@grails\n"
             ical+="DTSTAMP:"+df.format(new Date())+"Z\n"
-            ical+="SUMMARY:"+it.title+"\n"
+            ical+="SUMMARY:"+it.title+" - "+it.compte.name+"\n"
             ical+="DTSTART:"+df.format(it.startDate)+"\n"
             ical+="DTEND:"+df.format(it.endDate)+"\n"
-            ical+="DESCRIPTION:"+it.description+"\n"
+			ical+="DESCRIPTION:"+it.description.replaceAll("<br/>","\\\\n").replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
+            ical+="LOCATION:"+it.compte.street+" "+it.compte.city+"\n"
+            ical+="X-ALT-DESC;FMTTYPE=text/html:"+it.description.replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
             ical+="END:VEVENT\n"
         }
 
@@ -106,7 +109,7 @@ VERSION:2.0
             ical+="SUMMARY:"+it.title+"\n"
             ical+="DTSTART:"+df.format(it.startDate)+"\n"
             ical+="DTEND:"+df.format(it.endDate)+"\n"
-            ical+="DESCRIPTION:"+it.description+"\n"
+            ical+="DESCRIPTION:"+it.description.replaceAll("\n"," ").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
             ical+="END:VEVENT\n"
         }
         ical+="END:VCALENDAR\n"
@@ -118,7 +121,7 @@ VERSION:2.0
 
     // the delete, save and update actions only accept POST requests
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	
+
 	@Secured(['ROLE_USER'])
     def list = {
         params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
@@ -186,7 +189,7 @@ VERSION:2.0
             if (params.version) {
                 def version = params.version.toLong()
                 if (eventInstance.version > version) {
-                    
+
                     eventInstance.errors.rejectValue("version", "event.optimistic.locking.failure", "Another user has updated this Event while you were editing")
                     render(view: "edit", model: [eventInstance: eventInstance])
                     return
@@ -237,3 +240,4 @@ VERSION:2.0
         }
     }
 }
+

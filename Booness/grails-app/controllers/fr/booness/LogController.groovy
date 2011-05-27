@@ -23,10 +23,11 @@ class LogController{
     def save={
         //System.out.println params
         def log = new Log(params)
+		if(log.startDate==log.endDate) log.allDay=true
         User principal = User.get(springSecurityService.principal.id)
         principal.addToLogs(log)
         if (log.save(flush: true)) {
-            flash.message = "Nouvelle Activite ${log.title} creee"
+            flash.message = "Nouvelle Activité ${log.title} créée"
             redirect(action: "show", id: log.id)
         }
         else {
@@ -36,3 +37,4 @@ class LogController{
 
 
 }
+

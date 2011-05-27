@@ -7,7 +7,7 @@ import grails.plugins.springsecurity.Secured
 class CompteController {
 	def scaffold=true
 	def springSecurityService
-	
+
 
 	static navigation = [
 		title: 'Accounts',
@@ -16,6 +16,10 @@ class CompteController {
 		action:'list'
 	]
 	
+	def m={
+		[compteInstance:Compte.get(Long.parseLong(params.id))]
+	}
+
 	def slide={
 		[compteInstance:Compte.get(Long.parseLong(params.id))]
 		}
@@ -31,23 +35,28 @@ class CompteController {
 		if(!params.full){
 			if(!params.userid) params.userid=""+springSecurityService.principal.id
 		}
-		if(params.userid){
+		if(params.departementid){
+			def d=Departement.get(Long.parseLong(params.departementid))
+			def c = Compte.createCriteria()
+            def numero=d.numero
+            if(numero=='2A'|| numero=='2B') numero='20'
+			results=c.list (params){
+				like("zip",numero+"%")
+			}
+			total=results.totalCount
+		}
+		else if(params.userid){
 			println params.userid
 			def c = Compte.createCriteria()
 			results=c.list (params) {
 				or {
 					Departement.findAllByUser(User.get(Long.parseLong(params.userid))).each{d->
+                        def numero=d.numero
+                        if(numero=='2A'|| numero=='2B') numero='20'
+
 						like("zip",d.numero+"%")
 					}
 				}
-			}
-			total=results.totalCount
-		}
-		else if(params.departementid){
-			def d=Departement.get(Long.parseLong(params.departementid))
-			def c = Compte.createCriteria()
-			results=c.list (params){
-				like("zip",d.numero+"%")
 			}
 			total=results.totalCount
 		}
@@ -58,3 +67,4 @@ class CompteController {
 		[compteInstanceList:results, compteInstanceTotal: total]
 	}
 }
+
