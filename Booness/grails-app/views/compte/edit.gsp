@@ -26,6 +26,11 @@
                 <div class="dialog">
                     <table>
                         <tbody>
+                        <style>
+                        input {
+                        width:100%;
+                        }
+                        </style>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">

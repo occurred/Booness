@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="layout" content="main" />
-<resource:richTextEditor type="medium" />
+<resource:richTextEditor type="advanced" />
 <jq:resources />
 <jqui:resources />
 <title><g:message code="log.edit" default="Edit Log" />

@@ -17,16 +17,32 @@ class EventController {
 
 	@Secured(['ROLE_USER'])
 	def json={
+		
+		if(!params.start){
+			params.start=(long)((System.currentTimeMillis()-13600000*24*30)/1000)
+		}
+		if(!params.end){
+			params.end=(long)((System.currentTimeMillis()+13600000*24*30)/1000)
+		}
+		println params
         User principal = User.get(springSecurityService.principal.id)
-        render createJSON(principal)
+        render(text:createJSON(new Date(Long.parseLong(params.start+"000")),new Date(Long.parseLong(params.end+"000")), principal),contentType:"text/html")
     }
 
 
     @Secured(['ROLE_USER'])
-	private String createJSON(User user){
+	private String createJSON(Date start, Date end, User user){
         def json="["
         boolean first=true
-        Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
+		def c = Log.createCriteria()
+		println start
+        def results=c.list([order:'desc', sort:'startDate']){
+			and{
+				eq('user',user)
+				between('startDate', start, end)
+			}
+		}
+		results.each{
             if(first){
                 first=false
                 json+="{"
@@ -34,13 +50,13 @@ class EventController {
             else {
                 json+=",{"
             }
-
-            json+="title:\""+it.title.replaceAll("\"","'")+"\","
-            json+="start:'"+it.startDate+"',"
-            json+="end:'"+it.endDate+"',"
-            json+="allDay:"+it.allday+","
-            json+="url:\"log/show/"+it.id+"\","
-            json+="backgroundColor: 'green'"
+			json+="\"id\":"+it.id+","
+            json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+            json+="\"start\":\""+it.startDate+"\","
+            json+="\"end\":\""+it.endDate+"\","
+            json+="\"allDay\":"+it.allday+","
+            json+="\"url\":\"log/show/"+it.id+"\","
+            json+="\"backgroundColor\": \"green\""
             json+="}"
         }
         Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
@@ -52,12 +68,12 @@ class EventController {
                 json+=",{"
             }
 
-            json+="title:\""+it.title.replaceAll("\"","'")+"\","
-            json+="start:'"+it.startDate+"',"
-            json+="end:'"+it.endDate+"',"
-            json+="allDay:"+it.allday+","
-            json+="url:\"${controllerName}/show/"+it.id+"\","
-            json+="backgroundColor: 'blue'"
+            json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+            json+="\"start\":'"+it.startDate+"',"
+            json+="\"end\":'"+it.endDate+"',"
+            json+="\"allDay\":"+it.allday+","
+            json+="\"url\":\"${controllerName}/show/"+it.id+"\","
+            json+="\"backgroundColor\": \"blue\""
             json+="}"
         }
         json+="]"

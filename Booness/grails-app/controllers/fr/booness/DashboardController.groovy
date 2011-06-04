@@ -9,6 +9,7 @@ class DashboardController {
     def springSecurityService
     def searchableService
 	
+	
 	@Secured(['ROLE_USER'])
 	def slide = {
 		User principal = User.get(springSecurityService.principal.id)

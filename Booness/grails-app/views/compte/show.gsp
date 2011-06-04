@@ -24,6 +24,15 @@
                 });
         });
 
+        $(function() {
+            $( "#help" ).accordion({
+              collapsible:true,
+              active:false,
+              autoHeight:false
+            });
+    });
+    
+
       $(function() {
               $( "#tabs" ).tabs({
                       fillSpace: true,
@@ -32,7 +41,7 @@
       });
   </script>
   <h1>${compteInstance.name}</h1>
-  <p>[<a href="${createLink(controller:"compte", action:"edit", id:compteInstance.id)}"><g:message code="edit"/></a>][<a href="${createLink(controller:"compte", action:"print", id:compteInstance.id)}" target="_blank"><g:message code="print"/></a>][<a href="${createLink(controller:"compte", action:"slide", id:compteInstance.id)}">Slides</a>]</p>
+  <p>[<a href="${createLink(controller:"compte", action:"edit", id:compteInstance.id)}"><g:message code="edit"/></a>][<a href="${createLink(controller:'compte', action:'print', id:compteInstance.id)}" target="_blank"><g:message code="print"/></a>][<a href="${createLink(controller:'compte', action:'slide', id:compteInstance.id)}">Slides</a>][<a target="_blank" href="${createLink(controller:'compte', action:'m', id:compteInstance.id)}">IPhone</a>]</p>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">General</a></li>
@@ -40,6 +49,7 @@
     <li><a href="#tabs-3"><g:message code="compte.logs"/></a></li>
     <li><a href="#tabs-4"><g:message code="compte.contacts"/></a></li>
     <li><a href="#tabs-5"><g:message code="compte.carte" default="Carte"/></a></li>
+    <li><a href="#tabs-6"><g:message code="compte.fichiers" default="Fichiers"/></a></li>
   </ul>
 
   <div id="tabs-1">
@@ -54,8 +64,10 @@
     <br/>
     <blockquote style="border-style: solid;border-width: 1px;padding: 1em 1em">
 ${compteInstance.description}</blockquote>
-  </div>
+<img alt="qrcode" src="${createLink(controller:'qrcode', action:'text', params:['text':createLink(base:'http://caleffi-france.fr:8080/Booness',controller:'compte',action:'show',id:compteInstance.id)])}">
 
+  </div>
+  
   <div id="tabs-2">
   [<a href="${createLink(controller:"affaire", action:"create", params:["compte.id":compteInstance.id, "owner.id":sec.loggedInUserInfo(field:"id")])}"/><g:message code="message.new"/></a>]
   
@@ -66,7 +78,7 @@ ${compteInstance.description}</blockquote>
       </ul>
   </div>
   <div id="tabs-3">
-  [<a href="${createLink(controller:"log", action:"create", params:["compte.id":compteInstance.id,"user.id":id, description:"<b>Impression du Commercial</b><br/><br/><br/><br/><br/><br/><br/><br/><br/><b>Reste à Faire / Actions à mener</b><br/><br/><br/>"])}"/>
+  [<a href="${createLink(controller:"log", action:"create", params:["compte.id":compteInstance.id,"user.id":id, description:"<b>Resultat de la Visite</b><br/><br/><br/><br/><b>Reste à Faire / Actions à mener</b><br/><br/><br/>"])}"/>
       <g:message code="message.new"/>
       </a>]
     <div id="accordion">
@@ -77,7 +89,7 @@ ${compteInstance.description}</blockquote>
       <div>
         [<a href="${createLink(controller:"log",action:"edit",id:log.id)}"/><g:message code="edit"/></a>]
         <br/><b><u>Objectif</u></b><br/>${log.objectif}
-		<br/><b><u>Compte-Rendu</u></b><br/>${log.description}
+		<br/><b><u>Compte-Rendu</u></b><br/>${log.description.replaceAll('\n','<br/>')}
       </div>
       <%}%>
       </div>
@@ -92,7 +104,7 @@ ${compteInstance.description}</blockquote>
           <%for(def contact in compteInstance.contacts){%>
             <li><b><a href="${createLink(controller:"contact",action:"show",id:contact.id)}"/>${contact.name}</a> (${contact.post})</b><br/>
 			<g:if test="${contact.mobile}"><p>Mobile : <a href="tel:${contact.mobile}">${contact.mobile}</a></p></g:if>
-			<g:if test="${contact.telephone}"><p>Fixe : <a href="tel:${contact.telephone}">${contact.telephone}</a></g:if>
+			<g:if test="${contact.telephone}"><p>Fixe : <a href="tel:${contact.telephone}">${contact.telephone}</a></p></g:if>
 			<g:if test="${contact.email}"><p><a href="mailto:${contact.email}">${contact.email}</a></p></g:if>
 			</li>
             <%}%>
@@ -104,6 +116,19 @@ ${compteInstance.description}</blockquote>
     En fonction de la qualite de renseignement de l'adresse, la geolocalisation de la carte peut varier.
     <iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;mrt=loc&amp;hl=fr&amp;geocode=&amp;q=${compteInstance.street}+${compteInstance.extra}+${compteInstance.zip}+${compteInstance.city}+France&amp;ie=UTF8&amp;output=embed"></iframe>
 
+  </div>
+  <div id="tabs-6">
+  <div id="help"><h3><a href="#"/>Aide</a></h3>
+  <div>
+  <ul>
+    <li>Veuillez <b>connecter</b> le <b>VPN Caleffi</b> pour acceder aux fichiers relatifs au compte de facon securisee.</li>
+    
+    <li>Si le repertoire n'existe pas, vous pouvez le creer en copiant Z:\CALEFFI-FRANCE\Base%20Odys\Documents\ dans l'Explorer (Windows+E pour l'ouvrir) et en creant le fichier '${compteInstance.id}'. Z:\CALEFFI-FRANCE\Base%20Odys\Documents\${compteInstance.id}\ est ainsi cree.</li>
+    <li>Installez si ce n'est pas fait, le plugin chrome: <a target="_blank" href="https://chrome.google.com/webstore/detail/jllpkdkcdjndhggodimiphkghogcpida?hl=fr">Ici</a></li>
+    </ul>
+	</div>
+	</div>
+	<br/><a target="_blank" href="file:///Z:/CALEFFI-FRANCE/Base%20Odys/Documents/${compteInstance.id}">Allez aux fichiers</a>
   </div>
 
 

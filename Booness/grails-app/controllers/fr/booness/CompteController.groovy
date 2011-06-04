@@ -41,7 +41,10 @@ class CompteController {
             def numero=d.numero
             if(numero=='2A'|| numero=='2B') numero='20'
 			results=c.list (params){
-				like("zip",numero+"%")
+				and{
+					like("zip",numero+"%")
+					if(params.alphabet) like("name", params.alphabet+"%")
+				}
 			}
 			total=results.totalCount
 		}
@@ -49,13 +52,16 @@ class CompteController {
 			println params.userid
 			def c = Compte.createCriteria()
 			results=c.list (params) {
-				or {
-					Departement.findAllByUser(User.get(Long.parseLong(params.userid))).each{d->
-                        def numero=d.numero
-                        if(numero=='2A'|| numero=='2B') numero='20'
-
-						like("zip",d.numero+"%")
+				and{
+					or {
+						Departement.findAllByUser(User.get(Long.parseLong(params.userid))).each{d->
+	                        def numero=d.numero
+	                        if(numero=='2A'|| numero=='2B') numero='20'
+	
+							like("zip",d.numero+"%")
+						}
 					}
+					if(params.alphabet) like("name", params.alphabet+"%")
 				}
 			}
 			total=results.totalCount

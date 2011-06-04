@@ -31,16 +31,16 @@
 	rel="stylesheet" type="text/css" />
 <link id="prettify-link"
 	href="${resource(dir:'css/slides',file:'prettify.css')}"
-	rel="stylesheet"/>
+	rel="stylesheet" />
 <link href="${resource(dir:'css/slides',file:'moon.css')}" class="theme"
 	rel="stylesheet" />
 <link href="${resource(dir:'css/slides',file:'sand.css')}" class="theme"
 	rel="stylesheet" />
-<link href="${resource(dir:'css/slides',file:'sea_wave.css')}" class="theme"
-	rel="stylesheet" />
-<link href="${resource(dir:'css/slides',file:'default.css')}" class="theme"
-	rel="stylesheet" media="screen" />
-	
+<link href="${resource(dir:'css/slides',file:'sea_wave.css')}"
+	class="theme" rel="stylesheet" />
+<link href="${resource(dir:'css/slides',file:'default.css')}"
+	class="theme" rel="stylesheet" media="screen" />
+
 </head>
 
 <body>
@@ -108,8 +108,8 @@
 				</section>
 			</div>
 			<g:if test="${compteInstance.contacts}">
-			<div class="slide" id="contacts-title-slide">
-				<style>
+				<div class="slide" id="contacts-title-slide">
+					<style>
 #contacts-title-slide h1,#contacts-title-slide h2 {
 	color: black;
 }
@@ -135,35 +135,41 @@
 	letter-spacing: -1px;
 }
 </style>
-				<section class="middle">
-					<hgroup>
-						<h1>Contacts</h1>
-					</hgroup>
+					<section class="middle">
+						<hgroup>
+							<h1>Contacts</h1>
+						</hgroup>
 
-				</section>
-			</div>
+					</section>
+				</div>
 
 
-			<div class="slide" id="contacts-slide">
-				<style>
-				#contacts-slide p{
-				font-weight: 18px;
-				}
+				<div class="slide" id="contacts-slide">
+					<style>
+#contacts-slide p {
+	font-weight: 18px;
+}
+
+#contacts-slide ul *{
+	margin-top: 1px;
+	margin-bottom: 1px;
+	font-size: 14px;
+}
 </style>
-				<section class="small">
-					<ul>
+					<section class="small">
+						<ul>
 
-						<%for(def contact in compteInstance.contacts){%>
-            <li><b><a href="${createLink(controller:"contact",action:"show",id:contact.id)}"/>${contact.name}</a> (${contact.post})</b><br/>
+							<%for(def contact in compteInstance.contacts){%>
+            <li><h3><a href="${createLink(controller:"contact",action:"show",id:contact.id)}"/>${contact.name}</a> (${contact.post})</h3>
 			<g:if test="${contact.mobile}"><p>Mobile : <a href="tel:${contact.mobile}">${contact.mobile}</a></p></g:if>
 			<g:if test="${contact.telephone}"><p>Fixe : <a href="tel:${contact.telephone}">${contact.telephone}</a></g:if>
 			<g:if test="${contact.email}"><p><a href="mailto:${contact.email}">${contact.email}</a></p></g:if>
 			</li>
             <%}%>
 
-						<ul/>
-				</section>
-			</div>
+							<ul />
+					</section>
+				</div>
 			</g:if>
 			<div class="slide" id="map-slide">
 				<style>
@@ -216,15 +222,19 @@
 				
 				<div class="slide" id="log${log.id}-slide">
 	<style>
+	#log${log.id}-slide div *{
+		margin-top: 0px;
+		margin-bottom: 0px;
+		font-size: 14px;
+	}
 	</style>
 					<section>
-					<h3><a href="#"/>${log.title} par ${log.user.name} <small>(${log.startDate.toString().split(" ")[0]}<%if(!log.allday){%> de ${log.startDate.toString().split(" ")[1].substring(0,5)} a ${log.endDate.toString().split(" ")[1].substring(0,5)}<%}%>)</small></a></h3>
+					<h3>${log.title} par ${log.user.name} <small>(${log.startDate.toString().split(" ")[0]}<%if(!log.allday){%> de ${log.startDate.toString().split(" ")[1].substring(0,5)} a ${log.endDate.toString().split(" ")[1].substring(0,5)}<%}%>)</small> [<a href="${createLink(controller:"log",action:"edit",id:log.id)}"/><g:message code="edit"/></a>]</h3>
       <div>
-        [<a href="${createLink(controller:"log",action:"edit",id:log.id)}"/><g:message code="edit"/></a>]
+        
         <br/><b><u>Objectif</u></b><br/>${log.objectif}
-		<br/><b><u>Compte-Rendu</u></b><br/>${log.description}
+		<br/><b><u>Compte-Rendu</u></b><br/>${log.description.replaceAll('\\\\n','<br/>')}
       </div>
-	
 					</section>
 				</div>
        
@@ -238,13 +248,14 @@
 
 	</div>
 	<!-- presentation -->
- <script type="text/javascript" src="${resource(dir:'js/slides',file:'slides.js')}"></script>
-    <!--[if lt IE 9]>
+	<script type="text/javascript"
+		src="${resource(dir:'js/slides',file:'slides.js')}"></script>
+	<!--[if lt IE 9]>
     <script 
       src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">
     </script>
     <script>CFInstall.check({ mode: "overlay" });</script>
-    <![endif]--> 
- 
-  </body> 
+    <![endif]-->
+
+</body>
 </html>
