@@ -433,6 +433,8 @@
         document.addEventListener('DOMContentLoaded', function() {
           query('.slides').style.display = 'block';
         }, false);
+        
+        slideshow.changeTheme();
  
         
  
