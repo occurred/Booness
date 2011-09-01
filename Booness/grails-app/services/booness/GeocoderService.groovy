@@ -5,6 +5,9 @@ class GeocoderService {
     static transactional = false
 
     def getCities(String zip, String country) {
+	  if(!zip || zip.size()!=5){
+		  zip=123123123123
+	  }
       def base = "http://api.geonames.org/postalCodeSearch?username=gershwinou&"
       def qs = []
       qs << "postalcode=" + zip

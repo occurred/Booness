@@ -31,11 +31,18 @@
 
   <div id="tabs-1">
     <b><g:message code="contact.address"/></b>
+    <% if(contactInstance.city){ %>
     <blockquote>${contactInstance.street}<br/>${contactInstance.extra?contactInstance.extra+"<br/>":""}${contactInstance.zip} ${contactInstance.city}</blockquote>
 <%if(contactInstance.telephone){%><b><g:message code="contact.telephone"/></b> : <a href="tel:${contactInstance.telephone}">${contactInstance.telephone}</a><br/><%}%>
 <%if(contactInstance.mobile){%><b><g:message code="contact.mobile"/></b> : <a href="tel:${contactInstance.mobile}">${contactInstance.mobile}</a><br/><%}%>
   <%if(contactInstance.fax){%><b><g:message code="contact.fax"/></b> : <b>${contactInstance.fax}</b><br/><%}%>
+  
+<%} else {%>
+<blockquote>${contactInstance.compte.street}<br/>${contactInstance.compte.extra?contactInstance.compte.extra+"<br/>":""}${contactInstance.compte.zip} ${contactInstance.compte.city}</blockquote>
+<%if(contactInstance.compte.phone){%><b><g:message code="contact.telephone"/></b> : <a href="tel:${contactInstance.compte.phone}">${contactInstance.compte.phone}</a><br/><%}%>
+  <%if(contactInstance.compte.fax){%><b><g:message code="contact.fax"/></b> : <b>${contactInstance.compte.fax}</b><br/><%}%>
 
+<%}%>
   <%if(contactInstance.email){%><b><g:message code="contact.email"/></b> : <a href="mailto:${contactInstance.email}">${contactInstance.email}</a><br/><%}%>
     <%if(contactInstance.website){%><b><g:message code="contact.website"/></b> : <script type="text/javascript">wsr_snapshot('${contactInstance.website}', 'C2T4XSE7A1b0', 's');</script><%}%>
     <blockquote>

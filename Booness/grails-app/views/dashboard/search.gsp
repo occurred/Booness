@@ -1,7 +1,6 @@
 <%@ page import="org.springframework.util.ClassUtils" %>
-<%@ page import="org.codehaus.groovy.grails.plugins.searchable.SearchableUtils" %>
-<%@ page import="org.codehaus.groovy.grails.plugins.searchable.lucene.LuceneUtils" %>
-<%@ page import="org.codehaus.groovy.grails.plugins.searchable.util.StringQueryUtils" %>
+<%@ page import="grails.plugin.searchable.internal.lucene.LuceneUtils" %>
+<%@ page import="grails.plugin.searchable.internal.util.StringQueryUtils" %>
 <head>
   <meta content="main" name="layout"/>
   <style type="text/css">
@@ -89,9 +88,9 @@
     </div>
 
     <g:if test="${haveQuery && !haveResults && !parseException}">
-      <p>Nothing matched your query - <strong>${params.q}</strong></p>
+      <p>Aucun R&eacute;sultat pour <strong>${params.q}</strong></p>
       <g:if test="${!searchResult?.suggestedQuery}">
-        <p>Suggestions:</p>
+        <p>Suggestions :</p>
         <ul>
           <li>Try a suggested query: <g:link controller="searchable" action="index" params="[q: params.q, suggestQuery: true]">Search again with the <strong>suggestQuery</strong> option</g:link><br />
           <em>Note: Suggestions are only available when classes are mapped with <strong>spellCheck</strong> options, either at the class or property level.<br />
@@ -103,12 +102,12 @@
     </g:if>
 
     <g:if test="${searchResult?.suggestedQuery}">
-      <p>Did you mean <g:link controller="searchable" action="index" params="[q: searchResult.suggestedQuery]">${StringQueryUtils.highlightTermDiffs(params.q.trim(), searchResult.suggestedQuery)}</g:link>?</p>
+      <p>Voulez-vous dire <g:link controller="searchable" action="index" params="[q: searchResult.suggestedQuery]">${StringQueryUtils.highlightTermDiffs(params.q.trim(), searchResult.suggestedQuery)}</g:link>?</p>
     </g:if>
 
     <g:if test="${parseException}">
-      <p>Your query - <strong>${params.q}</strong> - is not valid.</p>
-      <p>Suggestions:</p>
+      <p>Votre demande - <strong>${params.q}</strong> - n'est pas valide.</p>
+      <p>Suggestions :</p>
       <ul>
         <li>Fix the query: see <a href="http://lucene.apache.org/java/docs/queryparsersyntax.html">Lucene query syntax</a> for examples</li>
         <g:if test="${LuceneUtils.queryHasSpecialCharacters(params.q)}">
@@ -137,10 +136,10 @@
       <div>
         <div class="paging">
           <g:if test="${haveResults}">
-            Page:
+            Page :
             <g:set var="totalPages" value="${Math.ceil(searchResult.total / searchResult.max)}" />
             <g:if test="${totalPages == 1}"><span class="currentStep">1</span></g:if>
-            <g:else><g:paginate controller="dashboard" action="search" params="[q: params.q]" total="${searchResult.total}" prev="&lt; previous" next="next &gt;"/></g:else>
+            <g:else><g:paginate controller="dashboard" action="search" params="[q: params.q]" total="${searchResult.total}" prev="&lt; Pr&eacute;c&eacute;dent" next="Suivant &gt;"/></g:else>
           </g:if>
         </div>
       </div>

@@ -24,7 +24,11 @@
                 <div class="dialog">
                     <table>
                         <tbody>
-                        
+                        <style>
+                        input {
+                        width:100%;
+                        }
+                        </style>
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="name"><g:message code="compte.name" default="Name" />:</label>
@@ -40,7 +44,7 @@
                                     <label for="type"><g:message code="compte.type" default="Type" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: compteInstance, field: 'type', 'errors')}">
-                                    <g:select name="type.id" from="${fr.booness.param.CompteType.list()}" optionKey="id" value="${compteInstance?.type?.id}"  />
+                                    <g:select name="type.id" from="${fr.booness.param.CompteType.list()}" optionKey="id" value="${fr.booness.param.CompteType.findByName('Autre')?.id}"  />
 
                                 </td>
                             </tr>

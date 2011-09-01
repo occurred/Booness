@@ -96,6 +96,17 @@
 
           </td>
           </tr>
+          
+          <tr class="prop">
+            <td valign="top" class="name">
+              <label for="kilometres"><g:message code="log.kilometres" default="Kilom&egrave;tres" />:</label>
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: logInstance, field: 'kilometres', 'errors')}">
+          <g:textField name="kilometres" value="${logInstance?.kilometres}" />
+
+          </td>
+          </tr>
+          
 
           </tbody>
         </table>

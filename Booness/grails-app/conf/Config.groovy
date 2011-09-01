@@ -52,7 +52,7 @@ grails.spring.bean.packages = []
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://www.idoine-test.ch"
+        grails.serverURL = "http://www.idoine-test.ch:8080/"
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -94,3 +94,10 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'fr.booness.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'fr.booness.UserRole'
 grails.plugins.springsecurity.authority.className = 'fr.booness.Role'
+grails.plugins.springsecurity.useSwitchUserFilter = true
+
+
+richui.serve.resource.files.remote=true
+richui.richTextEditorRenderer='de.andreasschmitt.richui.taglib.renderer.RichTextEditorRenderer'
+
+//camel.route.imap='imaps://imap.gmail.com?username=user@gmail.com&password=password&consumer.delay=60000'

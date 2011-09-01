@@ -107,5 +107,5 @@ def departements=[
 ]
 
 departements.each{d,n->
-    new fr.booness.Departement(name:n, numero:d).save()
+    new fr.booness.Departement(name:n, numero:d).save(failOnError:true)
 }

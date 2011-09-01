@@ -21,5 +21,7 @@
     <div class="description">
       <b><u>Compte-Rendu</u></b><br/> ${logInstance.description?.decodeHTML()}
     </div>
+    
+    <p>Kilometres Parcourus : ${logInstance.kilometres}</p>
   </body>
 </html>

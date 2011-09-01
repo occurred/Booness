@@ -38,11 +38,11 @@ class DashboardController {
     
     @Secured(['ROLE_USER'])
     def search = {
-        if (!params.q?.trim()) {
+		if (!params.q?.trim()) {
             return [:]
         }
         try {
-            return [searchResult:searchableService.search(params.q, params) ]
+            return [searchResult: searchableService.search(params.q, params)]
         } catch (SearchEngineQueryParseException ex) {
             return [parseException: true]
         }

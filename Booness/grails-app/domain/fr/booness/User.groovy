@@ -17,7 +17,7 @@ class User implements Serializable {
     boolean accountLocked
     boolean passwordExpired
 
-    static hasMany = [affaires:Affaire, logs:Log]
+    static hasMany = [affaires:Affaire, logs:Log, personalEvents:Event]
 
     static constraints = {
         username(blank: false, unique: true)

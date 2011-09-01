@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Dashboard</title>
+<title>Tableau de Bord</title>
 <meta content="main" name="layout" />
-<fullcal:resources />
+<fullcal:resources/>
 <script type='text/javascript'> 
  
 	$(document).ready(function() {

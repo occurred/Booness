@@ -41,7 +41,7 @@
         }
         else {
             if ("textarea" == cp.widget || (cp.maxSize > 250 && !cp.password && !cp.inList)) {
-                return "<richui:richTextEditor name=\"${property.name}\" width=\"600\" height=\"300\" value=\"\${${domainInstance}.${property.name}}\" />"
+                return "<g:textArea name=\"${property.name}\" rows=\"5\" cols=\"40\" value=\"\${fieldValue(bean: ${domainInstance}, field: '${property.name}')}\" />"
             }
             else {
                 if( cp.inList) {

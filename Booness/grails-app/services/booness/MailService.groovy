@@ -2,7 +2,6 @@ package booness
 
 import fr.booness.*
 import java.text.SimpleDateFormat
-import java.io.*
 
 class MailService {
 

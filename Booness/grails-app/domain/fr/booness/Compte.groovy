@@ -36,7 +36,7 @@ class Compte {
         fax(nullable:true)
         street()
         extra(nullable:true)
-        zip()
+        zip(blankable:false)
         city()
         country(inList:["FR", "IT", "DE","ES", "BE","LU","CH", "UK"])
         description(size:0..8192)

@@ -4,17 +4,18 @@ class Product {
     String code
 	String codeThermador
     String description
-	Integer section
-	Integer page
+	String section
+	String page
     Float priceCaleffiFrance
 	Float priceGrossiste
 
     static constraints = {
         code(unique:true, nullable:false, blank:false)
+		codeThermador(blankable:true)
         description(maxSize:2048)
         priceCaleffiFrance(min:0f)
-		section(min:0)
-		page(min:0)
+		section(nullable:true, blankable:true)
+		page(nullable:true, blankable:true)
 		priceGrossiste(min:0f)
     }
 

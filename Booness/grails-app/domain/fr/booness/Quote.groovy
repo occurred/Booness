@@ -6,14 +6,12 @@ class Quote implements Serializable{
     Boolean isPaid=false
     Affaire affaire
 
-    static hasMany=[products:Product]
+    static hasMany=[products:ProductInsert]
     static belongsTo=[affaire:Affaire]
     
     static constraints = {
         title(blank:false)
         isPaid()
-        dateCreated()
-        
     }
 
     String toString(){
