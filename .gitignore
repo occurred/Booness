@@ -1,2 +1,8 @@
 .DS_Store
 Booness/grails-app/conf/BootStrap.groovy
+Booness/scripts/*.txt
+Booness/scripts/*.zip
+Booness/target
+Booness/scripts/populateUser.groovy
+Booness/.settings
+Booness/**/DataSource.groovy
