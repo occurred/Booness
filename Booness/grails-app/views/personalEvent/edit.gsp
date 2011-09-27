@@ -47,6 +47,16 @@
                                 </td>
                             </tr>
                         
+                       		<tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="restricted"><g:message code="event.restricted" default="Priv&eacute;" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'restricted', 'errors')}">
+                                    <g:checkBox name="restricted" value="${eventInstance?.restricted}" />
+
+                                </td>
+                            </tr>
+                            
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="allday"><g:message code="event.allday" default="Allday" />:</label>
@@ -83,7 +93,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'description', 'errors')}">
                                     <richui:richTextEditor name="description" width="600" height="300" value="${eventInstance?.description}" />
-
                                 </td>
                             </tr>
                         

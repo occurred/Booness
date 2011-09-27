@@ -31,7 +31,7 @@
 
   <div id="tabs-1">
     <b><g:message code="contact.address"/></b>
-    <% if(contactInstance.city){ %>
+    <% if(contactInstance.street){ %>
     <blockquote>${contactInstance.street}<br/>${contactInstance.extra?contactInstance.extra+"<br/>":""}${contactInstance.zip} ${contactInstance.city}</blockquote>
 <%if(contactInstance.telephone){%><b><g:message code="contact.telephone"/></b> : <a href="tel:${contactInstance.telephone}">${contactInstance.telephone}</a><br/><%}%>
 <%if(contactInstance.mobile){%><b><g:message code="contact.mobile"/></b> : <a href="tel:${contactInstance.mobile}">${contactInstance.mobile}</a><br/><%}%>

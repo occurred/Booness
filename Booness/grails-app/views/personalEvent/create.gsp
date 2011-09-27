@@ -31,7 +31,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'title', 'errors')}">
                                     <g:textField name="title" value="${eventInstance?.title}" />
-
                                 </td>
                             </tr>
                         
@@ -44,6 +43,17 @@
 
                                 </td>
                             </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="restricted"><g:message code="event.restricted" default="Priv&eacute;" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'restricted', 'errors')}">
+                                    <g:checkBox name="restricted" value="${eventInstance?.restricted}" />
+
+                                </td>
+                            </tr>
+                        
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
