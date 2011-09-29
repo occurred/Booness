@@ -10,7 +10,7 @@ class PersonalEventController {
 	def scaffold=true
 
     static navigation = [
-        title: 'Calendrier',
+        title: 'Personnel',
         group: 'user',
         action: 'list'
     ]
@@ -36,7 +36,7 @@ class PersonalEventController {
         boolean first=true
         def results=user.personalEvents
 		results.each{
-			//println it
+			println it
             if(first){
                 first=false
                 json+="{"
@@ -168,13 +168,13 @@ VERSION:2.0
 			redirect(action: "index")
 		}
         else {
-            return [eventInstance: eventInstance]
+            return [personalEventInstance: eventInstance]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def update = {
-        def eventInstance = Event.get(params.id)
+        def eventInstance = PersonalEvent.get(params.id)
 		if(eventInstance.user.id!=springSecurityService.principal.id){
 			flash.message = "Vous ne pouvez pas editer un evenement qui ne vous appartient pas !"
 			redirect(action: "index")
@@ -209,7 +209,7 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
     def delete = {
-        def eventInstance = Event.get(params.id)
+        def eventInstance =PersonalEvent.get(params.id)
 		println eventInstance
         if (eventInstance) {
 			if(eventInstance.user.id!=springSecurityService.principal.id){
@@ -223,11 +223,12 @@ VERSION:2.0
                 flash.defaultMessage = "Event ${params.id} deleted"
                 redirect(action: "list")
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (Exception e) {
+				println e
                 flash.message = "event.not.deleted"
                 flash.args = [params.id]
                 flash.defaultMessage = "Event ${params.id} could not be deleted"
-                redirect(action: "show", id: params.id)
+                //redirect(action: "list", id: params.id)
             }
         }
         else {

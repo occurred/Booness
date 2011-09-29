@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <title>${eventInstance.type} - ${eventInstance.title}</title>
+        <title>${eventInstance.title}</title>
     </head>
     <body>
     <h1>${eventInstance.title} [<a href="${createLink(action:'edit', id:eventInstance.id)}">Editer</a>]</h1>

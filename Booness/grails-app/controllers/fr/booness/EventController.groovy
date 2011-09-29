@@ -59,25 +59,45 @@ class EventController {
 			json+="\"backgroundColor\": \"green\""
 			json+="}"
 		}
-		Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
-			if(!PersonalEvent.get(it.id)){
-				if(first){
-					first=false
-					json+="{"
-				}
-				else {
-					json+=",{"
-				}
-
-				json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
-				json+="\"start\":\""+it.startDate+"\","
-				json+="\"end\":\""+it.endDate+"\","
-				json+="\"allDay\":"+it.allday+","
-				json+="\"url\":\"${controllerName}/show/"+it.id+"\","
-				json+="\"backgroundColor\": \"blue\""
-				json+="}"
+		
+		user.personalEvents.each{
+			if(first){
+				first=false
+				json+="{"
 			}
+			else {
+				json+=",{"
+			}
+
+			json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+			json+="\"start\":\""+it.startDate+"\","
+			json+="\"end\":\""+it.endDate+"\","
+			json+="\"allDay\":"+it.allday+","
+			json+="\"url\":\"personalEvent/show/"+it.id+"\","
+			json+="\"backgroundColor\": \"red\""
+			json+="}"
 		}
+
+
+		Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
+
+			if(first){
+				first=false
+				json+="{"
+			}
+			else {
+				json+=",{"
+			}
+
+			json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+			json+="\"start\":\""+it.startDate+"\","
+			json+="\"end\":\""+it.endDate+"\","
+			json+="\"allDay\":"+it.allday+","
+			json+="\"url\":\"${controllerName}/show/"+it.id+"\","
+			json+="\"backgroundColor\": \"blue\""
+			json+="}"
+		}
+
 
 		json+="]"
 		return json
