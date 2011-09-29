@@ -23,7 +23,8 @@ class LogController{
     def save={
         //System.out.println params
         def log = new Log(params)
-		if(log.startDate==log.endDate) log.allDay=true
+		if(!log.title) log.title=log.type.toString()
+		if(log.startDate==log.endDate) log.allday=true
         User principal = User.get(springSecurityService.principal.id)
         principal.addToLogs(log)
         if (log.save(flush: true)) {

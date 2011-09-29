@@ -19,8 +19,28 @@ class ProfileController {
 		else {
 			principal = User.get(springSecurityService.principal.id)
 		}
-		println principal
-		[userInstance:principal,sameUser:same]
+		
+		def chart=[:]
+		(2008..(new Date().year+1900)).each{ year->
+			println year
+			(1..9).each{month->
+				chart[year+"/0"+month]=0
+			}
+			chart[year+"/10"]=0
+			chart[year+"/11"]=0
+			chart[year+"/12"]=0
+		}
+		principal.logs.each{
+			def date=it.startDate.format("yyyy/MM")
+			if(chart[date]) {
+				chart[date]+=1
+			}
+			else{
+				chart[date]=1
+			}
+		}
+
+		[userInstance:principal,sameUser:same,chart:chart]
 	}
 
 	def edit = {

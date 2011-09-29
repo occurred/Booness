@@ -6,6 +6,8 @@ import grails.plugins.springsecurity.Secured
 class PersonalEventController {
 
     def springSecurityService
+	
+	def scaffold=true
 
     static navigation = [
         title: 'Calendrier',
@@ -34,7 +36,7 @@ class PersonalEventController {
         boolean first=true
         def results=user.personalEvents
 		results.each{
-			println it
+			//println it
             if(first){
                 first=false
                 json+="{"
@@ -121,8 +123,8 @@ VERSION:2.0
         def eventInstance = new PersonalEvent(params)
 		User user= User.get(springSecurityService.principal.id)
 		user.addToPersonalEvents(eventInstance)
-		user.save()
 		eventInstance.user=user
+		
         if (!eventInstance.hasErrors() && eventInstance.save()) {
             flash.message = "event.created"
             flash.args = [eventInstance.id]
@@ -137,6 +139,7 @@ VERSION:2.0
     @Secured(['ROLE_USER'])
 	def show = {
         def eventInstance = PersonalEvent.get(params.id)
+		println eventInstance
         if (!eventInstance) {
             flash.message = "event.not.found"
             flash.args = [params.id]
@@ -157,6 +160,9 @@ VERSION:2.0
             flash.defaultMessage = "Event not found with id ${params.id}"
             redirect(action: "list")
         }
+		if(!eventInstance.user){
+			eventInstance.user=User.get(9)
+		}
 		else if(eventInstance.user.id!=springSecurityService.principal.id){
 			flash.message = "Vous ne pouvez pas editer un evenement qui ne vous appartient pas !"
 			redirect(action: "index")
@@ -177,7 +183,6 @@ VERSION:2.0
             if (params.version) {
                 def version = params.version.toLong()
                 if (eventInstance.version > version) {
-
                     eventInstance.errors.rejectValue("version", "event.optimistic.locking.failure", "Another user has updated this Event while you were editing")
                     render(view: "edit", model: [eventInstance: eventInstance])
                     return
@@ -205,6 +210,7 @@ VERSION:2.0
     @Secured(['ROLE_USER'])
     def delete = {
         def eventInstance = Event.get(params.id)
+		println eventInstance
         if (eventInstance) {
 			if(eventInstance.user.id!=springSecurityService.principal.id){
 				flash.message = "Vous ne pouvez pas supprimer un evenement qui ne vous appartient pas!"

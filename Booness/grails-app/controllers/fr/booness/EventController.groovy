@@ -51,7 +51,7 @@ class EventController {
 				json+=",{"
 			}
 			json+="\"id\":"+it.id+","
-			json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+			json+="\"title\":\""+it.type+" "+it.compte.name+"\","
 			json+="\"start\":\""+it.startDate+"\","
 			json+="\"end\":\""+it.endDate+"\","
 			json+="\"allDay\":"+it.allday+","
@@ -108,7 +108,7 @@ X-WR-CALDESC:GRAILS Plugin Calendar
 PRODID:-//SIGMEUS/NONSGML Bennu 0.1//EN
 VERSION:2.0
 '''
-		Log.findAllByUser(user,[max:1000, order:'desc', sort:'startDate']).each{
+		Log.findAllByUser(user,[max:200, order:'desc', sort:'startDate']).each{
 			ical+="BEGIN:VEVENT\n"
 			ical+="UID:"+user.name+it.id+"@grails\n"
 			ical+="DTSTAMP:"+df.format(new Date())+"Z\n"

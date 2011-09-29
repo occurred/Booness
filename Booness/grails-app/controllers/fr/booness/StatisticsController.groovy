@@ -5,48 +5,47 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class StatisticsController {
 
-	
-	
-    def index = { }
-	
-	private String createJSON(User user){
-		def json="["
-		boolean first=true
-		Log.findAllByUser(user,[max:100, order:'desc', sort:'startDate']).each{
-			if(first){
-				first=false
-				json+="{"
+	static navigation = [
+		title: 'Statistiques',
+		group: 'admin',
+		order: 1005
+	]
+
+	def index = {
+		def stats=[:]
+		Parameters.findByName("Statistiques Utilisateurs").value.split(",").each{
+			def principal=User.findByUsername(it)
+			def chart=[:]
+			if(!params.start){
+				params.start="2008"
 			}
-			else {
-				json+=",{"
+			if(!params.end){
+				params.end=new Date().format("yyyy")
+			}
+			(params.start.toInteger()..params.end.toInteger()).each{ year->
+				println year
+				(1..9).each{month->
+					chart[year+"/0"+month]=0
+				}
+				chart[year+"/10"]=0
+				chart[year+"/11"]=0
+				chart[year+"/12"]=0
+			}
+			principal.logs.each{
+				if(it.type.toString()==params.logType && it.startDate.year+1901>params.start.toInteger() && it.startDate.year+1899<params.end.toInteger() ){
+					def date=it.startDate.format("yyyy/MM")
+					if(chart[date]) {
+						chart[date]+=1
+					}
+					else{
+						chart[date]=1
+					}
+				}
 			}
 
-			json+="title:\""+it.title+"\","
-			json+="start:'"+it.startDate+"',"
-			json+="end:'"+it.endDate+"',"
-			json+="allDay:"+it.allday+","
-			json+="url:\"log/show/"+it.id+"\","
-			json+="backgroundColor: 'green'"
-			json+="}"
+			stats[principal.name]=chart
 		}
-		Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
-			if(first){
-				first=false
-				json+="{"
-			}
-			else {
-				json+=",{"
-			}
 
-			json+="title:\""+it.title+"\","
-			json+="start:'"+it.startDate+"',"
-			json+="end:'"+it.endDate+"',"
-			json+="allDay:"+it.allday+","
-			json+="url:\"${controllerName}/show/"+it.id+"\","
-			json+="backgroundColor: 'blue'"
-			json+="}"
-		}
-		json+="]"
-		return json
+		[stats:stats, logType:params.logType]
 	}
 }

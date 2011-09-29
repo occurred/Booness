@@ -2,9 +2,11 @@ package fr.booness
 
 class Parameters {
 	
-	String compteRepository
+	String name
+	String value
 
     static constraints = {
-		compteRepository(url:true)
+		name()
+		value(maxSize:4096)
     }
 }

@@ -29,7 +29,7 @@ class CompteController {
 	}
 
 	def list = {
-		params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
+		params.max = Math.min(params.max ? params.max.toInteger() : 12,  100)
 		def results
 		int total=0
 		if(!params.full){
