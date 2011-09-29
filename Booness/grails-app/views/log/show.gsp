@@ -7,13 +7,16 @@
 
 <html>
   <head>
-    <title>${logInstance.title}</title>
+    <title>${logInstance.type} ${logInstance.compte.name}</title>
     <meta content="main" name="layout"/>
   </head>
   <body>
-    <h1>Compte : <a href="${createLink(controller:'compte', action:'show', id:logInstance.compte.id)}">${logInstance.compte.name}</a> [<a href="${createLink(controller:'compte', action:'slide', id:logInstance.compte.id)}#log${logInstance.id}-slide">Voir en Contexte</a>]</h1>
-    <h1>${logInstance.title} [<a href="${createLink(action:'edit', id:logInstance.id)}">Editer</a>] par ${logInstance.user.name}</h1>
-    <h2>${logInstance.startDate.toString().split(" ")[0]} <%if(!logInstance.allday){%> de ${logInstance.startDate.toString().split(" ")[1].substring(0,5)} a ${logInstance.endDate.toString().split(" ")[1].substring(0,5)}<%}%></h2>
+  <div id="header">
+    <h1><a href="${createLink(controller:'compte', action:'show', id:logInstance.compte.id)}">${logInstance.compte.name}</a></h1>
+    
+    <h1>${logInstance.title} par ${logInstance.user.name}</h1>
+    </div>
+    <h2>${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(logInstance.startDate).capitalize()} <%if(!logInstance.allday){%> de ${logInstance.startDate.toString().split(" ")[1].substring(0,5)} a ${logInstance.endDate.toString().split(" ")[1].substring(0,5)}<%}%></h2>
     <div class="objectif">
       <b><u>Objectif</u></b><br/> ${logInstance.objectif?.decodeHTML()}
     </div>
@@ -23,5 +26,7 @@
     </div>
     
     <p>Kilometres Parcourus : ${logInstance.kilometres}</p>
+    <br/>
+     [<a href="${createLink(controller:'compte', action:'slide', id:logInstance.compte.id)}#log${logInstance.id}-slide">Voir en Contexte</a>] [<a href="${createLink(action:'edit', id:logInstance.id)}">Editer</a>] 
   </body>
 </html>

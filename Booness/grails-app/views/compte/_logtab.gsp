@@ -1,0 +1,1 @@
+<li><a href="#tab-${log.id}">${log.type}</a></li>

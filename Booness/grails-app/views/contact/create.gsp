@@ -88,7 +88,7 @@
 							<td valign="top"
 								class="value ${hasErrors(bean: contactInstance, field: 'post', 'errors')}">
 								<g:select name="post.id"
-									from="${fr.booness.param.ContactPost.list()}" optionKey="id"
+									from="${fr.booness.param.ContactPost.list(order:'asc', sort:'name')}" optionKey="id"
 									value="${contactInstance?.post?.id}" /></td>
 						</tr>
 

@@ -7,56 +7,21 @@
         <title><g:message code="compte.list" default="Compte List" /></title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="compte.new" default="New Compte" /></g:link></span>
-        </div>
+    	
+        
         <div class="body">
-            <g:if test="${!params.full}"><h1>Liste de mes comptes [<a href="${createLink(action:'list', params:[full:"1"])}">Voir tous les comptes</a>]</h1></g:if>
-            <g:else><h1>Liste de tous les comptes [<a href="${createLink(action:'list')}">Voir mes comptes</a>]</h1></g:else>
-            <g:if test="${flash.message}">
-            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-            </g:if>
-            <div class="list">
-                <table>
-                    <thead>
-                        <tr>
-
-                   	    <g:sortableColumn property="name" title="Name" titleKey="compte.name"/>
-
-                   	    <g:sortableColumn property="type" title="Type" titleKey="compte.type" params="${[userid:params.userid]}" />
-
-                   	    <g:sortableColumn property="phone" title="Phone" titleKey="compte.phone" params="${[userid:params.userid]}" />
-
-                   	    <g:sortableColumn property="zip" title="Zip" titleKey="compte.zip" params="${[userid:params.userid]}" />
-
-                   	    <g:sortableColumn property="city" title="City" titleKey="compte.city" params="${[userid:params.userid]}" />
-
-                   	    <th><g:message code="compte.logs"/></th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <g:each in="${compteInstanceList}" status="i" var="compteInstance">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-                            <td><g:link action="show" id="${compteInstance.id}">${fieldValue(bean: compteInstance, field: "name")}</g:link></td>
-
-                            <td>${compteInstance.type}</td>
-
-                            <td>${compteInstance.phone}</td>
-
-                            <td>${compteInstance.zip}</td>
-
-                            <td>${compteInstance.city}</td>
-
-                            <td>${compteInstance.logs.size()}</td>
-
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
-            <div class="paginateButtons">
+        <div id="navigation">
+        	<div id="address" style="display: inline-block;"><a href="${createLink(controller:'compte', action:'create')}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}'/> Nouveau Compte</a></div>
+			<div id="action">
+				Trier par 
+				<div id="address" style="display: inline-block;"><g:sortableColumn property="name" title="Name" titleKey="compte.name" /><g:if test="${params.sort=='name'}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'arrow_'+(params.order=='asc'?'up':'down')+'.png', plugin: 'famfamfam')}'/></g:if></div>
+        		<div id="address" style="display: inline-block;"><g:sortableColumn property="zip" title="Zip" titleKey="compte.zip" /><g:if test="${params.sort=='zip'}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'arrow_'+(params.order=='asc'?'up':'down')+'.png', plugin: 'famfamfam')}'/></g:if></div>
+        	</div>
+        </div>
+        
+        <g:render template="comptecard" collection="${compteInstanceList}" var="compte"/>
+        
+        <div class="paginateButtons">
             <%def aaa=params.clone()
 				aaa.remove("alphabet")%>
             	<a href="${createLink(action:'list', params:aaa)}">Tous</a>

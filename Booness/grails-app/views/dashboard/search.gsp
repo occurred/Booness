@@ -125,11 +125,19 @@
     <g:if test="${haveResults}">
       <div class="results">
         <g:each var="result" in="${searchResult.results}" status="index">
+        <g:set var="className" value="${ClassUtils.getShortName(result.getClass())}" />
+        <g:if test="${className=='Compte'}">
+        <g:render template="/compte/comptecard" model="[compte:fr.booness.Compte.get(result.id)]"></g:render>
+        </g:if>
+        <g:elseif test="${className=='Contact'}">
+        <g:render template="/contact/contactcard" model="[contact:fr.booness.Contact.get(result.id)]"></g:render>
+        </g:elseif>
+        <g:else>
           <div class="result">
-            <g:set var="className" value="${ClassUtils.getShortName(result.getClass())}" />
             <g:set var="link" value="${createLink(controller:className.toLowerCase(), action:'show', id:result.id)}"/>
             <div class="name"><a href="${link}">${result.toString()}</a> (<g:message code="${className.toLowerCase()}"/>)</div>
           </div>
+          </g:else>
         </g:each>
       </div>
 

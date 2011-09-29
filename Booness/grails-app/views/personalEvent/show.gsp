@@ -8,7 +8,8 @@
     </head>
     <body>
     <h1>${eventInstance.title} [<a href="${createLink(action:'edit', id:eventInstance.id)}">Editer</a>]</h1>
-    <g:if test="${eventInatance.restricted}"><p>Cet &eacute;v&eactue;nement est <b>priv&eacute;</b></p></g:if>
+    ${eventInstance.user}
+    <g:if test="${eventInstance.restricted}"><p>Cet &eacute;v&eacute;nement est <b>priv&eacute;</b></p></g:if>
     <h2>${eventInstance.startDate.toString().split(" ")[0]} <%if(!eventInstance.allday){%> de ${eventInstance.startDate.toString().split(" ")[1].substring(0,5)} a ${eventInstance.endDate.toString().split(" ")[1].substring(0,5)}<%}%></h2>
     <div class="description">
       ${eventInstance.description.decodeHTML()}

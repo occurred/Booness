@@ -20,12 +20,8 @@
                    	    <g:sortableColumn property="title" title="Title" titleKey="log.title" />
                         
                    	    <g:sortableColumn property="type" title="Type" titleKey="log.type" />
-                        
-                   	    <g:sortableColumn property="allday" title="Allday" titleKey="log.allday" />
-                        
-                   	    <g:sortableColumn property="startDate" title="Start Date" titleKey="log.startDate" />
-                        
-                   	    <g:sortableColumn property="endDate" title="End Date" titleKey="log.endDate" />
+                   	    
+                   	    <g:sortableColumn property="startDate" title="Date"/>
                         
                    	    <g:sortableColumn property="compte" title="Compte" titleKey="log.compte" />
                         
@@ -41,11 +37,7 @@
                         
                             <td>${logInstance.type}</td>
                         
-                            <td><g:formatBoolean boolean="${logInstance.allday}" /></td>
-                        
-                            <td><g:formatDate date="${logInstance.startDate}" /></td>
-                        
-                            <td><g:formatDate date="${logInstance.endDate}" /></td>
+                            <td>${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(logInstance.startDate)}</td>
                         
                             <td>${logInstance.compte}</td>
                         

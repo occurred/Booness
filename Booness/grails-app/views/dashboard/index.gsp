@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Tableau de Bord</title>
 <meta content="main" name="layout" />
-<fullcal:resources/>
+<fullcal:resources themeCss="/Booness/css/jquery-ui/themes/custom-theme/jquery-ui-1.8.16.custom.css"/>
 <script type='text/javascript'> 
  
 	$(document).ready(function() {
@@ -57,41 +57,15 @@
 </script> 
 </head>
 <body>
-	<script type="text/javascript">
-        $(function() {
-                $( "#tabs" ).tabs({
-                        fillSpace: true,
-                        navigation: true
-                });
-        });
-  </script>
-  <div id='loading' style='position:absolute; top: 8px; left: 200px; display:none'>Chargement...</div> 
-  
-	<div id="tabs" style="width: 100%;">
-		<ul>
-			<li><a href="#tabs-1">Calendrier</a></li>
-			<li><a href="#tabs-2">Derni&egrave;res Activit&eacute;s</a></li>
-		</ul>
-		<div id="tabs-1">
+  <div id="loading" class="spinner" style="z-index: 1000;position:absolute; width:100%; height:100%;zoom:2; top: 0px; left: 0px; display:none">
+			<img style="position:fixed; top:5px; left:140px;" src="${resource(dir:'images',file:'spinner.gif')}"
+				alt="${message(code:'spinner.alt',default:'Loading...')}" />
+		</div>
+	
 			<div id="calendar">
 		        
 			</div>
-		</div>
-		<div id="tabs-2">
-			[<a href="${createLink(action:'slide')}">Slides</a>]
-			<h2>
-				<g:message code="compte.affaires" />
-				non archiv&eacute;es
-			</h2>
-			<blockquote
-				style="border-style: solid; border-width: 1px; padding: 1em 1em">
-				<%for(def affaire:user.affaires){if(!affaire.archived){%>
-      <h3>${affaire.name} [<g:link controller="affaire" action="show" id="${affaire.id}"><g:message code="show"/></g:link>] / ${affaire.compte.name}</h3>
-  				<%}}%>
+		
 
-			</blockquote>
-		</div>
-
-	</div>
 </body>
 </html>

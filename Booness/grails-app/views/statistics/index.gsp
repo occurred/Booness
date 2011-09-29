@@ -1,64 +1,53 @@
+<%@page import="fr.booness.param.LogType"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="layout" content="main"/>
- <script type="text/javascript" src="${resource(dir:'plugins/extjs4-4.0.0.0/ext', file: 'bootstrap.js')}"></script>
-  <script type="text/javascript" src="http://dev.sencha.com/deploy/ext-4.0.0/examples/example-data.js"></script> 
-  
-  <script type="text/javascript">
-  Ext.require('Ext.chart.*');
-Ext.require('Ext.layout.container.Fit');
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="layout" content="main" />
 
-Ext.onReady(function () {
-	store1.loadData(generateData(6, 20));
-    Ext.create('Ext.chart.Chart', {
-        renderTo: Ext.get('chart'),
-        width: 500,
-        height: 300,
-        animate: true,
-        store: store1,
-        id: 'chartCmp',
-        legend: true,
-        theme: 'Base:gradients',
-        series: [{
-            type: 'pie',
-            field: 'data1',
-            showInLegend: true,
-            donut:35,
-            tips: {
-              trackMouse: true,
-              width: 140,
-              height: 28,
-              renderer: function(storeItem, item) {
-                //calculate and display percentage on hover
-                var total = 0;
-                store1.each(function(rec) {
-                    total += rec.get('data1');
-                });
-                this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data1') / total * 100) + '%');
-              }
-            },
-            highlight: {
-              segment: {
-                margin: 20
-              }
-            },
-            label: {
-                field: 'name',
-                display: 'rotate',
-                contrast: true,
-                font: '12px Arial'
-            }
-        }]    
-    });
-});
-   </script>
+<title>
+	Statistiques ${params.logType} ${params.start}-${params.end}
+</title>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart", "table"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Year');
+        data.addRows(${stats['joel'].keySet().size()+1});
+        <g:each in='${stats.keySet()}' var='user'>data.addColumn('number', '${user}');
+        </g:each>
+
+        <g:each in="${new TreeSet(stats['joel'].keySet())}" var="date" status="i">data.setValue(${i}, 0, '${date}');
+        </g:each>
+
+        <g:each in="${stats.keySet()}" var="user" status="i"><g:each in="${new TreeSet(stats[user].keySet())}" var="date" status="j">data.setValue(${j},${i+1},${stats[user][date]});</g:each>
+        </g:each> 
+        
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, {legend:'top', lineWidth:0, areaOpacity:0.8, chartArea:{left:50, top:50, width:"90%", height:"85%"}, isStacked:true, hAxis:{showTextEvery:12}, width: 1200, height: 600, title: 'Statistiques ${params.logType} ${params.start}-${params.end}'});
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {title: 'Statistiques ${params.logType} ${params.start}-${params.end})'});
+      }
+    </script>
 </head>
 <body>
-  <div class="body">
-  <button onclick="var chart = Ext.getCmp('chartCmp');store1.loadData(generateData(6, 20));chart.refresh();">   test   </button>
-  <div id="chart"></div>
-  </div>
+<div id="navigation">
+Type d'activit&eacute; 
+<g:each in="${LogType.list()}" var="t">
+	<div id="address" ${t.toString()==params.logType?'class="checked"':''} style="display: inline-block;"><a href="${createLink(action:'index', params:[start:params.start, end:params.end, logType:t.toString()])}"> ${t} </a></div>		
+</g:each>
+de 
+<g:each in="${2008..params.end.toInteger()}" var="y">
+	<div id="address" ${y.toString()==params.start?'class="checked"':''} style="display: inline-block;"><a href="${createLink(action:'index', params:[logType:params.logType, start:y, end:params.end])}"> ${y} </a></div>
+</g:each>
+ &agrave; 
+<g:each in="${params.start.toInteger()..(new Date().year+1900)}" var="y">
+	<div id="address" ${y.toString()==params.end?'class="checked"':''} style="display: inline-block;"><a href="${createLink(action:'index', params:[logType:params.logType, start:params.start, end:y])}"> ${y} </a></div>
+</g:each>
+</div>
+ <div style="margin:auto;" id="chart_div"></div>
+ <div id="table_div"></div>
 </body>
 </html>

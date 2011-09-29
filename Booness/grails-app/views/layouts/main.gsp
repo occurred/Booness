@@ -1,6 +1,6 @@
 <html lang="fr">
 <head>
-<title><g:layoutTitle default="Grails" />
+<title><g:layoutTitle default="Booness" />
 </title>
 <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
 <link rel="shortcut icon"
@@ -11,10 +11,6 @@
 </head>
 <body>
 	<div id="wrapper">
-		<div id="spinner" class="spinner" style="display: none;">
-			<img src="${resource(dir:'images',file:'spinner.gif')}"
-				alt="${message(code:'spinner.alt',default:'Loading...')}" />
-		</div>
 		<table>
 			<tbody>
 				<tr>
@@ -68,10 +64,11 @@
 				<nav:render group="admin" />
 			</div>
 		</sec:ifAllGranted>
-
-		<div class="rounded-corner" style="padding: 15px;">
+			
+			
+			<br/>
+		
 			<g:layoutBody />
-		</div>
 
 		<div id="footer">
 			Une Production de Francois-Xavier Thoorens<br />
