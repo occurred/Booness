@@ -265,7 +265,7 @@ select {
 	font-size: small;
 	margin-top: 100px;
 	margin-bottom: 30px;
-	padding: 5px;
+	padding: 15px;
 	box-shadow: 5px 5px 5px #aaa;
 	border-radius: 5px;
 	overflow: hidden;
@@ -281,14 +281,14 @@ select {
 #profile input {
 	font-size:20px;
 }
-#profile  div {
+#profile  .login {
 	text-align: center;
 	margin:10px;
 }
 
 
 #profile:hover {
-	background-color: #eef;
+	background-color: #ddf;
 }
 
 #profile:hover > #action {
@@ -568,6 +568,28 @@ input {
 
 .center {
 	text-align: center;
+}
+
+.list td{
+	border: thin solid #888;
+	empty-cells: show;
+}
+
+.list th{
+	border: thin solid #888;
+	padding:3px;
+}
+
+.list th td{
+	padding:5px;
+}
+
+.list table {
+	border: thin solid #888;
+	padding:0;
+	line-height:30px;
+	border-radius:5px;
+	box-shadow: 5px 5px 5px #aaa;
 }
 
 table {

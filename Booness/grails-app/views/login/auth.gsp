@@ -19,19 +19,19 @@
 			</div>
 			</g:if>
 			<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
-				<div>
+				<div class="login">
 					<label for='username'>Utilisateur</label>
 					<input type='text' class='text_' name='j_username' id='username' />
 				</div>
-				<div>
+				<div class="login">
 					<label for='password'>Mot de Passe</label>
 					<input type='password' class='text_' name='j_password' id='password' />
 				</div>
-				<div>
+				<div class="login">
 					<input style="width:10%" type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if> />
 					<label style="width:80%" for='remember_me'>Se souvenir de moi</label>
 				</div>
-				<div>
+				<div class="login">
 					<input type='submit' value='Connection' />
 				</div>
 			</form>

@@ -1,0 +1,17 @@
+<tr>
+	<td>
+		${insert.product.code}
+	</td>
+	<td>
+		${insert.product.description}
+	</td>
+	<td>
+		${insert.product.codeThermador}
+	</td>
+	<td>
+		${insert.quantity}
+	</td>
+	<td>
+		${String.format("%.2f",insert.price*insert.quantity)}
+	</td>
+</tr>

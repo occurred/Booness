@@ -8,8 +8,8 @@
 <body>
 	<div class="body">
 		<g:form action="upload" method="post" enctype="multipart/form-data">
-			<input type="file" name="file" />
-			<input type="submit" />
+			<input type="file" name="file"  value="Choisir un Fichier"/>
+			<input type="submit" value="Envoyer"/>
 		</g:form>
 	</div>
 </body>

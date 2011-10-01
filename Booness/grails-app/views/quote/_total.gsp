@@ -1,0 +1,1 @@
+<br/><div><strong>Total: ${String.format("%.2f",total)} &euro;</strong></div>

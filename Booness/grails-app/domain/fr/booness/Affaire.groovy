@@ -4,6 +4,7 @@ class Affaire {
     String name
     String description
     Boolean archived=false
+	Date dateCreated
 
     Compte compte
     User owner
@@ -13,8 +14,9 @@ class Affaire {
     
     static constraints = {
         name(blank:false)
-        description(size:0..1024)
-        archived()
+        description(nullable:true,size:0..1024)
+		archived()
+		dateCreated(nullable:true)
     }
 
     static searchable=[only: ['name', 'description']]

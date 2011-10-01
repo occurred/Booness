@@ -5,6 +5,7 @@ class Quote implements Serializable{
     Date dateCreated
     Boolean isPaid=false
     Affaire affaire
+	Contact contact
 
     static hasMany=[products:ProductInsert]
     static belongsTo=[affaire:Affaire]

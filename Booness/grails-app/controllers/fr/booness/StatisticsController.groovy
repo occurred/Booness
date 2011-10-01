@@ -13,6 +13,7 @@ class StatisticsController {
 
 	def index = {
 		def stats=[:]
+		def dateset
 		Parameters.findByName("Statistiques Utilisateurs").value.split(",").each{
 			def principal=User.findByUsername(it)
 			def chart=[:]
@@ -23,7 +24,7 @@ class StatisticsController {
 				params.end=new Date().format("yyyy")
 			}
 			(params.start.toInteger()..params.end.toInteger()).each{ year->
-				println year
+				//println year
 				(1..9).each{month->
 					chart[year+"/0"+month]=0
 				}
@@ -31,6 +32,8 @@ class StatisticsController {
 				chart[year+"/11"]=0
 				chart[year+"/12"]=0
 			}
+			
+			if(!dateset) dateset=new TreeSet(chart.keySet())
 			principal.logs.each{
 				if(it.type.toString()==params.logType && it.startDate.year+1901>params.start.toInteger() && it.startDate.year+1899<params.end.toInteger() ){
 					def date=it.startDate.format("yyyy/MM")
@@ -46,6 +49,6 @@ class StatisticsController {
 			stats[principal.name]=chart
 		}
 
-		[stats:stats, logType:params.logType]
+		[stats:stats, dateset:dateset, logType:params.logType]
 	}
 }

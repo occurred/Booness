@@ -11,7 +11,7 @@ import fr.booness.Product;
 
 class ProductListUploadService {
 
-	static transactional = true
+	static transactional = false
 
 	private String getValue(Cell cell){
 		switch(cell.cellType) {
@@ -52,25 +52,39 @@ class ProductListUploadService {
 				println code
 				if(code && code.size()>0){
 					try{
-						Product.withNewSession{
 						Product p = Product.findByCode(""+code)
 
 						if(!p){
-							println "new"
-
-							def price=getValue(r.getCell(2))
-							if(price==null) price=0
-							new Product(code:code, codeThermador:"", description:getValue(r.getCell(1)), priceGrossiste:0f, section:""+getValue(r.getCell(3)), page:""+getValue(r.getCell(4)), priceCaleffiFrance:price).save()
+							print "new "
+							
+							def price=getValue(r.getCell(3))
+							if(price instanceof String || price==null) price=0
+							
+							def description=""+getValue(r.getCell(2))
+							
+							def codeThermador=""+getValue(r.getCell(1))
+							
+							def section=""+getValue(r.getCell(4))
+							
+							def page=""+getValue(r.getCell(5))
+							
+							new Product(code:code,
+										codeThermador:codeThermador,
+										description:description,
+										priceGrossiste:0f,
+										section:section,
+										page:page,
+										priceCaleffiFrance:price
+								).save(failOnError:true)
 							newP++
 						}
 						else{
-							def price=Float.parseFloat(""+getValue(r.getCell(2)))
+							def price=Float.parseFloat(""+getValue(r.getCell(3)))
 							if(p.priceCaleffiFrance!=price){
 								p.priceCaleffiFrance=price
 								p.save(failOnError:true)
 								updatedP++
 							}
-						}
 						}
 					}
 					catch(Exception e){

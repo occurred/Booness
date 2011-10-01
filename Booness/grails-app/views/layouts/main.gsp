@@ -10,6 +10,10 @@
 <nav:resources override="true" />
 </head>
 <body>
+	<g:if test="${flash.message}">
+  
+ <div class="message" style="position:fixed; top:20px; left:500px;"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
+    </g:if>
 	<div id="wrapper">
 		<table>
 			<tbody>

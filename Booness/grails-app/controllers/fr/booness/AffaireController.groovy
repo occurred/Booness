@@ -6,6 +6,8 @@ import grails.plugins.springsecurity.Secured
 class AffaireController {
 
 	def springSecurityService
+	
+	def scaffold=true
 
 	static navigation = [
 		title: 'Affaire',

@@ -14,12 +14,12 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Year');
-        data.addRows(${stats['joel'].keySet().size()+1});
+        data.addColumn('string', 'Mois');
+        data.addRows(${dateset.size()+1});
         <g:each in='${stats.keySet()}' var='user'>data.addColumn('number', '${user}');
         </g:each>
 
-        <g:each in="${new TreeSet(stats['joel'].keySet())}" var="date" status="i">data.setValue(${i}, 0, '${date}');
+        <g:each in="${dateset}" var="date" status="i">data.setValue(${i}, 0, '${date}');
         </g:each>
 
         <g:each in="${stats.keySet()}" var="user" status="i"><g:each in="${new TreeSet(stats[user].keySet())}" var="date" status="j">data.setValue(${j},${i+1},${stats[user][date]});</g:each>

@@ -21,8 +21,10 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Year');
         data.addColumn('number', 'Activites');
-        <g:each in="${new TreeSet(chart.keySet())}" var="date">data.addRow(['${date}',${chart[date]}]);
+        data.addColumn('number', 'Affaires');
+        <g:each in="${new TreeSet(activites.keySet())}" var="date">data.addRow(['${date}',${activites[date]},${affaires[date]}]);
         </g:each>
+        
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, {hAxis:{showTextEvery:12}, width: 1200, height: 300, title: 'Statistiques'});
       }
@@ -34,10 +36,12 @@
 
 <div id="profile" style="font-size: x-large;">
 <div id="action">
-	<a href="${createLink(controller:'profile', action:'edit', id:userInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
-	<a href="${createLink(controller:'event', action:'ical', params:['token':userInstance.token]).replaceAll("http","webcal")}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'calendar.png', plugin: 'famfamfam')}'/></a>
+	<g:if test="${sameUser}">
+		<a href="${createLink(controller:'profile', action:'edit', id:userInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
+		<a href="${createLink(controller:'event', action:'ical', params:['token':userInstance.token]).replaceAll("http","webcal")}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'calendar.png', plugin: 'famfamfam')}'/></a>
+		<a href="${createLink(controller:'user',action:'changePassword')}" /><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'key.png', plugin: 'famfamfam')}'/></a>
+	</g:if>
 	<a href="${createLink(controller:'compte', action:'list', params:[userid:userInstance.id])}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'application.png', plugin: 'famfamfam')}'/></a>
-	<g:if test="${sameUser}"><a href="${createLink(controller:'user',action:'changePassword')}" /><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'key.png', plugin: 'famfamfam')}'/></a></g:if>
 	
 </div>
 	${userInstance.name} <span class="small">${userInstance.username}</span><br />
@@ -64,8 +68,7 @@
 <sec:ifNotSwitched>
 		<sec:ifAllGranted roles='ROLE_ADMIN'>
 			<form action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
-				<input type='text' name='j_username' /><br /> <input
-					type='submit' value='Echanger Utilisateur' />
+				<input type='text' name='j_username' /><br/> <input type='submit' value='Echanger Utilisateur' />
 			</form>
 
 		</sec:ifAllGranted>

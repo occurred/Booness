@@ -30,7 +30,7 @@
                                     <label for="username"><g:message code="user.username" default="Username" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'username', 'errors')}">
-                                    <g:textField name="username" value="${fieldValue(bean: userInstance, field: 'username')}" />
+                                    <g:textField name="username" value="${userInstance.username}" />
 
                                 </td>
                             </tr>
@@ -40,7 +40,7 @@
                                     <label for="name"><g:message code="user.name" default="Name" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${fieldValue(bean: userInstance, field: 'name')}" />
+                                    <g:textField name="name" value="${userInstance.name}" />
 
                                 </td>
                             </tr>
@@ -50,7 +50,7 @@
                                     <label for="initiales"><g:message code="user.initiales" default="Initiales" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'initiales', 'errors')}">
-                                    <g:textField name="initiales" maxlength="2" value="${fieldValue(bean: userInstance, field: 'initiales')}" />
+                                    <g:textField name="initiales" maxlength="2" value="${userInstance.initiales}" />
 
                                 </td>
                             </tr>
@@ -60,7 +60,7 @@
                                     <label for="email"><g:message code="user.email" default="Email" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'email', 'errors')}">
-                                    <g:textField name="email" value="${fieldValue(bean: userInstance, field: 'email')}" />
+                                    <g:textField name="email" value="${userInstance.email}" />
 
                                 </td>
                             </tr>
@@ -70,7 +70,7 @@
                                     <label for="telephone"><g:message code="user.telephone" default="Telephone" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'telephone', 'errors')}">
-                                    <g:textField name="telephone" value="${fieldValue(bean: userInstance, field: 'telephone')}" />
+                                    <g:textField name="telephone" value="${userInstance.telephone}" />
 
                                 </td>
                             </tr>
@@ -80,7 +80,7 @@
                                     <label for="bio"><g:message code="user.bio" default="Bio" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'bio', 'errors')}">
-                                    <richui:richTextEditor name="bio" width="600" height="300" value="${userInstance.bio}" />
+                                    <g:textArea name="bio" width="600" height="300" value="${userInstance.bio}" />
                                 </td>
                             </tr>
                             <tr class="prop">
@@ -88,7 +88,7 @@
                                     <label for="token"><g:message code="user.token" default="Token" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'token', 'errors')}">
-                                    <g:textField name="token" value="${fieldValue(bean: userInstance, field: 'token')}" />
+                                    <g:textField name="token" value="${userInstance.token}" />
 
                                 </td>
                             </tr>

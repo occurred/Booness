@@ -77,6 +77,16 @@
                         width:100%;
                         }
                         </style>
+                        
+                        <tr class="prop">
+							<td valign="top" class="name"><label for="titre"><g:message
+										code="contact.titre" default="Civilit&eacute;" />:</label></td>
+							<td valign="top"
+								class="value ${hasErrors(bean: contactInstance, field: 'titre', 'errors')}">
+								<g:select name="titre"
+									from="${fr.booness.Contact.constraints.titre.inList}"
+									value="${contactInstance?.titre}" /></td>
+						</tr>
 
 						<tr class="prop">
 							<td valign="top" class="name"><label for="name"><g:message
