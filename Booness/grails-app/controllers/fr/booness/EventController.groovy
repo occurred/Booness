@@ -79,7 +79,7 @@ class EventController {
 		}
 
 
-		Event.findAll("from Event as b where b.class like '%Event' order by startDate").each{
+		Event.findAll("from Event as b where b.class like '%Event' order by startDate desc",[max:20]).each{
 
 			if(first){
 				first=false
@@ -135,13 +135,13 @@ VERSION:2.0
 			ical+="SUMMARY:"+it.title+" - "+it.compte.name+"\n"
 			ical+="DTSTART:"+df.format(it.startDate)+"\n"
 			ical+="DTEND:"+df.format(it.endDate)+"\n"
-			ical+="DESCRIPTION:"+it.description.replaceAll("<br/>","\\\\n").replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
+			ical+="DESCRIPTION:"+it.objectif.replaceAll("<br/>","\\\\n").replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"<br/><br/>"+it.description.replaceAll("<br/>","\\\\n").replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
 			ical+="LOCATION:"+it.compte.street+" "+it.compte.city+"\n"
 			ical+="X-ALT-DESC;FMTTYPE=text/html:"+it.description.replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
 			ical+="END:VEVENT\n"
 		}
 
-		Event.findAll("from Event as b where b.class like '%Event' order by startDate",[max:10]).each{
+		Event.findAll("from Event as b where b.class like '%Event' order by startDate desc",[max:20]).each{
 			ical+="BEGIN:VEVENT\n"
 			ical+="UID:Event"+it.id+"@grails\n"
 			ical+="DTSTAMP:"+df.format(new Date())+"Z\n"
