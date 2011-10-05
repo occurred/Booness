@@ -10,7 +10,7 @@ class PersonalEventController {
 	def scaffold=true
 
     static navigation = [
-        title: 'Personnel',
+        title: 'Calendrier\nPersonnel',
         group: 'user',
         action: 'list'
     ]
@@ -115,6 +115,9 @@ VERSION:2.0
     def create = {
         def eventInstance = new PersonalEvent()
         eventInstance.properties = params
+		if(eventInstance.startDate!=eventInstance.startDate){
+			eventInstance.allday=true;
+		}
         return [eventInstance: eventInstance]
     }
 

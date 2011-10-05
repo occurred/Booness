@@ -22,8 +22,9 @@ class DashboardController {
     def index = {
 		if(!springSecurityService.principal) redirect(controller:'login')
         User principal = User.get(springSecurityService.principal.id)
-        if(principal){
-            [user:principal]
+		
+		if(principal){
+			render view:'index', model: [user:principal]
         }
     }
 	

@@ -11,6 +11,7 @@ class JQueryDatePickerTagLib {
 		out.println "<input type=\"hidden\" name=\"${name}_day\" id=\"${id}_day\"  value=\"${attrs.value?.format('dd')}\" />"
 		out.println "<input type=\"hidden\" name=\"${name}_month\" id=\"${id}_month\"  value=\"${attrs.value?.format('MM')}\" />"
 		out.println "<input type=\"hidden\" name=\"${name}_year\" id=\"${id}_year\"  value=\"${attrs.value?.format('yyyy')}\" />"
+		if(attrs.precision=="full"| attrs.precision==null){
 		out.println "<select style=\"width=30px;\" type=\"select\" name=\"${name}_hour\" id=\"${id}_hour\">"
 		(0..23).each {
 			out.println "<option value=\"${it}\"${value?.getHours()==it?' selected':''}>${it<10?'0':''}${it}</option>"
@@ -22,10 +23,11 @@ class JQueryDatePickerTagLib {
 			out.println "<option value=\"${it}\"${it==value?.getMinutes()?' selected':''}>${it<10?'0':''}${it}</option>"
 		}
 		out.println "</select>"
+		}
 		
 		out.println '''
 		<script type="text/javascript">
-		\$(document).ready(function(){
+		jQuery(document).ready(function($){
 		   \$("#'''+name+'''").datepicker({
 		   	  dateFormat:"dd/mm/yy",
 		   	  closeText: 'Fermer',

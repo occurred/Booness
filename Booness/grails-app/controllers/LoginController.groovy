@@ -50,7 +50,7 @@ class LoginController {
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
 		                           rememberMeParameter: config.rememberMe.parameter]
-	}
+		}
 
 	/**
 	 * Show denied page.
@@ -104,6 +104,7 @@ class LoginController {
 		}
 		else {
 			flash.message = msg
+			flash.defaultMessage = msg
 			redirect action: auth, params: params
 		}
 	}
@@ -112,6 +113,9 @@ class LoginController {
 	 * The Ajax success redirect url.
 	 */
 	def ajaxSuccess = {
+		
+		flash.message="goodbye"
+		flash.defaultMessage="Au revoir et &agrave bient&ocirc;t"
 		render([success: true, username: springSecurityService.authentication.name] as JSON)
 	}
 

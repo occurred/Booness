@@ -18,6 +18,13 @@ class LogController{
     def index={
         redirect(action:list)
     }
+	
+	def create = {
+		def logInstance=new Log(params)
+		logInstance.startDate=new Date()
+		logInstance.endDate=new Date()
+		[logInstance:logInstance]	
+    }
 
      @Secured(['ROLE_USER'])
     def save={

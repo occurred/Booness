@@ -27,6 +27,15 @@
         
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, {hAxis:{showTextEvery:12}, width: 1200, height: 300, title: 'Statistiques'});
+
+
+        var dataca = new google.visualization.DataTable();
+        dataca.addColumn('string', 'Year');
+        dataca.addColumn('number', 'CA');
+        <g:each in="${new TreeSet(ca.keySet())}" var="date">dataca.addRow(['${date}',${ca[date] as int}]);
+        </g:each>
+        var chartca = new google.visualization.LineChart(document.getElementById('chart_ca'));
+        chartca.draw(dataca, {vAxis:{format:'# €'}, hAxis:{showTextEvery:12}, width: 1200, height: 300, title: 'Chiffre d\'Affaire'});
       }
     </script>
 </head>
@@ -39,8 +48,12 @@
 	<g:if test="${sameUser}">
 		<a href="${createLink(controller:'profile', action:'edit', id:userInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
 		<a href="${createLink(controller:'event', action:'ical', params:['token':userInstance.token]).replaceAll("http","webcal")}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'calendar.png', plugin: 'famfamfam')}'/></a>
-		<a href="${createLink(controller:'user',action:'changePassword')}" /><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'key.png', plugin: 'famfamfam')}'/></a>
+		<a href="${createLink(controller:'user',action:'changePassword')}" ><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'key.png', plugin: 'famfamfam')}'/></a>
 	</g:if>
+	
+	<sec:ifAllGranted roles="ROLE_ADMIN">
+		<a href="${createLink(controller:'profile',action:'editObjectifs', id:userInstance.id)}" ><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'money.png', plugin: 'famfamfam')}'/></a>
+	</sec:ifAllGranted>
 	<a href="${createLink(controller:'compte', action:'list', params:[userid:userInstance.id])}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'application.png', plugin: 'famfamfam')}'/></a>
 	
 </div>
@@ -63,6 +76,8 @@
 </div>
 
 <div style="margin:auto;" id="chart_div"></div>
+
+<div style="margin:auto;" id="chart_ca"></div>
 
 <div style="margin:auto; width:300px;">
 <sec:ifNotSwitched>

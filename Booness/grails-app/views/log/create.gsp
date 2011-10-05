@@ -42,7 +42,7 @@
 							<td valign="top"
 								class="value ${hasErrors(bean: logInstance, field: 'type', 'errors')}">
 								<g:select name="type.id"
-									from="${fr.booness.param.LogType.list()}" optionKey="id"
+									from="${fr.booness.param.LogType.list(order:'asc', sort:'name')}" optionKey="id"
 									value="" /></td>
 						</tr>
 

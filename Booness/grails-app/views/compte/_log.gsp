@@ -1,4 +1,4 @@
-<div id="tab-${log.id}">
+<div id="log-${log.id}">
 	<div id="log">
 		<div id="action">
 			<a href="${createLink(controller:'log', action:'edit', id:log.id)}">

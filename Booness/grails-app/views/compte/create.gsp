@@ -4,9 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <resource:richTextEditor  type="full"/>
-        <jq:resources/>
-        <jqui:resources/>
         <title><g:message code="compte.create" default="Create Compte" /></title>
     </head>
     <body>
@@ -154,7 +151,7 @@
                                     <label for="description"><g:message code="compte.description" default="Description" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: compteInstance, field: 'description', 'errors')}">
-                                    <richui:richTextEditor name="description" width="600" height="300" value="${compteInstance?.description}" />
+                                    <g:textArea name="description" height="300" value="${compteInstance?.description}" />
 
                                 </td>
                             </tr>

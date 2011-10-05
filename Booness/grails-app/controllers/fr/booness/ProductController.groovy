@@ -35,4 +35,66 @@ class ProductController {
 		productListUploadService.upload(file.inputStream)
 		redirect(action:'list')
 	}
+	
+	def show = {
+		def product=Product.get(params.id)
+		[productInstance:product]	
+	}
+	
+	def imageUrl={
+		response.outputStream << getImageUrl(Product.get(params.id).code).toURL().getBytes()
+	}
+	
+	private getImageUrl(String code){
+		def urlImage="http://www.caleffi.fr/Resources/cale_immagini/"
+		if(code.startsWith("0")){
+			return "http://www.caleffi.fr/Resources/cale_immagini/CARTUCCE_th.jpg"
+		}
+		try{
+			(urlImage+code.split(" ")[0]+"_th.jpg").toURL().getBytes()
+			urlImage+=code.split(" ")[0]+"_th.jpg"
+			println urlImage
+		}
+		catch(Exception e){
+			try{
+				(urlImage+code[0..2]+"_th.jpg").toURL().getBytes()
+				urlImage+=code[0..2]+"_th.jpg"
+				println urlImage
+			}
+			catch(Exception e2){
+				try{
+					(urlImage+code[0..2]+"AUT_th.jpg").toURL().getBytes()
+					urlImage+=code[0..2]+"AUT_th.jpg"
+					println urlImage
+				}
+				catch(Exception e3){
+					try{
+						(urlImage+code[0..3]+"_th.jpg").toURL().getBytes()
+						urlImage+=code[0..3]+"_th.jpg"
+						println urlImage
+					}
+					catch(Exception e4){
+						try{
+							(urlImage+code[0..3]+"fil_th.jpg").toURL().getBytes()
+							urlImage+=code[0..3]+"fil_th.jpg"
+							println urlImage
+						}
+						catch(Exception e5){
+							try{
+								(urlImage+code[1..-1]+"_th.jpg").toURL().getBytes()
+								urlImage+=code[1..-1]+"_th.jpg"
+								println urlImage
+							}
+							catch(Exception e6){
+								
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		urlImage
+		
+	}
 }

@@ -46,11 +46,18 @@
 
 <script>
     $(document).ready(function() {
-        $("#tabs").tabs({
+        $("#logs").tabs({
             fillSpace: true,
             navigation: true
     	}).addClass('ui-tabs-vertical ui-helper-clearfix');
-     	$("#tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
+     	$("#logs li").removeClass('ui-corner-top').addClass('ui-corner-left');
+    });
+    $(document).ready(function() {
+        $("#affaires").tabs({
+            fillSpace: true,
+            navigation: true
+    	}).addClass('ui-tabs-vertical ui-helper-clearfix');
+     	$("#affaires li").removeClass('ui-corner-top').addClass('ui-corner-left');
     });
 </script>
 <title>
@@ -107,7 +114,20 @@
 		</div>
 		
 		<div id="leftCol">
-			<div id="tabs">
+		<div id="affaires" class="tabs">
+				<h1>
+					Affaires (${compteInstance.affaires.size()})
+					<a href="${createLink(controller:'affaire', action:'create', params:['compte.id':compteInstance.id])}">
+						<img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}' />
+					</a>
+				</h1>
+				<ul>
+					<g:render template="affairetab" collection="${compteInstance.affaires}" var="affaire" />
+				</ul>
+				<g:render template="affaire" collection="${compteInstance.affaires}" var="affaire" />
+			</div>
+		<br/>
+			<div id="logs" class="tabs">
 				<h1>
 					Activit&eacute;s (${compteInstance.logs.size()})
 					<a href="${createLink(controller:'log', action:'create', params:['compte.id':compteInstance.id,'user.id':id, description:'<b>Resultat de la Visite</b><br/><br/><br/><br/><b>Reste &agrave; Faire / Actions &agrave; mener</b><br/><br/><br/>'])}">
@@ -119,6 +139,8 @@
 				</ul>
 				<g:render template="log" collection="${compteInstance.logs}" var="log" />
 			</div>
+			
+			
 		</div>
 	</div>
 </body>

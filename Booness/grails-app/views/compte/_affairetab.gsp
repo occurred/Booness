@@ -1,0 +1,1 @@
+<li><a href="#affaire-${affaire.id}">${new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.FRANCE).format(affaire.dateCreated).capitalize()}</a></li>

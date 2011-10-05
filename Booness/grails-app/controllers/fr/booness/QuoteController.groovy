@@ -20,8 +20,9 @@ class QuoteController {
 	def show = {
 		def quote=Quote.get(params.id)
 		def total=0
-		quote.products.each{
+		quote.products.each{it
 			total+=it.quantity*it.price
+		
 		}
 		[quoteInstance:quote, total:total]
 	}
@@ -88,7 +89,6 @@ class QuoteController {
 				
 			}
 			if(toremove){
-				println toremove
 				session.quote.removeFromProducts(toremove)
 			}
 		}
@@ -112,23 +112,37 @@ class QuoteController {
 		quote.products.each{
 			total+=it.quantity*it.price
 		}
+		
 		[quoteInstance:quote, total:total]
-	} 
+	}
+	
+	def printPdf={
+		def quote=Quote.get(params.id)
+		def total=0
+		quote.products.each{
+			total+=it.quantity*it.price
+		}
+		renderPdf(template: "/quote/print", model: [quoteInstance:quote, total:total], filename: "Devis.pdf")
+	}
 	
 	def update={
-		println params
 		def quote=session.quote
+		quote.properties=params
 		quote.dateCreated=new Date()
-		quote.contact=Contact.get(params.'contact.id')
-		quote.save()
+		quote.products.each {
+			it.price=it.product.priceCaleffiFrance*0.0001*(100 - (it.product.section=="12"?quote.remise1Section12:quote.remise1))*(100 - (it.product.section=="12"?quote.remise2Section12:quote.remise2))
+		}
+		quote.save(failOnError:true)
 		session.quote==null
+		flash.defaultMessage="Devis mis &agrave; jour avec ${quote.products.size()} articles"
+		flash.message="quote.updated"
 		redirect(action:'show', id:quote.id)
 	}
 	
 	def save={
 		def quote=session.quote
-		quote.title=params.title
-		quote.contact=Contact.get(params.'contact.id')
+		quote.properties=params
+		quote.dateCreated=new Date()
 		println quote
 		def affaire=Affaire.get(Long.parseLong(params.affaire.id))
 		affaire.addToQuotes(quote)

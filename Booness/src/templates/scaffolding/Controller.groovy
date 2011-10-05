@@ -71,7 +71,7 @@
             if (!${propertyName}.hasErrors() && ${propertyName}.save()) {
                 flash.message = "${domainClass.propertyName}.updated"
                 flash.args = [params.id]
-                flash.defaultMessage = "${className} \${params.id} updated"
+                flash.defaultMessage = "${className} updated"
                 redirect(action: "show", id: ${propertyName}.id)
             }
             else {

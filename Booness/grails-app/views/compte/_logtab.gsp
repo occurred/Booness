@@ -1,1 +1,1 @@
-<li><a href="#tab-${log.id}">${log.type}</a></li>
+<li><a href="#log-${log.id}">${new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.FRANCE).format(log.startDate).capitalize()}</a></li>

@@ -10,14 +10,6 @@
 <body>
 	<div id='profile'>
 		<div class='inner'>
-			<g:if test='${flash.message}'>
-			<div class="ui-widget">
-				<div class="ui-state-error ui-corner-all"> 
-					<p><span class="ui-icon ui-icon-alert"></span> 
-					${flash.message}</p>
-				</div>
-			</div>
-			</g:if>
 			<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 				<div class="login">
 					<label for='username'>Utilisateur</label>

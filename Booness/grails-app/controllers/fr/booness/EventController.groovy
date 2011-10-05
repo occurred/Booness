@@ -176,6 +176,9 @@ VERSION:2.0
 	def create = {
 		def eventInstance = new Event()
 		eventInstance.properties = params
+		if(eventInstance.startDate!=eventInstance.startDate){
+			eventInstance.allday=true;
+		}
 		return [eventInstance: eventInstance]
 	}
 
