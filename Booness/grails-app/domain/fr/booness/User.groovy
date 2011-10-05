@@ -12,12 +12,13 @@ class User implements Serializable {
     String bio
 	String token
     Set logs
+	SortedSet objectifs
     boolean enabled
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
 
-    static hasMany = [affaires:Affaire, logs:Log, personalEvents:PersonalEvent]
+    static hasMany = [affaires:Affaire, logs:Log, personalEvents:PersonalEvent, objectifs:Objectif]
 
     static constraints = {
         username(blank: false, unique: true)

@@ -9,5 +9,6 @@ class ProductInsert {
     static constraints = {
 		quantity(min:1)
 		price(nullable:true, blankable:true)
+		
     }
 }
