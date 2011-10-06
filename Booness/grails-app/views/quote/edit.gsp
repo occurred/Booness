@@ -53,7 +53,7 @@ jQuery.noConflict();
 		<br/>
 		<g:select name="type" from="${fr.booness.Quote.constraints.type.inList}"/>
 		<h1>Date d'execution</h1>
-		<br/><g:jqDatePicker name="dateExecution" value="${session.quote.dateExecution} precision="blob"/>
+		<br/><g:jqDatePicker name="dateExecution" value="${session.quote.dateExecution}" precision="blob"/>
 		<h1>Contact</h1>
 		<br/><g:select name="contact.id" from="${session.quote.affaire.compte.contacts}" optionKey="id" value="${session.quote.contact?.id}" />
 		<g:hiddenField name="affaire.id" value="${session.quote.affaire.id}"/>

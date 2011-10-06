@@ -8,7 +8,14 @@
 <g:layoutHead />
 <g:javascript library="application" />
 <nav:resources override="true" />
-
+<style type="text/css">
+body{
+	background-image: url("${fr.booness.Parameters.findByName('wallpaper').value}");
+}
+#wrapper{
+	opacity:${fr.booness.Parameters.findByName('wallpaper-opacity').value};
+}
+</style>
 </head>
 <body>
 	<g:if test="${flash.message}">

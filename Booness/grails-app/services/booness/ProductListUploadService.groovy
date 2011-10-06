@@ -58,7 +58,11 @@ class ProductListUploadService {
 							print "new "
 							
 							def price=getValue(r.getCell(3))
-							if(price instanceof String || price==null) price=0
+							if(price instanceof String && price.toLowerCase().equals("sur demande"))
+								price=price.toFloat()
+							else{
+								price=0
+							}
 							
 							def description=""+getValue(r.getCell(2))
 							
@@ -79,7 +83,12 @@ class ProductListUploadService {
 							newP++
 						}
 						else{
-							def price=Float.parseFloat(""+getValue(r.getCell(3)))
+							def price=getValue(r.getCell(3))
+							if(price instanceof String && price.toLowerCase().equals("sur demande"))
+								price=price.toFloat()
+							else{
+								price=0
+							}
 							if(p.priceCaleffiFrance!=price){
 								p.priceCaleffiFrance=price
 								p.save(failOnError:true)

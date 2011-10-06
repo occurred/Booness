@@ -19,12 +19,7 @@ class QuoteController {
 	
 	def show = {
 		def quote=Quote.get(params.id)
-		def total=0
-		quote.products.each{it
-			total+=it.quantity*it.price
-		
-		}
-		[quoteInstance:quote, total:total]
+		[quoteInstance:quote]
 	}
 
 	def searchAjax = {
@@ -47,45 +42,35 @@ class QuoteController {
 	def addProduct = {
 		def code=params.product.split(" -- ")[0]
 		def updated=false
-		def total=0
 		if(params.product.size()>0){
 			session.quote.products.each{
 				if(it.product.code==code){
 					it.quantity+=Integer.parseInt(params.quantity)
 					updated=true
 				}
-				total+=it.quantity*it.price
 			}
 			if(!updated){
 				ProductInsert pi=new ProductInsert()
 				pi.product=Product.findByCode(code)
 				pi.quantity=Integer.parseInt(params.quantity)
 				pi.price=pi.product.priceCaleffiFrance
-				total+=pi.quantity*pi.price
 				session.quote.addToProducts(pi)
 			}
 		}
-		else{
-			session.quote.products.each{
-				total+=it.quantity*it.price
-			}
-		}
+		
 		render(template:'productList', collection:session.quote.products, var:'product')
-		render(template:'total', model:[total:total])
+		render(template:'total', model:[total:session.quote.total])
 	}
 
 	def removeProduct = {
 		println params.code
-		def total=0
 		if(params.code){
 			def toremove
 			session.quote.products.each{
 				if(it.product.code==params.code){
 					toremove=it
 				}
-				else{
-					total+=it.quantity*it.price
-				}
+				
 				
 			}
 			if(toremove){
@@ -93,7 +78,7 @@ class QuoteController {
 			}
 		}
 		render(template:'productList', collection:session.quote.products, var:'product')
-		render(template:'total', model:[total:total])
+		render(template:'total', model:[total:session.quote.total])
 	}
 
 	def create= {
@@ -108,21 +93,12 @@ class QuoteController {
 	
 	def print={
 		def quote=Quote.get(params.id)
-		def total=0
-		quote.products.each{
-			total+=it.quantity*it.price
-		}
-		
-		[quoteInstance:quote, total:total]
+		[quoteInstance:quote]
 	}
 	
 	def printPdf={
 		def quote=Quote.get(params.id)
-		def total=0
-		quote.products.each{
-			total+=it.quantity*it.price
-		}
-		renderPdf(template: "/quote/print", model: [quoteInstance:quote, total:total], filename: "Devis.pdf")
+		renderPdf(template: "/quote/print", model: [quoteInstance:quote], filename: "Devis.pdf")
 	}
 	
 	def update={
@@ -148,6 +124,8 @@ class QuoteController {
 		affaire.addToQuotes(quote)
 		quote.save(failOnError:true)
 		session.quote=null;
+		flash.message="${quote.type} a bien ete cr&eacute;&eacute;"
+		flash.defaultMessage=flash.message
 		redirect(action:'show', id:quote.id)
 	}
 	

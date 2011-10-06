@@ -16,6 +16,15 @@ class Quote implements Serializable{
 
     static hasMany=[products:ProductInsert]
     static belongsTo=[affaire:Affaire]
+	static transients=['total']
+	
+	Float getTotal(){
+		Float tot=0;
+		products.each{
+			tot+=it.price*it.quantity
+		}
+		tot
+	}
     
     static constraints = {
         title(blank:false)
@@ -31,4 +40,6 @@ class Quote implements Serializable{
     String toString(){
         return title
     }
+	
+	
 }

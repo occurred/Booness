@@ -253,7 +253,7 @@ td.LOW {
   		<tbody>
   			<g:render template="product" collection="${quoteInstance.products}" var="insert"/>
   			<tr>
-  				<td colspan="3"/><td><strong>Total</strong></td><td>${String.format("%.2f",total)} &euro;</td>
+  				<td colspan="3"/><td><strong>Total</strong></td><td>${String.format("%.2f",quoteInstance.total)} &euro;</td>
   			</tr>
   		</tbody>
   	</table>

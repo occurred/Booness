@@ -41,7 +41,7 @@ Offre de Prix <g:link controller="affaire" action="show" id="${quoteInstance.aff
   		</thead>
   		<g:render template="product" collection="${quoteInstance.products}" var="insert"/>
   		<tr>
-  			<td colspan="3"/> <td><strong>Total</strong></td><td>${String.format("%.2f",total)}</td>
+  			<td colspan="3"/> <td><strong>Total</strong></td><td>${String.format("%.2f",quoteInstance.total)}</td>
   		</tr>
   	</table>
   	</div>

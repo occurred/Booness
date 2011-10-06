@@ -4,7 +4,7 @@
 <head>
 <title>Devis</title>
 </head>
-<g:render template="print" model="${[quoteInstance:quoteInstance, total:total]}"></g:render>
+<g:render template="print" model="${[quoteInstance:quoteInstance]}"></g:render>
 </body>
 </html>
 

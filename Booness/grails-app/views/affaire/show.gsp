@@ -14,35 +14,31 @@
 
 </head>
 <body>
-  <script type="text/javascript">
-      $(function() {
-              $( "#tabs" ).tabs({
-                      fillSpace: true,
-                      navigation: true
-              });
-      });
-  </script>
-  <h1>${affaireInstance.name} / <a href="${createLink(controller:'compte', action:'show', id:affaireInstance.compte.id)}">${affaireInstance.compte}</a> par ${affaireInstance.owner}</h1>
-  <p>[<a href="${createLink(controller:"affaire", action:"edit", id:affaireInstance.id)}"/><g:message code="edit"/></a>]</p>
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Description</a></li>
-    <li><a href="#tabs-2"><g:message code="affaire.quotes"/></a></li>
-  </ul>
-
-  <div id="tabs-1">
-${affaireInstance.description}<br/>
+  <div id="header">
+	  ${affaireInstance.name}
+	  <div id="action">
+	  		<a href="${createLink( action:'edit', id:affaireInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
+	  </div>
   </div>
-
-  <div id="tabs-2">
-    <ul>
-<%for(def quote in affaireInstance.quotes){%>
-      <li><h2><a href="${createLink(controller:"quote",action:"show",id:quote.id)}"/>${quote.title}</a></li>
-<%}%>
-      <li><h2>[<a href="${createLink(controller:"quote", action:"create", params:["affaire.id":affaireInstance.id, "owner.id":sec.loggedInUserInfo(field:"id")])}"/><g:message code="message.new"/></a>]</h2></li>
-      <ul/>
+  
+  <div id="rightCol">
+  <g:render template="/compte/compte" model="${[compte:affaireInstance.compte]}"></g:render>
   </div>
-
-</div>
+  
+  <div id="leftCol">
+  <h2>${affaireInstance.description}</h2>
+  <div class="small">par ${affaireInstance.owner}</div>
+  <br/>
+  
+  <g:each in="${affaireInstance.quotes}" var="quote">
+  	<div id="address">
+  		<div id="action" affaire>
+  			<a href="${createLink(controller:'quote', action:'edit', id:quote.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
+  			<a href="${createLink(controller:'quote', action:'show', id:quote.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'application_go.png', plugin: 'famfamfam')}'/></a>
+  		</div>
+  		<h2>${quote.title} ${quote.total} &euro;</h2>
+  	</div>
+  </g:each>
+  </div>
 </body>
 </html>
