@@ -8,6 +8,8 @@ class Product {
 	String page
     Float priceCaleffiFrance
 	Float priceGrossiste
+	Float priceToThermador
+	Boolean deprecated=false
 
     static constraints = {
         code(unique:true, nullable:false, blank:false)
@@ -17,6 +19,7 @@ class Product {
 		section(nullable:true, blankable:true)
 		page(nullable:true, blankable:true)
 		priceGrossiste(min:0f)
+		priceToThermador(min:0f)
     }
 
     static searchable=[only: ['code', 'description']]

@@ -6,7 +6,7 @@
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def list = {
-        params.max = Math.min(params.max ? params.max.toInteger() : 12,  100)
+        params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
         [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count()]
     }
 
@@ -71,7 +71,7 @@
             if (!${propertyName}.hasErrors() && ${propertyName}.save()) {
                 flash.message = "${domainClass.propertyName}.updated"
                 flash.args = [params.id]
-                flash.defaultMessage = "${className} updated"
+                flash.defaultMessage = "${className} \${params.id} updated"
                 redirect(action: "show", id: ${propertyName}.id)
             }
             else {

@@ -6,3 +6,7 @@ Booness/target
 Booness/scripts/populateUser.groovy
 Booness/.settings
 Booness/**/DataSource.groovy
+caleffi.backup
+Booness/grails-app/conf/BootStrap.groovy
+Booness/stacktrace.log
+Booness/grails-app/conf/DataSource.groovy

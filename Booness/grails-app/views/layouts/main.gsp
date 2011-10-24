@@ -10,10 +10,10 @@
 <nav:resources override="true" />
 <style type="text/css">
 body{
-	background-image: url("${fr.booness.Parameters.findByName('wallpaper').value}");
+	background-image: url("${fr.booness.Parameters.findByName('wallpaper')?.value}");
 }
 #wrapper{
-	opacity:${fr.booness.Parameters.findByName('wallpaper-opacity').value};
+	opacity:${fr.booness.Parameters.findByName('wallpaper-opacity')?.value};
 }
 </style>
 </head>

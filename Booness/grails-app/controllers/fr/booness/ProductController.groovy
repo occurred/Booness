@@ -27,13 +27,21 @@ class ProductController {
 
 	def index={ redirect(action:list) }
 
+	@Secured(['ROLE_ADMIN'])
 	def uploadNew={
 	}
 
+	
+	@Secured(['ROLE_ADMIN'])
 	def upload = {
 		def file = request.getFile('file')
 		productListUploadService.upload(file.inputStream)
 		redirect(action:'list')
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def edit = {
+		[productInstance:Product.get(params.id)]
 	}
 	
 	def show = {
@@ -57,8 +65,8 @@ class ProductController {
 		}
 		catch(Exception e){
 			try{
-				(urlImage+code[0..2]+"_th.jpg").toURL().getBytes()
-				urlImage+=code[0..2]+"_th.jpg"
+				(urlImage+code[0..-1]+"_th.jpg").toURL().getBytes()
+				urlImage+=code[0..-1]+"_th.jpg"
 				println urlImage
 			}
 			catch(Exception e2){
@@ -81,8 +89,8 @@ class ProductController {
 						}
 						catch(Exception e5){
 							try{
-								(urlImage+code[1..-1]+"_th.jpg").toURL().getBytes()
-								urlImage+=code[1..-1]+"_th.jpg"
+								(urlImage+code[0..2]+"_th.jpg").toURL().getBytes()
+								urlImage+=code[0..2]+"_th.jpg"
 								println urlImage
 							}
 							catch(Exception e6){

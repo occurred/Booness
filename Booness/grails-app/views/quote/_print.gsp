@@ -117,6 +117,12 @@ td.LOW {
 		</tbody>
 	</table>
 	
+	<div class="footer small" style="font-size: 10px;">
+	CALEFFI FRANCE S.A.R.L - Capital 207.500 &euro; - 450 181 383 00024 - RCS Romans B 450 181 383 - SIRET 450 181 383 00024 - APE 4674B - TVA FR 66 450 181 383
+	</div>
+	
+	
+	<g:if test="${quoteInstance.type=='devis'}">
 	<div id="post-header"/>
 	<table>
 		<tbody>
@@ -154,8 +160,10 @@ td.LOW {
 			  <br/>
 			  Notre offre est valable jusqu'au ${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(quoteInstance.dateCreated+120)}
 			  <br/>
-			  <br/>
-			  <div style="color: red; text-align: center;font-weight: bold;width: 100%">Commande &agrave; passer chez votre grossiste partenaire de Thermador</div>
+			  <g:if test="${quoteInstance.affaire.compte.type.toString()!='BUREAU D\'ETUDES'}">
+			  	<br/>
+			  	<div style="color: red; text-align: center;font-weight: bold;width: 100%">Commande &agrave; passer chez votre grossiste partenaire de Thermador</div>
+			  </g:if>
 			  <br/>
 			  Pour toutes demandes compl&eacute;mentaires, vous pourrez nous joindre aux coordonn&eacute;es suivantes :
 			  <br/>
@@ -178,7 +186,7 @@ td.LOW {
 			     &ensp;&ensp;&ensp;&ensp;Nous restons bien entendu &agrave; votre disposition pour tous renseignements. Vous trouverez notre documentation technique et les nouveaut&eacute;s en consultant notre site internet www.caleffi.fr.
 			  <br/>
 			  <br/>
-			     &ensp;&ensp;&ensp;&ensp;Dans l'attente de vos commandes, nous vous prions d'agr&eacute;er, ${quoteInstance.contact.titre.toLowerCase()}, l'expression de nos meilleures salutations.
+			     &ensp;&ensp;&ensp;&ensp;Dans l'attente de vos commandes, nous vous prions d'agr&eacute;er, ${quoteInstance.contact.titre?.toLowerCase()}, l'expression de nos meilleures salutations.
 			  <br/>
 			  <br/>
 			  <br/>
@@ -191,25 +199,31 @@ td.LOW {
 		</tbody>
 	</table>
 	
-	<div class="footer small" style="font-size: 10px;">
-	CALEFFI FRANCE S.A.R.L - Capital 207.500 &euro; - 450 181 383 00024 - RCS Romans B 450 181 383 - SIRET 450 181 383 00024 - APE 4674B - TVA FR 66 450 181 383
-	</div>
+	
     
     <div class="break"/>
+    </g:if>
     <div id="post-header"/>
 	<table>
 		<tbody>
 			<tr>
 				<td colspan="2" style=" border:thin solid #333; text-align: center;">
-					<h1>Offre de Prix ${quoteInstance.affaire.compte.type}</h1>
-					<g:if test="${quoteInstance.affaire.compte.type.toString()=='INSTALLATEUR'}"><h1>Sp&eacute;cial Chantier ${quoteInstance.affaire.name}</h1></g:if>
+					<g:if test="${quoteInstance.type=='devis'}">
+						<h1>Offre de Prix ${quoteInstance.affaire.compte.type}</h1>
+						<g:if test="${quoteInstance.affaire.compte.type.toString()=='INSTALLATEUR'}"><h1>Sp&eacute;cial Chantier ${quoteInstance.affaire.name}</h1></g:if>
+					</g:if>
+					<g:else>
+						<h1>Fiche de Transmission Thermador</h1>
+					</g:else>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2" >
-				<div style="margin:5mm; color: red; text-align: center;font-weight: bold;width: 100%">Commande &agrave; passer chez votre grossiste partenaire de Thermador</div> 
-				</td>
-			</tr>
+			<g:if test="${quoteInstance.affaire.compte.type.toString()!='BUREAU D\'ETUDES'}">
+				<tr>
+					<td colspan="2" >
+					<div style="margin:5mm; color: red; text-align: center;font-weight: bold;width: 100%">Commande &agrave; passer chez votre grossiste partenaire de Thermador</div> 
+					</td>
+				</tr>
+			</g:if>
 			<tr>
 				<td style="width:50%;">
 				Date : ${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(quoteInstance.dateCreated)}
@@ -258,7 +272,12 @@ td.LOW {
   		</tbody>
   	</table>
   	<br/>
-  	L'offre  est  valable jusqu'au ${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(quoteInstance.dateCreated+120)}
+  	<g:if test="${quoteInstance.type=='devis'}">
+		L'offre  est  valable jusqu'au ${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(quoteInstance.dateCreated+120)}
+	</g:if>
+	<g:else>
+		Date Pr&eacute;vue : ${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(quoteInstance.dateExecution)}
+	</g:else>
 </body>
 </html>
 
