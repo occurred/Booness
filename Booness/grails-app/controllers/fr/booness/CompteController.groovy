@@ -36,9 +36,8 @@ class CompteController {
 			if(!params.userid) params.userid=""+springSecurityService.principal.id
 		}
 		if(params.departementid){
-			def d=Departement.get(Long.parseLong(params.departementid))
 			def c = Compte.createCriteria()
-            def numero=d.numero
+            def numero=params.departementid
             if(numero=='2A'|| numero=='2B') numero='20'
 			results=c.list (params){
 				and{

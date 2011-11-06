@@ -209,8 +209,8 @@ td.LOW {
 			<tr>
 				<td colspan="2" style=" border:thin solid #333; text-align: center;">
 					<g:if test="${quoteInstance.type=='devis'}">
-						<h1>Offre de Prix ${quoteInstance.affaire.compte.type}</h1>
-						<g:if test="${quoteInstance.affaire.compte.type.toString()=='INSTALLATEUR'}"><h1>Sp&eacute;cial Chantier ${quoteInstance.affaire.name}</h1></g:if>
+						<h1>Offre de Prix</h1>
+						<g:if test="${quoteInstance.affaire.compte.type.toString()=='INSTALLATEUR'}"><h1>${quoteInstance.affaire.name}</h1></g:if>
 					</g:if>
 					<g:else>
 						<h1>Fiche de Transmission Thermador</h1>

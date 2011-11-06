@@ -35,17 +35,27 @@ jQuery.noConflict();
 		</div>
 		<br/>
 		<g:form>
-		<h1>Nom de l'Affaire</h1> 
-		<br/><g:field type="text" name="title" value="${session.quote.title}"/>
-		<h1>Remises (1, 2, 1 section 12, 2 section 12)</h1>
-		<br/>
-		<div id="aligned">
-		<g:field type="int" style="width:50px;" name="remise1" value="${session.quote.remise1}"/>
-		<g:field type="int" style="width:50px;" name="remise2" value="${session.quote.remise2}"/> 
-		<g:field type="int" style="width:50px;" name="remise1Section12" value="${session.quote.remise1Section12}"/> 
-		<g:field type="int" style="width:50px;" name="remise2Section12" value="${session.quote.remise2Section12}"/> 
+		<g:hiddenField type="text" name="title" value="Devis"/>
+		<div class="list">
+		<table style="table-layout: fixed;">
+			<thead>
+				<tr>
+					<th>Remise 1</th>
+					<th>Remise 2</th>
+					<th>Section 12 Remise 1</th>
+					<th>Section 12 Remise 2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><g:field style="width:100%;" type="int" style="width:50px;" name="remise1" value="${session.quote.remise1}"/></td>
+					<td><g:field type="int" style="width:50px;" name="remise2" value="${session.quote.remise2}"/></td>
+					<td><g:field type="int" style="width:50px;" name="remise1" value="${session.quote.remise1Section12}"/></td>
+					<td><g:field type="int" style="width:50px;" name="remise1" value="${session.quote.remise2Section12}"/></td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		
 		<h1>Statut</h1>
 		<br/>
 		<g:select name="status" from="${fr.booness.Quote.constraints.status.inList}"/>

@@ -50,12 +50,14 @@ class EventController {
 			else {
 				json+=",{"
 			}
+			def title="<img src='/Booness/plugins/famfamfam-1.0.1/images/icons/car.png'/>"
 			json+="\"id\":"+it.id+","
-			json+="\"title\":\""+it.type+" "+it.compte.name+"\","
+			json+="\"title\":\""+it.compte.name+" "+it.compte.city+"\","
 			json+="\"start\":\""+it.startDate+"\","
 			json+="\"end\":\""+it.endDate+"\","
 			json+="\"allDay\":"+it.allday+","
 			json+="\"url\":\"log/show/"+it.id+"\","
+			json+="\"className\":\""+it.type+"\","
 			json+="\"backgroundColor\": \"green\""
 			json+="}"
 		}

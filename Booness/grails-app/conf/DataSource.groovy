@@ -1,8 +1,8 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-    username = "user"
-    password = "password"
+    username = "caleffi"
+    password = "caleffi"
     dialect=org.hibernate.dialect.MySQLInnoDBDialect
     properties {
         validationQuery="select 1"

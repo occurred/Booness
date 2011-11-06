@@ -640,6 +640,20 @@ input {
 	text-align: center;
 }
 
+.VISITE {
+       padding-left: 20px;
+       background-image: url(/Booness/plugins/famfamfam-1.0.1/images/icons/car.png);
+       background-repeat: no-repeat;
+       background-position: 2px 50%;
+}
+.TELEPHONE {
+       padding-left: 20px;
+       background-image: url(/Booness/plugins/famfamfam-1.0.1/images/icons/phone.png);
+       background-repeat: no-repeat;
+       background-position: 2px 50%;
+}
+
+
 .list td{
 	border: thin solid #888;
 	empty-cells: show;

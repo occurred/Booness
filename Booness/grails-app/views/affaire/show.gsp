@@ -29,7 +29,9 @@
   <h2>${affaireInstance.description}</h2>
   <div class="small">par ${affaireInstance.owner}</div>
   <br/>
-  
+  <div id="address">
+  	<g:link action="create" controller="quote" params="${['affaire.id':affaireInstance.id]}">Nouveau Devis</g:link>
+  </div>	
   <g:each in="${affaireInstance.quotes}" var="quote">
   	<div id="address">
   		<div id="action" affaire>
