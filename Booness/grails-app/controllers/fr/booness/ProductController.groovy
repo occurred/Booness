@@ -35,7 +35,7 @@ class ProductController {
 	@Secured(['ROLE_ADMIN'])
 	def upload = {
 		def file = request.getFile('file')
-		productListUploadService.upload(file.inputStream)
+		productListUploadService.upload(file.inputStream,params.version)
 		redirect(action:'list')
 	}
 	

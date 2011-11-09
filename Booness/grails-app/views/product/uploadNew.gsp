@@ -11,6 +11,20 @@
 			<input type="file" name="file"  value="Choisir un Fichier"/>
 			<input type="submit" value="Envoyer"/>
 		</g:form>
+		
+		Derni&egrave;res versions<br>
+		
+		<g:each in="${fr.booness.ProductLog.list(order:'desc', sort:'dateCreated', max:10)}" var="log">
+		<div id="address">
+			${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(log.dateCreated).capitalize()}
+				<br/>
+			${log.description}
+		</div>
+				
+		
+		</g:each>
 	</div>
+	
+	
 </body>
 </html>

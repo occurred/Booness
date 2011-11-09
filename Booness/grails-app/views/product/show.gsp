@@ -21,12 +21,12 @@
 			<div id="address">
 				<h2>${productInstance.description}</h2>
 				<br />
-				Prix Caleffi France ${productInstance.priceCaleffiFrance} &euro;
+				Prix Caleffi France ${productInstance.priceCaleffiFrance?productInstance.priceCaleffiFrance+" &euro;":"sur demande"}
 				<br/>
-				Prix Grossiste ${productInstance.priceGrossiste} &euro;
+				Prix Grossiste ${productInstance.priceGrossiste?productInstance.priceGrossiste+" &euro;":"sur demande"} 
 				<br/>
 				<sec:ifAllGranted roles="ROLE_ADMIN">
-					Prix pour Thermador ${productInstance.priceToThermador} &euro;
+					Prix pour Thermador ${productInstance.priceToThermador?productInstance.priceToThermador+" &euro;":"sur demande"}
 				</sec:ifAllGranted>
 			</div>
 			<br/>

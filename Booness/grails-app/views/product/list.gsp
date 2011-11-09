@@ -1,43 +1,37 @@
-<%@ page import="fr.booness.Compte" %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <title><g:message code="compte.list" default="Compte List" /></title>
+        <title>Articles</title>
     </head>
     <body>
     	
         
         <div class="body">
         <div id="navigation">
-        	<div id="address" style="display: inline-block;"><a href="${createLink(controller:'compte', action:'create')}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}'/> Nouveau Compte</a></div>
+        	<sec:ifAllGranted roles="ROLE_ADMIN">
+				<div id="address" style="display: inline-block;"><a href="${createLink(controller:'product', action:'create')}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}'/>Nouvel Article</a></div>
+				<div id="address" style="display: inline-block;"><a href="${createLink(controller:'product', action:'uploadNew')}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'page_excel.png', plugin: 'famfamfam')}'/>Televerser une nouvelle liste</a></div>
+			</sec:ifAllGranted>
 			<div id="action">
 				Trier par 
-				<div id="address" style="display: inline-block;"><g:sortableColumn property="name" title="Name" titleKey="compte.name" /><g:if test="${params.sort=='name'}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'arrow_'+(params.order=='asc'?'up':'down')+'.png', plugin: 'famfamfam')}'/></g:if></div>
-        		<div id="address" style="display: inline-block;"><g:sortableColumn property="zip" title="Zip" titleKey="compte.zip" /><g:if test="${params.sort=='zip'}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'arrow_'+(params.order=='asc'?'up':'down')+'.png', plugin: 'famfamfam')}'/></g:if></div>
+				<div id="address" style="display: inline-block;"><g:sortableColumn property="priceCaleffiFrance" title="Prix" titleKey="product.priceCaleffiFrance" /><g:if test="${params.sort=='priceCaleffiFrance'}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'arrow_'+(params.order=='asc'?'up':'down')+'.png', plugin: 'famfamfam')}'/></g:if></div>
+        		<div id="address" style="display: inline-block;"><g:sortableColumn property="code" title="Code" titleKey="product.code" /><g:if test="${params.sort=='code'}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'arrow_'+(params.order=='asc'?'up':'down')+'.png', plugin: 'famfamfam')}'/></g:if></div>
         	</div>
         </div>
         
-        <g:render template="comptecard" collection="${compteInstanceList}" var="compte"/>
+        <g:each in="${productInstanceList}" var="product">
+        <div id="address">
+	        <g:link action="show" id="${product.id}">${product.code}</g:link> ${product.description}
+	        <br/>
+	        ${product.priceCaleffiFrance?product.priceCaleffiFrance+" &euro;":"sur demande"} 
+        </div>
         
+        
+        </g:each>
         <div class="paginateButtons">
-            <%def aaa=params.clone()
-				aaa.remove("alphabet")%>
-            	<a href="${createLink(action:'list', params:aaa)}">Tous</a>
-            	<%for(def c:'A'..'Z'){
-				def temp=params.clone()
-				temp.put("alphabet",c)%>
-					<g:if test="${params.alphabet==c}">
-						<span class="currentStep">${c}</span>
-					</g:if>
-					<g:else>
-					
-						<a href="${createLink(action:'list', params:temp)}">${c}</a>
-					</g:else>
-				<%}%>
-				<br/><br/>
-                <g:paginate total="${compteInstanceTotal}" params="${params}" />
+                <g:paginate total="${productInstanceTotal}" params="${params}" />
             </div>
         </div>
     </body>

@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import fr.booness.Product;
+import fr.booness.ProductLog;
 
 class ProductListUploadService {
 
@@ -36,7 +37,6 @@ class ProductListUploadService {
 	}
 	
 	private String getValue(CellValue cell){
-		println cell.numberValue
 		switch(cell.cellType) {
 			case Cell.CELL_TYPE_STRING:
 				return cell.stringValue
@@ -49,7 +49,7 @@ class ProductListUploadService {
 		}
 	}
 
-	def upload(InputStream is) {
+	def upload(InputStream is, String version) {
 		Workbook wb = new XSSFWorkbook(is)
 		evaluator=wb.creationHelper.createFormulaEvaluator();
 		
@@ -57,6 +57,9 @@ class ProductListUploadService {
 		boolean start=true
 		int newP=0
 		int updatedP=0
+		def codes = []
+		ProductLog pl=new ProductLog()
+		pl.description="Mise &agrave; jour de la liste des articles<br/><br/>"
 		for(Row r:sheet){
 			if(start){
 				start=false
@@ -68,14 +71,15 @@ class ProductListUploadService {
 					return
 				}
 				String code = getValue(cell)
-				println code
+				
 				if(code && code.size()>0){
+					codes << code
 					try{
 						Product p = Product.findByCode(""+code)
 						def price=getValue(r.getCell(3))
 						if(price instanceof String && !price.toLowerCase().equals("sur demande"))
 							price=price.toFloat()
-						else if(!price instanceof Float){
+						else if(price instanceof String){
 							price=0
 						}
 						else if(price==null){
@@ -91,38 +95,39 @@ class ProductListUploadService {
 						def page=""+getValue(r.getCell(5))
 						
 						def temp=getValue(r.getCell(6))
-						if(temp.equals("sur demande")){
+						if("sur demande".equals(temp)){
 							temp=0
 						}
 						def prixGrossiste=(""+temp).toFloat()
 						
 						temp=getValue(r.getCell(7))
-						if(temp.equals("sur demande")){
+						if("sur demande".equals(temp)){
 							temp=0
 						}
 						def prixConfidentiel=(""+temp).toFloat()
 						
 						
 						if(p){
-							p.deprecated=false
 							if(p.priceCaleffiFrance!=price){
+								pl.description+="* article ${p.code} prix caleffi france ${p.priceCaleffiFrance} -> ${price}<br/>"
 								p.priceCaleffiFrance=price
 								updatedP++
 							}
 							if(p.priceToThermador!=prixConfidentiel){
+								pl.description+="* article ${p.code} prix confidentiel ${p.priceToThermador} -> ${prixConfidentiel}<br/>"
 								p.priceToThermador=prixConfidentiel
 								updatedP++
 							}
 							if(p.priceGrossiste!=prixGrossiste){
+								pl.description+="* article ${p.code} prix grossite ${p.priceGrossiste} -> ${prixGrossiste}<br/>"
 								p.priceGrossiste=prixGrossiste
 								updatedP++
 							}
 							p.save(failOnError:true)
-							p.save()
 						}
 						
 						else{
-							new Product(code:code,
+							def np=new Product(code:code,
 										codeThermador:codeThermador,
 										description:description,
 										priceGrossiste:prixGrossiste,
@@ -132,14 +137,34 @@ class ProductListUploadService {
 										priceCaleffiFrance:price,
 										deprecated:false
 								).save(failOnError:true)
+								
+							pl.description+="* creation article r&eacute;f&eacute;rence ${np.code}<br/>"
 							newP++
 						}
 					}
 					catch(Exception e){
-						e.printStackTrace()
+						println code+" -> error = "+e.message
 					}
 				}
 			}
+		}
+		def c = Product.createCriteria()
+		def deletedProducts=[]
+		def results=c.list {
+			not{
+				'in'("code",codes)
+			}
+		}.each{
+			pl.description+="* article ${it.code} (${it.description}) supprimm&eacute;<br/>"
+			deletedProducts << it.code
+		}
+		
+		pl.save()
+		
+		println deletedProducts
+		deletedProducts.each{
+			Product.findByCode(it).delete()
+			println "deleted "+it
 		}
 	}
 }
