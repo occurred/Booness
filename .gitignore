@@ -11,3 +11,4 @@ Booness/grails-app/conf/BootStrap.groovy
 Booness/stacktrace.log
 Booness/grails-app/conf/DataSource.groovy
 Booness/web-app/WEB-INF/classes
+test/
