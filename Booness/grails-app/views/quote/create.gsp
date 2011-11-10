@@ -51,8 +51,8 @@ jQuery.noConflict();
 				<tr>
 					<td><g:field style="width:100%;" type="int" style="width:50px;" name="remise1" value="${session.quote.remise1}"/></td>
 					<td><g:field type="int" style="width:50px;" name="remise2" value="${session.quote.remise2}"/></td>
-					<td><g:field type="int" style="width:50px;" name="remise1" value="${session.quote.remise1Section12}"/></td>
-					<td><g:field type="int" style="width:50px;" name="remise1" value="${session.quote.remise2Section12}"/></td>
+					<td><g:field type="int" style="width:50px;" name="remise1Section12" value="${session.quote.remise1Section12}"/></td>
+					<td><g:field type="int" style="width:50px;" name="remise2Section12" value="${session.quote.remise2Section12}"/></td>
 				</tr>
 			</tbody>
 		</table>
