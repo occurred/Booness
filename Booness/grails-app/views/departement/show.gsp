@@ -1,4 +1,3 @@
-
 <%@ page import="fr.booness.Departement" %>
 <html>
     <head>
@@ -7,17 +6,24 @@
         <title>${departementInstance.name}</title>
     </head>
     <body>
-    <h1>${departementInstance.name} [<a href="${createLink(action:'edit', id:departementInstance.id)}">Editer</a>]</h1>
-    <%
-    def count=fr.booness.Compte.withCriteria{
-            projections {
-                count('id')
-            }
-            like("zip",departementInstance.numero+"%")
-        }[0]
-    %>
-    Commercial referent : ${departementInstance.user?.name} <br/>
-
-    Il y a ${count} compte(s) dans ce departement [<a href="${createLink(controller:'compte', action:'list', params:['departementid':departementInstance.id])}">Voir</a>]
+    <% def cl=fr.booness.Compte.findAllByZipLike(departementInstance.numero+"%") %>
+    <table>
+    <tr>
+    <td valign="top">
+    <div style="display: inline-block;position: fixed;" >
+    	<h1>${departementInstance.name} [<a href="${createLink(action:'edit', id:departementInstance.id)}">Editer</a>]</h1>
+    	<h3>Commercial : <b>${departementInstance.user?.name}</b> </h3>
+    	<h3>${cl.size()} compte(s) [<a href="${createLink(controller:'compte', action:'list', params:['departementid':departementInstance.numero])}">Voir</a>]</h3>
+    	<img width='400' alt='Cher-Position' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/${departementInstance.name}-Position.svg/500px-${departementInstance.name}-Position.svg.png'/>
+    </div>
+    <div style="display: inline-block;width:400px;height:500px;"></div>
+    </td>
+    <td>
+    <div style="display: inline-block;width:100%;" >
+    	<g:render template="/compte/list" model="${[compteInstanceList:cl]}"/>
+    </div>
+    </td>
+    </tr>
+    </table>
     </body>
 </html>
