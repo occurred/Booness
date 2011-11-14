@@ -175,7 +175,7 @@ VERSION:2.0
         }
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_USER'])
     def update = {
         def eventInstance = PersonalEvent.get(params.id)
 		if(eventInstance.user.id!=springSecurityService.principal.id){
