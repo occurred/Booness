@@ -18,7 +18,7 @@
 		        <div id="address" style="width:250;display: inline-block;">
 			        <g:link action="show" id="${quote.id}">${quote.title}</g:link> par ${quote.affaire.owner.name}
 			        <br/>
-			        ${quote.products?.size()} Articles
+			        <b>${quote.affaire.name}</b> pour <b>${quote.affaire.compte.name}</b>
 			        <br/>
 			        Prix : ${quote.total} &euro;
 		        </div>
