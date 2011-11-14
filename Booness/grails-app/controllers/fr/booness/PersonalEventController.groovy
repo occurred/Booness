@@ -1,5 +1,7 @@
 package fr.booness
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils;
+
 import grails.plugins.springsecurity.Secured
 
 
@@ -35,6 +37,8 @@ class PersonalEventController {
         def json="["
         boolean first=true
         def results=user.personalEvents
+		
+		def switched=SpringSecurityUtils.isSwitched()
 		results.each{
 			println it
             if(first){
@@ -45,7 +49,7 @@ class PersonalEventController {
                 json+=",{"
             }
 			json+="\"id\":"+it.id+","
-            json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+            json+="\"title\":\""+(switched&&it.restricted?" Privé":it.title.replaceAll("\"","'"))+"\","
             json+="\"start\":\""+it.startDate+"\","
             json+="\"end\":\""+it.endDate+"\","
             json+="\"allDay\":"+it.allday+","
@@ -86,7 +90,7 @@ VERSION:2.0
             ical+="BEGIN:VEVENT\n"
             ical+="UID:"+user.name+it.id+"@grails\n"
             ical+="DTSTAMP:"+df.format(new Date())+"Z\n"
-            ical+="SUMMARY:"+it.title+" - "+it.compte.name+"\n"
+            ical+="SUMMARY:"+it.title+"\n"
             ical+="DTSTART:"+df.format(it.startDate)+"\n"
             ical+="DTEND:"+df.format(it.endDate)+"\n"
 			ical+="DESCRIPTION:"+it.description.replaceAll("<br/>","\\\\n").replaceAll("\n","\\\\n").replaceAll(",","\\\\,").replaceAll(";","\\\\;")+"\n"
@@ -113,6 +117,7 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
     def create = {
+		if(SpringSecurityUtils.isSwitched()) redirect(action:'index')
         def eventInstance = new PersonalEvent()
         eventInstance.properties = params
 		if(eventInstance.startDate!=eventInstance.startDate){
@@ -123,6 +128,7 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
     def save = {
+		if(SpringSecurityUtils.isSwitched()) redirect(action:'index')
         def eventInstance = new PersonalEvent(params)
 		User user= User.get(springSecurityService.principal.id)
 		user.addToPersonalEvents(eventInstance)
@@ -141,6 +147,7 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
 	def show = {
+		if(SpringSecurityUtils.isSwitched()) redirect(action:'index')
         def eventInstance = PersonalEvent.get(params.id)
 		println eventInstance
         if (!eventInstance) {
@@ -156,6 +163,7 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
     def edit = {
+		if(SpringSecurityUtils.isSwitched()) redirect(action:'index')
         def eventInstance = PersonalEvent.get(params.id)
         if (!eventInstance) {
             flash.message = "event.not.found"
@@ -177,6 +185,7 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
     def update = {
+		if(SpringSecurityUtils.isSwitched()) redirect(action:'index')
         def eventInstance = PersonalEvent.get(params.id)
 		if(eventInstance.user.id!=springSecurityService.principal.id){
 			flash.message = "Vous ne pouvez pas editer un evenement qui ne vous appartient pas !"
@@ -212,9 +221,9 @@ VERSION:2.0
 
     @Secured(['ROLE_USER'])
     def delete = {
+		if(SpringSecurityUtils.isSwitched()) redirect(action:'index')
         def eventInstance =PersonalEvent.get(params.id)
-		println eventInstance
-        if (eventInstance) {
+		if (eventInstance) {
 			if(eventInstance.user.id!=springSecurityService.principal.id){
 				flash.message = "Vous ne pouvez pas supprimer un evenement qui ne vous appartient pas!"
 				redirect(action: "index")

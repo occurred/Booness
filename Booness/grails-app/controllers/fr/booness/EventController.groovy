@@ -1,5 +1,7 @@
 package fr.booness
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils;
+
 import grails.plugins.springsecurity.Secured
 
 
@@ -62,6 +64,7 @@ class EventController {
 			json+="}"
 		}
 		
+		def switched=SpringSecurityUtils.isSwitched()
 		user.personalEvents.each{
 			if(first){
 				first=false
@@ -70,8 +73,8 @@ class EventController {
 			else {
 				json+=",{"
 			}
-
-			json+="\"title\":\""+it.title.replaceAll("\"","'")+"\","
+			
+			json+="\"title\":\""+(switched&&it.restricted?" Privé":it.title.replaceAll("\"","'"))+"\","
 			json+="\"start\":\""+it.startDate+"\","
 			json+="\"end\":\""+it.endDate+"\","
 			json+="\"allDay\":"+it.allday+","
