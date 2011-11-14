@@ -11,7 +11,7 @@ Offre de Prix <g:link controller="affaire" action="show" id="${quoteInstance.aff
 <div id="action">
 			<a href="${createLink(action:'edit', id:quoteInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
 			<a target="_blank" href="${createLink(action:'printPdf', id:quoteInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'printer.png', plugin: 'famfamfam')}'/></a>
-			<a target="_blank" href="${createLink(action:'delete', id:quoteInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'cancel.png', plugin: 'famfamfam')}'/></a>
+			<a target="_blank" href="${createLink(action:'delete', id:quoteInstance.id)}" onclick="return confirm('Etes-vous sur de supprimer ce devis? Il ne sera pas possible de retourner en arriere...');"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'cancel.png', plugin: 'famfamfam')}'/></a>
 </div>
 </div>
   <div class="body">
