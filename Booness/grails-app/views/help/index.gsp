@@ -18,12 +18,12 @@
 	
 	<g:each in="${openIssues}" var="issue">
 	<div id="address">
-		<img id="famfamfam" src="${issue.user.avatar_url}"/>
+		<img width="50px;" id="famfamfam" src="${issue.user.avatar_url}"/>
 		<b><a target="_blank" href="${issue.html_url}">${issue.title}</a></b>
 		<br/>
 		${issue.body}
 		<br/>
-		${issue.comments} commentaires
+		${issue.comments} <img id="famfamfam" src='${resource(dir: 'images/icons', file: 'comments.png', plugin: 'famfamfam')}'/>
 	</div>
 	</g:each>
 	
@@ -32,12 +32,12 @@
 	</h1>
 	<g:each in="${closedIssues}" var="issue">
 	<div id="address">
-		<img id="famfamfam" src="${issue.user.avatar_url}"/>
+		<img width="50px;" id="famfamfam" src="${issue.user.avatar_url}"/>
 		<b><a target="_blank" href="${issue.html_url}">${issue.title}</a></b>
 		<br/>
 		${issue.body}
 		<br/>
-		${issue.comments} commentaires
+		${issue.comments} <img id="famfamfam" src='${resource(dir: 'images/icons', file: 'comments.png', plugin: 'famfamfam')}'/>
 	</div>
 	</g:each>
 	
