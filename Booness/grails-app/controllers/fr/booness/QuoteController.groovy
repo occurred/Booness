@@ -119,7 +119,9 @@ class QuoteController {
 		def quote=session.quote
 		quote.properties=params
 		quote.dateCreated=new Date()
-		println quote
+		quote.products.each {
+			it.price=it.product.priceCaleffiFrance*0.0001*(100 - (it.product.section.contains("12")?quote.remise1Section12:quote.remise1))*(100 - (it.product.section=="12"?quote.remise2Section12:quote.remise2))
+		}
 		def affaire=Affaire.get(Long.parseLong(params.affaire.id))
 		affaire.addToQuotes(quote)
 		quote.save(failOnError:true)
