@@ -11,7 +11,7 @@ Offre de Prix <g:link controller="affaire" action="show" id="${quoteInstance.aff
 <div id="action">
 			<a href="${createLink(action:'edit', id:quoteInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'pencil.png', plugin: 'famfamfam')}'/></a>
 			<a target="_blank" href="${createLink(action:'printPdf', id:quoteInstance.id)}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'printer.png', plugin: 'famfamfam')}'/></a>
-			<a target="_blank" href="${createLink(action:'delete', id:quoteInstance.id)}" onclick="return confirm('Etes-vous sur de supprimer ce devis? Il ne sera pas possible de retourner en arriere...');"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'cancel.png', plugin: 'famfamfam')}'/></a>
+			<a href="${createLink(action:'delete', id:quoteInstance.id)}" onclick="return alert('Etes-vous sur de supprimer ce devis? Il ne sera pas possible de retourner en arriere...');"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'cancel.png', plugin: 'famfamfam')}'/></a>
 </div>
 </div>
   <div class="body">
@@ -22,7 +22,7 @@ Offre de Prix <g:link controller="affaire" action="show" id="${quoteInstance.aff
   		<br/>
   		<div id="address">
 	  		<p>Date : ${java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, java.util.Locale.FRANCE).format(quoteInstance.dateCreated).capitalize()}</p>
-			<p>R&eacute;f&eacute;rence : ${quoteInstance.title.toUpperCase()}-${quoteInstance.affaire.owner.initiales.toUpperCase()}-${quoteInstance.version}</p>
+			<p>R&eacute;f&eacute;rence : ${quoteInstance.reference}</p>
 	  		<p>Date d'execution : ${java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, java.util.Locale.FRANCE).format(quoteInstance.dateExecution).capitalize()}</p>
 			
 	  		<strong>Remises</strong> ${quoteInstance.remise1} +  ${quoteInstance.remise2} <strong>Section 12</strong> ${quoteInstance.remise1Section12} +  ${quoteInstance.remise2Section12}

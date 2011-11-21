@@ -210,11 +210,11 @@ td.LOW {
 				<td colspan="2" style=" border:thin solid #333; text-align: center;">
 					<g:if test="${quoteInstance.type=='devis'}">
 						<h1>Offre de Prix</h1>
-						<g:if test="${quoteInstance.affaire.compte.type.toString()=='INSTALLATEUR'}"><h1>${quoteInstance.affaire.name}</h1></g:if>
 					</g:if>
 					<g:else>
 						<h1>Fiche de Transmission Thermador</h1>
 					</g:else>
+					<h1>${quoteInstance.affaire.name}</h1>
 				</td>
 			</tr>
 			<g:if test="${quoteInstance.affaire.compte.type.toString()!='BUREAU D\'ETUDES'}">
@@ -228,9 +228,9 @@ td.LOW {
 				<td style="width:50%;">
 				Date : ${java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, java.util.Locale.FRANCE).format(quoteInstance.dateCreated)}
 				<br/><br/>
-				N/REF: 
+				N/REF: ${quoteInstance.reference}
 				<br/>
-				V/REF : 
+				V/REF : ${quoteInstance.affaire.name}
 				<br/><br/>
 				Contact : ${quoteInstance.affaire.owner.name }<br/>
 				Portable : ${quoteInstance.affaire.owner.telephone }<br/>

@@ -59,6 +59,12 @@
     	}).addClass('ui-tabs-vertical ui-helper-clearfix');
      	$("#affaires li").removeClass('ui-corner-top').addClass('ui-corner-left');
     });
+    $(document).ready(function() {
+        $( "#tabs" ).tabs({
+                fillSpace: true,
+                navigation: true
+        });
+	});
 </script>
 <title>
 	${compteInstance.name}
@@ -114,32 +120,35 @@
 		</div>
 		
 		<div id="leftCol">
-		<div id="affaires" class="tabs">
-				<h1>
-					Affaires (${compteInstance.affaires.size()})
-					<a href="${createLink(controller:'affaire', action:'create', params:['compte.id':compteInstance.id])}">
-						<img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}' />
-					</a>
-				</h1>
+<div id="tabs">
+<ul>
+    <li><a href="#tabs-1">Affaires (${compteInstance.affaires.size()})</a> <a style="cursor: pointer;" href="${createLink(controller:'affaire', action:'create', params:['compte.id':compteInstance.id])}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}' /></a>
+    <li><a href="#tabs-2">Activit&eacute;s (${compteInstance.logs.size()})</a><a style="cursor: pointer;" href="${createLink(controller:'log', action:'create', params:['compte.id':compteInstance.id,'user.id':id, description:'<b>Resultat de la Visite</b><br/><br/><br/><br/><b>Reste &agrave; Faire / Actions &agrave; mener</b><br/><br/><br/>'])}"><img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}' /></a></li>
+
+  </ul>
+
+  <div id="tabs-1" style="padding:0; border:none;">
+  <div id="affaires">
 				<ul>
 					<g:render template="affairetab" collection="${compteInstance.affaires}" var="affaire" />
 				</ul>
 				<g:render template="affaire" collection="${compteInstance.affaires}" var="affaire" />
 			</div>
-		<br/>
-			<div id="logs" class="tabs">
-				<h1>
-					Activit&eacute;s (${compteInstance.logs.size()})
-					<a href="${createLink(controller:'log', action:'create', params:['compte.id':compteInstance.id,'user.id':id, description:'<b>Resultat de la Visite</b><br/><br/><br/><br/><b>Reste &agrave; Faire / Actions &agrave; mener</b><br/><br/><br/>'])}">
-						<img id="famfamfam" src='${resource(dir: 'images/icons', file: 'add.png', plugin: 'famfamfam')}' />
-					</a>
-				</h1>
+  </div>
+  
+  <div id="tabs-2" style="padding:0; border:0px;">
+						
+<div id="logs">
 				<ul>
 					<g:render template="logtab" collection="${compteInstance.logs}" var="log" />
+					
 				</ul>
 				<g:render template="log" collection="${compteInstance.logs}" var="log" />
 			</div>
 			
+			
+  </div>
+		</div>
 			
 		</div>
 	</div>

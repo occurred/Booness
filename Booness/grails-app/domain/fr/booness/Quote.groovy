@@ -1,5 +1,7 @@
 package fr.booness
 
+import java.text.SimpleDateFormat;
+
 class Quote implements Serializable{
     String title
     Date dateCreated
@@ -16,7 +18,7 @@ class Quote implements Serializable{
 
     static hasMany=[products:ProductInsert]
     static belongsTo=[affaire:Affaire]
-	static transients=['total']
+	static transients=['total', 'reference']
 	
 	Float getTotal(){
 		Float tot=0;
@@ -24,6 +26,13 @@ class Quote implements Serializable{
 			tot+=it.price*it.quantity
 		}
 		tot
+	}
+	
+	String getReference(){
+		String ref=type=="devis"?"D":"FT"
+		ref+="-"+affaire.owner.initiales.toUpperCase()+"-"
+		ref+=new SimpleDateFormat("yyMMdd").format(dateCreated)+"-"+id
+		ref
 	}
     
     static constraints = {

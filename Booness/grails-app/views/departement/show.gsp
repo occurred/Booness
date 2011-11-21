@@ -14,7 +14,7 @@
     	<h1>${departementInstance.name} [<a href="${createLink(action:'edit', id:departementInstance.id)}">Editer</a>]</h1>
     	<h3>Commercial : <b>${departementInstance.user?.name}</b> </h3>
     	<h3>${cl.size()} compte(s) [<a href="${createLink(controller:'compte', action:'list', params:['departementid':departementInstance.numero])}">Voir</a>]</h3>
-    	<img width='400' alt='Cher-Position' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/${departementInstance.name}-Position.svg/500px-${departementInstance.name}-Position.svg.png'/>
+    	<img width='400' alt='${departementInstance.name}' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/${departementInstance.name.replaceAll(" ","_")}-Position.svg/500px-${departementInstance.name.replaceAll(" ","_")}-Position.svg.png'/>
     </div>
     <div style="display: inline-block;width:400px;height:500px;"></div>
     </td>

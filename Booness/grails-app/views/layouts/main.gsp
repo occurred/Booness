@@ -78,7 +78,6 @@ body{
 			
 			
 			<br/>
-		
 			<g:layoutBody />
 
 		<div id="footer">
@@ -86,5 +85,9 @@ body{
 		</div>
 
 	</div>
+	<div style="text-align: center;">
+	<button onclick="document.getElementById('wrapper').style.opacity=1-${fr.booness.Parameters.findByName('wallpaper-opacity')?.value};">hide</button>
+	<button onclick="document.getElementById('wrapper').style.opacity=${fr.booness.Parameters.findByName('wallpaper-opacity')?.value};">show</button>
+	</div>			
 </body>
 </html>
